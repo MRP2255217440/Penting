@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, inital-scale=1">
+        <meta name="description" content="A place to learn basic pen testing info!">
+        <meta name="author" content="Mujeeb">
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
+        <title>Penting - Nmap</title>
+
+    </head>
+    <body>
+        <header>
+            <h1>Penting Nmap</h1>
+            <!-- Navigation bar based off https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp-->
+            <nav>
+                <div class="navbar">
+                    <a href="index.html">Home</a>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">List of Tools 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                        <a href="Tools.html">Tools page Overview</a>
+                        <a href="Nmap.html">Nmap</a>
+                        <a href= "Nikto.html">Nikto</a>
+                        <a href="BurpSuite.html">BurpSuite</a>
+                        <a href="Othertools.html">Other Tools</a>
+                      </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">List of Services 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Services.html">Services page Overview</a>
+                          <a href="DVWA.html">DVWA</a>
+                          <a href="BadStore.html">BadStore</a>
+                          <a href="bonus.html">Additional Tasks</a>
+                        </div>
+                    </div>
+
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Misc. Resources
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Misc.html">Misc Resources page</a>
+                          <a href="EDB.html">ExploitDB</a>
+                          <a href="Kali.html">Kali</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Legal + Ethics 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="LandE.html">Legal and Ethics Overview</a>
+                          <a href="Legal.html">Useful Legal info</a>
+                          <a href="Ethics.html">Ethics info</a>
+                          <a href="Disclaimer.html">Disclaimer page</a>
+                        </div>
+                      </div>
+
+                      <div class="dropdown">
+                        <button class="dropbtn">Further Reading 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Next.html">What to do next?</a>
+                          <a href="HTB.html">HTB</a>
+                          <a href="TryHackMe.html">TryHackMe</a>
+                          <a href="Programming.html">Programming</a>
+                        </div>
+                      </div>
+                  </div>
+                  
+            </nav>
+        </header>
+
+        <main>
+            
+            <h2 style="padding-left: 10px;"id ="Start"><u>Nmap</u></h2>
+            <button class="button"><a href="Tools.html"><span>Back to Overview</span></a></button><br>
+            Here is the URL to the offical Nmap page: <a href="https://nmap.org/">https://nmap.org/</a>
+
+
+
+            <hr>
+            <p><b>Pre knowledge:</b> 
+                as a rule of thumb, its best to know common ports used beforehand. 
+                For example, knowing SSH = port 22, DNS = 53, HTTP/s = 80/443. 
+                This is because some services are bound to certain ports, and as such 
+                if you recognise an open port, you may recognise what service its related to.
+                <br>
+                I also recommend using Nmap on Kali, it comes preinstalled. 
+                Some commands struggled to work in Ubuntu, so I had to do some fixing
+            </p>
+
+            <div>
+                 <!-- Code based off the following:https://www.tipsandtricks-hq.com/simple-table-of-contents-toc-using-pure-html-and-css-code-9217-->
+                <p><b><u>Table of contents</u></b></p>
+                <ul style="  border: 1px solid black;
+                padding-right: 0px;
+                padding-left: 28px;
+                width: 240px;
+                border-radius: 5px;">
+                <li><a href="#General">1. General Info + Tool Purpose</a></li>
+                <li><a href="#How to use the tool">2. How to use the tool</a></li>
+                <li><a href="#Arguments">3. Arguments</a>
+
+                    <ul style="  border: 1px solid rgb(190, 255, 233);
+                    padding-right: 0px;
+                    padding-left: 28px;
+                    width: 200px;
+                    border-radius: 5px;">
+
+                    <!-- This style was put it due to formatting visual issues-->
+
+                        <li><a href="#HostD">3.1 Host Discovery</a></li>
+                        <li><a href="#TargetI">3.2 More Target Info</a></li>
+                        <li><a href="#Ports">3.3 Ports</a></li>
+                        <li><a href="#Scans">3.4 Scan Types</a></li>
+                        <li><a href="#ScansT">3.5 Scan Timing</a></li>
+                        <li><a href="#outputting">3.6 Outputting Scan Result</a></li>
+                        <li><a href="#Misc">3.7 Misc. Arguments</a></li>
+                      </ul>
+                </li>
+
+                <li><a href="#exam">4. Nmap examples</a></li>
+                <li><a href="#help">5. Nmap Help page</a></li>
+
+                </ul>
+                </div>
+
+            <hr>
+
+            
+
+            <h3 style="padding-left: 10px;" id="General">1. General Info + Tool Purpose</h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+
+            <p>
+                Nmap is a very popular scanning tool used in the penetration testing world. 
+                Its most common usage is to scan a target to find exposed ports from a targeted machine. 
+                When scanning the machine it will also provide additional information about the exposed port on the target, 
+                such as what service it is running. <br><br>When scanning for ports there are three types that can be found:
+            </p>
+
+            <dl style="padding: 10px;">
+                <dt>Open</dt> <dd> A service is listening on that port and is waiting to make a connection</dd>
+                <dt>Closed</dt> <dd> There is a firewall or filter blocking the port resulting in Nmap not knowing if the port is open or not</dd>
+                <dt>Filtered</dt> <dd> The port has no service listening</dd>
+            </dl>
+
+
+            <p><b>Importance of scanning tools:</b> 
+                Information is gold. Just by knowing what  service is being used and its version you can 
+                start get an idea of what exploit/vulnerability to look for. By knowing the version number you can start looking for an 
+                appropriate exploit that works against that version.<br> 
+                For example, if I found out my target was a windows OS then I would start to look for windows exploits. 
+                If I found the specific version (like a Windows server 2012 R2) then I would look for an appropriate exploit for that target 
+                (note, what exploit would I use? hint: its quite blue).
+            </p>
+
+            <hr>
+            <h3 style="padding-left: 10px;" id="How to use the tool">2. How to use the tool:</h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+                The tool can be used by entering ‘nmap’ into the command line. In order to use certain arguments (such as –A) 
+                the command may need to be run with root privileges (due to permissions required by Nmap). <br>
+                This can be done by either changing to root user beforehand 
+                (type su, press enter, type root into password) or adding sudo to the start of the command (sudo nmap).
+            </p>
+            <div><pre><code> nmap | sudo nmap </code></pre></div>
+            <p><img src="images/sudonmap.png" alt = "running nmap via sudo nmap"><br>
+            <img src="images/sunmap.png" alt = "running nmap as root then running as usual"> </p>
+
+            <p>
+                The tool can be run with only one argument, the IP address, however it would not give a lot of information. 
+                For example ‘nmap localhost’ (NB localhost refers to 127.0.0.1) would work. 
+                <br><br>Try using the Nmap scan against localhost and identify the opened ports.
+                Click the button below to see what I got. 
+            </p>
+            <div><pre><code> nmap localhost</code></pre></div>
+
+            <p>
+            Have a go yourself!<br>
+            <!-- Embeded link to the terminal page-->
+            <iframe src="http://localhost:7681" height="600" width="60%"></iframe><br>   
+            </p>
+
+
+            <!-- Button used to show an example after clicked/unhide-->
+            <img id="localhostcheck" src="" />
+            <button type="button"
+                onclick="show()" id="btnID">
+                See what I found
+            </button>
+
+            <script>
+                function show() {
+         
+                    /* Get image and change value
+                    of src attribute */
+                    let image = document.getElementById("localhostcheck");
+         
+                    image.src ="images/nmaplh.png"
+         
+                    document.getElementById("btnID")
+                            .style.display = "none";
+                }
+            </script>
+
+
+
+            <p>
+                On the Penting machine, from scanning localhost four open ports can be found, with the most vital 
+                find being port 80 and 3306. From this scan we have found out the VM we are running it has a webserver and 
+                MySQL server. <br>These are targets commonly found when investigating a vulnerable machine hosting a server.
+            </p>
+
+
+            <hr>
+
+
+            
+            <h3 style="padding-left: 10px;" id="Arguments">3. Arguments:</h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p><b>Warning:</b> some arguments need to be run as root user or sudo to work! This is because in order to make use of the 
+            raw network sockets, listening and sending packets (which can provide more scan information), 
+            root privilege is required. Without this privilege, Nmap will not run the argument and instead error out.
+             </p>
+
+            <p>
+                With no arguments, Nmap does the bare minimum – it does a TCP SYN scan (-sS) (also known as a stealth scan as doesn’t 
+                complete the TCP connection) and looks for open ports among the common ports (1000 common ports) and returns the service 
+                names (and not the software name or version).
+            </p>
+
+            <p>
+                In the Nmap command we ran previously we did not get a lot of info about the services itself – for example we know port 80 has a 
+                webserver, but what service version? And also, what if I want to scan the target through a different way instead of the 
+                default syn scan (-sS)? You may have also noticed, including the open ports found we only scanned 1000 ports. 
+                These can be solved by adding an argument.
+            </p>
+
+            <hr>
+
+            <h4 style="padding-left: 10px;" id="HostD">3.1 Host Discovery:</h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+                Nmap can also be used for host discovery as well as port scanning. Truth be told, I don’t used Nmap for 
+                host discovery, I use fping, however I have included it in case you are curious.
+            </p>
+
+            <p>
+                <b>-sn</b> (different to -sN) – the –sn argument is used to find hosts on a subnet (network inside of a network). 
+                Using –sn makes 
+                it so the port scan feature is disabled, and hosts are only pinged to see if they are active. When scanning for 
+                hosts it is important to confine to subnetting rules regarding the IP address. <br><br>For example, if the IP address 
+                is 192.168.100.100 you would need to enter ‘nmap –sn 192.168.100.0/24’. I’m not very good at teaching subnets 
+                so I recommend looking elsewhere for it! Below is an example of me using it against Pentings IP:
+            </p>
+
+            <div><pre><code> nmap -sn IP/24</code></pre></div>
+            <p><img src="images/nmapsn2.png" alt = "nmap -sn example"> </p>
+            <p>
+                From the host discovery scan it managed to find two hosts/IP addresses that are active.
+                <br<br>>NB I found my IP through the ip a command:<br><img src="images/ipa.png" alt = "ipa">
+            </p>
+
+            <hr>
+
+            <h4 style="padding-left: 10px;" id="TargetI">3.2 Showing More Target Information:</h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+
+            <p>
+                <b>-sV</b> – this argument can be added to the command to receive the version info of any services found. 
+                This is what it looks like when it is used alongside the previously used command. 
+            </p>
+
+            <div><pre><code> nmap -sV localhost</code></pre></div>
+            <p><img src="images/nmapsv.png" alt = "nmap -sV example"> </p>
+
+            <p>
+                With –sV we now know the webserver is an Apache server, and that its version is 2.4.41!
+            </p>
+
+            <p>
+                <b>-O</b> - Similar to –sV, -O finds the version of the Operating system running the virtual machine. –sV can also find the 
+                OS however it does not present all possible guesses, just the most likely. From scanning the VM I found my Linux version.
+            </p>
+            <div><pre><code> nmap -O localhost</code></pre></div>
+            <p><img src="images/nmapO.png" alt = "nmap -O example"> </p>
+
+            <p class="description">
+                <b>-sC</b> -  another argument is the –sC argument, this arguments runs a set of default scripts against the target. 
+                <em>Unlike the previous arguments, this argument is considered to be more intrusive due to the scripts being used 
+                and as such shouldn’t be used against unauthorized targets</em>, using it against the targets mentioned in this machine 
+                is fine though. This is what it looks like when it is used alongside the previously used command.
+            </p>
+
+            <div><pre><code> nmap -sC localhost</code></pre></div>
+            <p><img src="images/nmapsc.png" alt = "nmap -sC example" style="height: 500px;"> </p>
+
+            <p>
+                Compared to the other scans it gave a lot more information – however you may notice on the apache service it didn’t 
+                state its version, unlike -sV
+            </p>
+
+            <p>
+                <b>-A</b> - This argument is all of the three previous arguments rolled into one (and another one called traceroute – traces path to host). 
+                Usually when I’m scanning I use this argument. Here is an example with the Ubuntu VM. 
+            </p>
+
+            <div><pre><code> nmap -A localhost</code></pre></div>
+            <p><img src="images/nmapA.png" alt = "nmap -A example" style="height: 550px;"> </p>
+
+
+            <p>I have broken down the screenshots into its respective arguments. 
+                I have missed out some sections to make it easier to understand:
+            </p>
+
+            <p>-sV <br><img src="images/nmapasv.png" alt = "nmap -A sv example" style="height: 500px;"> </p>
+            <p>-O <br><img src="images/nmapao.png" alt = "nmap -A o example" style="height: 500px;"> </p>
+            <p>-sC <br><img src="images/nmapasc.png" alt = "nmap -A sc example" style="height: 500px;"> </p>
+
+            <p>
+                I also tried -A on my personal Kali machine against a website. Instead of scanning localhost, 
+                I scanned the nmap scanning website .scanme.nmap.org (can be found at the bottom of the nmap help page).
+                I have also split it up as best as I can. I have left out traceroute.
+            </p>
+
+            <p><img src="images/nmapa2.png" alt = "nmap -A example" style="height: 280px;" > </p>
+            <p>-sV <br><img src="images/nmapasv2.png" alt = "nmap -A sv example" style="height: 280px;"> </p>
+            <p>-O <br><img src="images/nmapao2.png" alt = "nmap -A o example" style="height: 280px;"> </p>
+            <p>-sC <br><img src="images/nmapasc2.png" alt = "nmap -A sc example" style="height: 280px;"> </p>
+
+            <p>Overall, I recommended trying out the –A argument on machines found on HackTheBox as it is safe to do so and every box gives a 
+                different output. <br><br>After finding out the services and its version numbers look it up online on google and look for 
+                vulnerabilities (e.g. apache version xyz exploit). <a href="EDB.html">ExploitDB</a> is as good source of exploits.
+            </p>
+
+            <hr>
+
+            <h4 style="padding-left: 10px;" id="Ports">3.3 Ports:</h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+                By default, nmap only scans the 1000 common ports, this is to save time. If you wish to pick your own 
+                port, you can use the –p argument. The most common use of the –p argument is to scan all ports, which is –p-.
+                <br>
+                NB first 1023 ports = well known ports. 1024 – 49151= registered ports. 49152 – 65535 = dynamic/private ports
+
+            </p>
+
+            <p>
+                <b>-p-</b> - The –p- argument selects ALL ports to scan. This is a scan range of 1 – 65535. 
+                This is what the command looks like when used on Penting.
+            </p>
+            <div><pre><code> nmap -p- localhost</code></pre></div>
+            <p><img src="images/nmap-p-.png" alt = "nmap -p-"> </p>
+
+            <p>
+                Because of the port range being extended a new service can be found on 33060. This is because previously nmap did not take 
+                this port into consideration when scanning (as it was not in the 1000 common ports).
+            </p>
+
+            <p>
+                <b>-px</b> - Other uses of the –p argument is to scan a specific port, or a range of ports, such as -p123. 
+                Here is an example of looking for a single port and a range of ports.
+            </p>
+            <div><pre><code> nmap -p80 localhost</code></pre></div>
+            <p><img src="images/nmapp80.png" alt = "nmap -p80"> </p>
+
+            <p>It can also be combined with commas, like so. <br>
+                <div><pre><code> nmap -p80,600-4000 localhost</code></pre></div>
+                <img src="images/nmappx.png" alt = "nmap -p80,600-4000">
+            </p>
+
+            <p>Reasons for using specific port numbers:</p>
+            <ol>
+                <li>First a user may do a lite scan looking for all open ports on the target machine</li>
+                <li>As this scan is only looking for open ports it is very quick </li>
+                <li>For example, nmap –p- localhost</li>
+                <li>When all the ports are found, a second scan is done.</li>
+                <li>This time however, only the open ports found are scanned, and this time an additional argument is also used, -A, 
+                    to get all port information. As it only checks 6 ports its much quicker</li>
+                <li>For example, nmap –p80,631,3306 –A localhost</li>
+            </ol>
+
+            <hr>
+
+            <h4 style="padding-left: 10px;" id="Scans">3.4 Scanning types:</h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+                Nmap also allows the use of different types of scans. The most popular being TCP SYN  (-sS), then TCP connect (-sT). 
+                There is also a UDP scan (-sU) and TCP NULL, FIN and XMAS (-sN, -sF, -sX). 
+                There are more but I will only be covering these, the most popular ones. <b>NB: sudo needed to run these arguments</b>
+            </p>
+
+            <p>
+                <b>-sS</b> - TCP SYN – this is the default scan and considered the go to scan. All of the scans I have done with 
+                no stated scan argument have been done as a TCP SYN scan (is the default). It is considered fast and stealthy. Here is an example with
+                the argument stated, doesn't looked much different.
+            </p>
+            <div><pre><code> sudo nmap -sS localhost</code></pre></div>
+            <img src="images/nmapss.png" alt = "nmap -sS">
+
+            <p>
+                <b>-sT</b> - TCP connect – simply put, it is considered the inferior version of TCP SYN. This is because it gets the same 
+                information as TCP SYN, except it does it less efficiently – it takes longer to do as it makes a connection with the target, 
+                and because of this is more likely to be logged by the target (TCP SYN does not make a full connection). <br>
+                Here is an example of me using –sT. Not  much of a difference can be seen, better to stick with TCP SYN/-sS 
+                if possible.
+            </p>
+            <div><pre><code> sudo nmap -sT localhost</code></pre></div>
+            <img src="images/nmapst.png" alt = "nmap -sT">
+
+            <p>
+                <b>-sU</b> - UDP – possibly one of the more important alternative scans. As well as TCP ports, there are also UDP 
+                ports – these ports are not scanned with the TCP scans/by default so need to manually scan for UDP ports. <br><br>The main 
+                issue with UDP ports however, is when it comes to scanning UDP takes significantly longer to scan (due to how much longer the requests take)). 
+                Because of this 
+                many people only scan the 1000 common ports with UDP. See example below for UDP. 
+            </p>
+            <div><pre><code> sudo nmap -sU localhost</code></pre></div>
+            <img src="images/nmapsu.png" alt = "nmap -sU">
+
+            <p>
+                Take note of how long the scan took and compare it to the TCP SYN scan. Yes, it's only 1.2 seconds longer, however 
+                most of the scans I’ve done so far have been under 0.1 seconds. Additionally, imagine the scan on a larger scale. 
+                Being 30mins+ is considered the norm for UDP. 
+                <br>Regardless, doing the UDP scan revealed two new ports that were not 
+                revealed in the –sS scan (even when I used the –p- argument to scan all ports, it didn’t show up). This is 
+                because these are UDP ports, and so doesn’t get scanned by TCP. As such, as obvious as this may sound, 
+                it is important to scan the target for any UDP ports.
+            </p>
+
+            <p>
+                <b>XMAS, NULL and FIN </b>– these scans are all quite similar. They all consist of exploiting the TCP RFC and 
+                messing with the packet, basically changing the flag bits to cause mayhem and being able to identify open 
+                and closed ports. Here is an extract from the Nmap website:<br><br>
+                <b><i>
+                    "Page 65 of RFC 793 says that “if the [destination] port state is CLOSED .... an incoming segment not containing 
+                a RST causes a RST to be sent in response.” Then the next page discusses packets sent to open ports without the 
+                SYN, RST, or ACK bits set, stating that: “you are unlikely to get here, but if you do, drop the segment, and return.”"</i></b>
+                <br><br>In other words – if a RFC compliant system gets a SYN, RST or ACK bit, the system will return a 
+                RST if the port is closed, otherwise there is no response.
+            </p>
+
+            <p>
+                <b>-sN</b> - NULL scan – in the TCP flag header, no bits are set
+            </p>
+            <div><pre><code> sudo nmap -sN localhost</code></pre></div>
+            <img src="images/nmapsn.png" alt = "nmap -sN">
+
+            <p>
+                <b>-sF</b> - FIN scan – only sets the TCP FIN bit
+            </p>
+            <div><pre><code> sudo nmap -sF localhost</code></pre></div>
+            <img src="images/nmapsf.png" alt = "nmap -sF">
+
+            <p>
+                <b>-sX</b> - XMAS scan – the FIN, PSH and URG flags are set, the packet is lit up like a Christmas tree
+            </p>
+            <div><pre><code> sudo nmap -sX localhost</code></pre></div>
+            <img src="images/nmapsx.png" alt = "nmap -sX">
+
+            <p>As the scan can’t tell if it’s open or filtered it states both</p>
+
+
+            <hr>
+
+            <h4 style="padding-left: 10px;" id = "ScansT">3.5 Scan Timings:</h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>With the –T argument the speed of the scan can also be influenced</p>
+
+            <p>
+                <b>-T</b> - by default the speed of the scan is set at 3. The range of the speed can be between 0-5. 
+                If you wish to speed up the time of the scan the –T argument can be set to a higher number. <br>
+                Normally increasing the 
+                speed may alert the firewall, so it may be best to keep it as normal (unless you are in a rush/being caught is not an issue). 
+                Here is an example of setting the speed at max.
+            </p>
+            <div><pre><code> nmap -T5 localhost</code></pre></div>
+            <p><img src="images/nmapt.png" alt = "nmap -T5"> </p>
+
+            <hr>
+
+            <h4 style="padding-left: 10px;"id="outputting">3.6 Outputting Scan Result:</h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+                The scan result can also be stored in a text file as soon as the scan is complete. Saving the scan into a file is a 
+                good idea as you wouldn’t need to do the scan again if you forgot to take a picture, especially if it was a long scan. 
+                There are a range of file format, I will only go over the normal format (you can see the other options in the help 
+                page, seen below). 
+            </p>
+            <p><img src="images/nmaporange.png" alt = "nmap output range"> </p>
+
+            <p>
+                <b>-oN</b> - this outputs the file into the normal format. Make sure to select a file name after the 
+                argument. Here is an example of its usage (added the –p argument to add flavor).
+            </p>
+
+            <div><pre><code> nmap -p1-1000 localhost -oN scan1.txt</code></pre></div>
+            <p><img src="images/nmapon.png" alt = "nmap -oN"> </p>
+
+            <p>And this is what it looks like in the file:</p>
+            <p><img src="images/nmapon2.png" alt = "nmap -oN result" style="height: 150px;"> </p>
+
+            <p>
+                Alternatively you can also use the Linux append feature to add the scan result to a file after it is completed. 
+                Instead of –oN filename just do > filename.  Here is an example with '>':
+            </p>
+
+            <div><pre><code> nmap -p1-1000 localhost > scan2.txt</code></pre></div>
+            <p><img src="images/nmaponap.png" alt = "nmap -oN result"> </p>
+
+            <p>The main difference is that the –oN version adds the exact command entered to the file. <br> 
+                In my opinion, either way works. I use –oN for more complex commands just in case I forget what I enter, 
+                however the append method (>) works for other commands outside of just nmap (for example cat file > file2 would work). 
+                Either way, I mix and match.
+            </p>
+
+            <hr>
+
+            <h4 style="padding-left: 10px;"id ="Misc">3.7 Misc. arguments:</h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+
+            <p>
+                <b>-v</b> - Verbosity – using the –v argument (or –vv) it will make is so whilst the scan is running it will 
+                print out information it finds. For example, if the scan finds an open port on port 80 from localhost it will 
+                output to the terminal saying it has done so as it found it. Below shows an screenshot of the –v argument being 
+                used.
+            </p>
+
+            <div><pre><code> nmap -v localhost</code></pre></div>
+            <p><img src="images/nmapv.png" alt = "nmap -v"> </p>
+            <p>As you can see it lists the ports found as it scans localhost. It also presents the report as usual at the end. 
+                Usually I don’t use the –v argument (as its makes it messy for my eyes) however if you’re doing a long scan, 
+                like UDP, and you don’t have time to wait for the final report and you wish to action upon the found ports ASAP 
+                then using verbosity may be a good choice. </p>
+
+            <p>
+                <b>-iL</b> - entering  IP address(s) through a file – using the –iL argument, a file can be used to 
+                enter a list of IP addresses. Below is a text file I made containing two IP addresses (technically one) and then
+                using it in Nmap:
+            </p>
+    
+            <p><img src="images/nmaplist.png" alt = "nmap list"> </p>
+            <div><pre><code> nmap -v localhost</code></pre></div>
+            <p><img src="images/nmapil.png" alt = "nmap -iL"> </p>
+            <p>
+                Overall, the –iL argument is very good if you need to scan a list of IP addresses. In a work environment you may 
+                make a file containing a list of targets (found from searching the web) you need to scan against, or possibly an 
+                employer may send you a file that contain a list of machines they wish for you to attack.<br> As a whole I do not use 
+                –iL a lot because for HackTheBox machines you only need to focus on a single IP address. 
+            </p>
+
+
+            <hr>
+
+            <h3 style="padding-left: 10px;" id ="exam">4. Nmap examples:</h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+
+
+            <p> Here are examples of the Nmap command This command is to scan a target for all possible information, scanning for all ports at max speed and saving the 
+                results to a text file: </p>
+
+            <div><pre><code> sudo nmap -p- -A -sS -T5 localhost -oN scan.txt </code></pre></div>
+
+            <p>
+                The -sS argument can be replaced with a different argument in order to change the type of scan. For example, if I wanted to do a UDP scan
+                I would turn -sS to -sU (and due to timing contraints I would also only scan for the first 1000 ports as UDP takes a while):
+            </p>
+            <div><pre><code> sudo nmap -p1-1000 -A -sU -T5 localhost -oN scanUDP.txt </code></pre></div>
+
+
+            <p> Here is an example of the Nmap command, used to discover other hosts on a network, remember, the 0/24 is needed to specify scanning the network 
+                for hosts: </p>
+
+            <div><pre><code> sudo nmap -sn IP.IP.IP.0/24 </code></pre></div>
+
+            <!-- Embeded link to the terminal page-->
+            <iframe src="http://localhost:7681" height="600" width="60%"></iframe><br>   
+            </p>
+
+            <hr>
+
+
+
+            <h3 style="padding-left: 10px;" id ="help">5. Help Page:</h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+                By running just the command ‘nmap’ or with the –h argument (‘nmap –h’) the help menu can open up. 
+                There is also a man page for nmap, accessible via the VM.
+            </p>
+            <div><pre><code> nmap | nmap -h</code></pre></div>
+
+            <p><img src="images/nmaph1.png" alt = "nmap help page p1"> </p>
+            <p><img src="images/nmaph2.png" alt = "nmap help page p2"> </p>
+            <p><img src="images/nmaph3.png" alt = "nmap help page p3"> </p>
+
+
+        </main>
+
+
+
+
+
+        <div class="footer">
+          <p>Pen Testing is hard at first, be careful not to do difficult challenges early</p>
+        </div>
+    </body>
+</html>
+

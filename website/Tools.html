@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, inital-scale=1">
+        <meta name="description" content="A place to learn basic pen testing info!">
+        <meta name="author" content="Mujeeb">
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
+        <title>Penting - Tools</title>
+
+    </head>
+    <body>
+        <header>
+            <h1>Penting Tools Overview</h1>
+            <!-- Navigation bar based off https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp-->
+            <nav>
+                <div class="navbar">
+                    <a href="index.html">Home</a>
+
+                    <div class="dropdown">
+                      <button class="dropbtn">List of Tools 
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-content">
+                      <a href="Tools.html">Tools page Overview</a>
+                      <a href="Nmap.html">Nmap</a>
+                      <a href= "Nikto.html">Nikto</a>
+                      <a href="BurpSuite.html">BurpSuite</a>
+                      <a href="Othertools.html">Other Tools</a>
+                    </div>
+                  </div>
+
+                  <div class="dropdown">
+                      <button class="dropbtn">List of Services 
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-content">
+                        <a href="Services.html">Services page Overview</a>
+                        <a href="DVWA.html">DVWA</a>
+                        <a href="BadStore.html">BadStore</a>
+                        <a href="bonus.html">Additional Tasks</a>
+                      </div>
+                  </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Misc. Resources
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Misc.html">Misc Resources page</a>
+                          <a href="EDB.html">ExploitDB</a>
+                          <a href="Kali.html">Kali</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Legal + Ethics 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="LandE.html">Legal and Ethics Overview</a>
+                          <a href="Legal.html">Useful Legal info</a>
+                          <a href="Ethics.html">Ethics info</a>
+                          <a href="Disclaimer.html">Disclaimer page</a>
+                        </div>
+                      </div>
+
+                      <div class="dropdown">
+                        <button class="dropbtn">Further Reading 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Next.html">What to do next?</a>
+                          <a href="HTB.html">HTB</a>
+                          <a href="TryHackMe.html">TryHackMe</a>
+                          <a href="Programming.html">Programming</a>
+                        </div>
+                      </div>
+                  </div>
+                  
+            </nav>
+    
+
+        </header>
+
+        <main>
+            <h2 style="padding-left: 10px;"><u>List of Tools</u></h2>
+            <hr>
+
+            <!-- Nmap Overview-->
+
+            <h3 style="padding: 10px;"><a href="Nmap.html"><b>Nmap</b></a></h3>
+            <p>Nmap is primarily a port scanning tool, though it does have some host discovery capabilities. This consists of the tool 
+                looking at a target and checking for any open ports by talking to it and depending on the response it gets from the target, 
+                Nmap will be able to determine whether or not the port is open or closed (and in some cases, filtered). Nmap is considered one of the top port scanning tools 
+                and so is considered a must know in the pen testing industry.
+            </p>
+
+
+
+            <!-- Nikto Overview-->
+            <hr>
+            <h3 style="padding: 10px;"><a href="Nikto.html"><b>Nikto</b></a></h3>
+            <p>
+              Nikto is a web scanner. Nikto is quite similar to Nmap, as Nmap is also a scanning tool. The best way to think of it is – 
+              Nmap was made to scan ports, and websites just happen to be a port scanned. Nikto however was made to scan websites. 
+              It’s a very useful tool, during the scanning process Nikto gets information from the website such as what vulnerabilities 
+              the website has, does it have any odd configurations, are there any exposed folders etc.
+            </p>
+
+            <!-- Burp Suite Overview-->
+            <hr>
+            <h3 style="padding: 10px;"><a href="BurpSuite.html"><b>Burp Suite</b></a></h3>
+            <p>
+              Burp Suite is a proxy interception tool. It basically stands between your browser and the internet. If an HTTP request is on 
+              its way, it intercepts it and gives it to you, allowing you the opportunity to alter the contents. It also have other 
+              features like being used as a vulnerability scanner (if you have the pro version) or use it to brute force a page. Burp 
+              Suite is possibly one of the most famous pen testing tools and is considered the best at what it does. Alternatives do 
+              exist however they lack documentation.
+            </p>
+
+            <!-- Overview of other tools-->
+            <hr>
+            <h3 style="padding: 10px;"><a href="Othertools.html"><b>Other Tools</b></a></h3>
+            <p>
+              This page goes over tools that are useful, however not as useful as the other three. Zenmap is the GUI version 
+              of nmap, providing many similar services as the original as well as additional features like being able to 
+              visual the target topology as well as instantly change command arguments by switching profiles. There 
+              is also Wget and cURL as well, both of which can be used to transfer data to and from servers, becoming 
+              a useful tool when it comes to downloading (sensitive) files.
+            </p>
+        </main>
+
+        <div class="footer">
+          <p>Pen Testing is hard at first, be careful not to do difficult challenges early</p>
+        </div>
+    </body>
+</html>
+

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, inital-scale=1">
+        <meta name="description" content="A place to learn basic pen testing info!">
+        <meta name="author" content="Mujeeb">
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
+        <title>Penting Home</title>
+
+    </head>
+    <body>
+        <header>
+            <h1>Penting Home</h1>
+            <!-- Navigation bar based off https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp-->
+            <nav>
+                <div class="navbar">
+                    <a href="index.html">Home</a>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">List of Tools 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                        <a href="Tools.html">Tools page Overview</a>
+                        <a href="Nmap.html">Nmap</a>
+                        <a href= "Nikto.html">Nikto</a>
+                        <a href="BurpSuite.html">BurpSuite</a>
+                        <a href="Othertools.html">Other Tools</a>
+                      </div>
+                    </div>
+
+                    <div class="dropdown">
+                      <button class="dropbtn">List of Services 
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-content">
+                        <a href="Services.html">Services page Overview</a>
+                        <a href="DVWA.html">DVWA</a>
+                        <a href="BadStore.html">BadStore</a>
+                        <a href="bonus.html">Additional Tasks</a>
+                      </div>
+                  </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Misc. Resources
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Misc.html">Misc Resources page</a>
+                          <a href="EDB.html">ExploitDB</a>
+                          <a href="Kali.html">Kali</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Legal + Ethics 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="LandE.html">Legal and Ethics Overview</a>
+                          <a href="Legal.html">Useful Legal info</a>
+                          <a href="Ethics.html">Ethics info</a>
+                          <a href="Disclaimer.html">Disclaimer page</a>
+                        </div>
+                      </div>
+
+                      <div class="dropdown">
+                        <button class="dropbtn">Further Reading 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Next.html">What to do next?</a>
+                          <a href="HTB.html">HTB</a>
+                          <a href="TryHackMe.html">TryHackMe</a>
+                          <a href="Programming.html">Programming</a>
+                        </div>
+                      </div>
+                  </div>
+                  
+            </nav>
+    
+
+        </header>
+
+        <main>
+        <h2 style="padding: 10px;">Welcome to Penting!</h2>
+        <hr>
+        <p>Hello, this website is designed to provide information regarding common pen testing tools and how you may use them!
+        <br><br> The site contains the techniques of each tool, example usage and also dissects the tool to explain things like arguments!
+            <br><br>
+            For example, the Nmap page goes into detail about the most common arguments, like -p-, -sU, and how they are used.
+            <br>
+            When running certain tools (like Nmap) it is very important you keep a look out for case sensitivity. For example,
+             nmap –sn and nmap –sN are two different commands
+        </p>
+        <p> In addition to this content, I have also added some general penetration testing content and resources, such as HTB, as well as general tips.</p>
+        <h2 style="padding: 10px;">Recommended path:</h2>
+        <p>This is the path I recommend following. I recommend this path because some tools are best used before others in practice 
+          , and some platforms provide easier tasks
+          
+        </p>
+        <ol>
+          <li><a href= "Nmap.html">Nmap</a></li>
+          <li><a href= "Nikto.html">Nikto</a></li>
+          <li><a href="BurpSuite.html">BurpSuite</a></li>
+          <li><a href="BadStore.html">BadStore</a></li>
+          <li><a href="DVWA.html">DVWA</a></li>
+          <li><a href="bonus.html">Additional Tasks</a></li>
+          <li>Mutillidae (no guide page available, also needs to be setup)</li>
+          <li><a href="TryHackMe.html">TryHackMe</a> (and then <a href="HTB.html">HTB</a>) </li>
+        </ol>
+        <p>
+          I also recommend looking at the <a href="Misc.html">Misc Resources page</a> and <a href="LandE.html">Legal and Ethics Overview</a> pages I added. They contain helpful information. 
+        </p>
+
+        </main>
+
+        <div class="footer">
+          <p>Pen Testing is hard at first, its fine to struggle at first! </p>
+        </div>
+    </body>
+</html>
+

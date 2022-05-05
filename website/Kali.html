@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, inital-scale=1">
+        <meta name="description" content="A place to learn basic pen testing info!">
+        <meta name="author" content="Mujeeb">
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
+        <title>Penting - Kali</title>
+
+    </head>
+    <body>
+        <header>
+            <h1>Penting Kali</h1>
+            <!-- Navigation bar based off https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp-->
+            <nav>
+                <div class="navbar">
+                    <a href="index.html">Home</a>
+
+                    <div class="dropdown">
+                      <button class="dropbtn">List of Tools 
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-content">
+                      <a href="Tools.html">Tools page Overview</a>
+                      <a href="Nmap.html">Nmap</a>
+                      <a href= "Nikto.html">Nikto</a>
+                      <a href="BurpSuite.html">BurpSuite</a>
+                      <a href="Othertools.html">Other Tools</a>
+                    </div>
+                  </div>
+
+                  <div class="dropdown">
+                    <button class="dropbtn">List of Services 
+                      <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                      <a href="Services.html">Services page Overview</a>
+                      <a href="DVWA.html">DVWA</a>
+                      <a href="BadStore.html">BadStore</a>
+                      <a href="bonus.html">Additional Tasks</a>
+                    </div>
+                </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Misc. Resources
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Misc.html">Misc Resources page</a>
+                          <a href="EDB.html">ExploitDB</a>
+                          <a href="Kali.html">Kali</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Legal + Ethics 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="LandE.html">Legal and Ethics Overview</a>
+                          <a href="Legal.html">Useful Legal info</a>
+                          <a href="Ethics.html">Ethics info</a>
+                          <a href="Disclaimer.html">Disclaimer page</a>
+                        </div>
+                      </div>
+
+                      <div class="dropdown">
+                        <button class="dropbtn">Further Reading 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Next.html">What to do next?</a>
+                          <a href="HTB.html">HTB</a>
+                          <a href="TryHackMe.html">TryHackMe</a>
+                          <a href="Programming.html">Programming</a>
+                        </div>
+                      </div>
+                  </div>
+                  
+            </nav>
+    
+
+        </header>
+
+        <main>
+            <h2 style="padding-left: 10px;"><u>Kali Linux</u></h2>
+            <button class="button"><a href="Misc.html"><span>Back to Overview</span></a></button> <br>
+            Here is the URL to the Kali page: <a href="https://www.kali.org/">https://www.kali.org/</a>
+            <hr>
+
+            <h3 style="padding-left: 10px;"><u>My opinion: Should you use Kali?</u></h3>
+            <p>
+                Overall, yes, I believe you should take a look at Kali once you are done with Penting (of course you are welcome to 
+                look at other pentesting based VMs), I belive Kali is the best. Read on for infomration regarding Kali 
+              </p>
+
+                <h3 style="padding-left: 10px;"><u>What is Kali?</u></h3>
+            <p>
+                Kali Linux is a wonderful VM designed for penetration testing (and security auditing). When people think 
+                about pen testing VMs, Kali Linux is always the first VM that comes to mind. Although there are other 
+                VMs available online, Kali is considered the go to VM, the cream of the crop – and for good reason too, 
+                it’s very well made.
+            </p>
+            <p>
+                Kali Linux is an open source debian based Linux distribution, that gets regularly updated (normally getting 
+                around 3-4 big updates a year), meaning the tools on the VM are kept up to date as time (whilst at the same 
+                time adding any QOL updates to the VM). 
+            
+                It’s also free, meaning absolutely no costs involved (unless you pay for it using cloud/Amazon AWS, in which 
+                case it cost pennies). <br><br>This means it’s free and easy to try out ! Just keep in mind, the penetration 
+                tools on the VM can still be used to cause harm so be careful about misuse.<br>
+                <img src="images/kalidl.png" alt = "Kali dl" > 
+            </p>
+
+            <p>
+                Kali Linux basically has a very large number of tools strapped to it, pre-installed, no configuration required. 
+                Not just that, many tools have also been designed with Kali in mind, meaning the tool would be ‘good to go out 
+                the box’ as soon as you install it (and do any required configurations). This makes trying out any tools a 
+                leisurely task. <br><br>
+                
+                Let’s say you find out about a new tool, and you want to try it out. Odds are Kali Linux may already have it 
+                installed, so all you would need to do is enter the command name.<br><br>
+                
+                On the off chance the tool isn’t installed on Kali, you would most likely download the tool from the GitHub 
+                page. In the read me/description of on page would contain a set of instructions on how to download and use 
+                the tool on Kali.
+
+            </p>
+
+            <hr>
+            <h3 style="padding-left: 10px;"><u>Should you use Kali?</u></h2>
+            
+            <p>
+                Kali Linux is not as user friendly as Ubuntu. This is what the home screen looks like, it’s very barren. 
+                For more experienced penetration testers, people prefer it this way, however a new penetration tester may get lost.
+                <br><img src="images/kalihome.png" alt = "Kali home" width="700" > 
+            </p>
+            <p>
+                The start menu is also quite cluttered. If a beginner penetration tester looked at the start menu they may 
+                become barraged by the sheer volume of tools. In the screenshot below, each tab on the left is a folder. 
+                The tools would then be shown on the right. If there are multiple tools of the same purpose, they would then 
+                be grouped up in their own folder.
+                <br><img src="images/kalistart.png" alt = "Kali start menu" > 
+            </p>
+            <p>
+                On the Penting VM, only around 5 tools have been installed. Kali Linux, on the other hand, has around 600+. 
+                Chances are you won’t even touch most of said tools (that doesn’t mean those tools are useless, it just means 
+                they are not currently relevant). As such, having 600+ tools on a VM were only a very small number would actually 
+                be used for a guide would be a waste of resources and may needlessly overwhelm the user.
+                <br>
+                Another thing that’s also begun to happen in the past couple of years is Kali has started to remove its 
+                teaching/learning aspects, turning more purely into a penetration toolkit. It also doesn’t offer any 
+                vulnerable services by default.
+
+            </p>
+            <hr>
+            <p style="padding-left: 10px;">
+                NB: When people talk about Kali Linux, they are most likely referring to the virtual machine. 
+                The reason I am mentioning this is because there is now a large range of Kali products. They are all however, 
+                still Kali Linux, they just have a different paint colours. <br>Although you are unlikely to try any of the other 
+                variants, it's still a nice thing to know about.
+            </p>
+
+            <p><img src="images/kalirange.png" alt = "Range of Kali Products" height="600"> </p>
+
+            <a href="Misc.html"><h4 style="padding-left: 10px;"><b>Back to Miscellaneous resources</b></h4></a>
+        </main>
+
+        <div class="footer">
+          <p>Pen Testing is hard at first, walk before you fly!</p>
+        </div>
+    </body>
+</html>
+

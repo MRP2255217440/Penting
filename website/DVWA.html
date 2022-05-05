@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, inital-scale=1">
+        <meta name="description" content="A place to learn basic pen testing info!">
+        <meta name="author" content="Mujeeb">
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
+        <title>Penting - DVWA</title>
+
+    </head>
+    <body>
+        <header>
+            <h1>Penting DVWA</h1>
+            <!-- Navigation bar based off https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp-->
+            <nav>
+                <div class="navbar">
+                    <a href="index.html">Home</a>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">List of Tools 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                        <a href="Tools.html">Tools page Overview</a>
+                        <a href="Nmap.html">Nmap</a>
+                        <a href= "Nikto.html">Nikto</a>
+                        <a href="BurpSuite.html">BurpSuite</a>
+                        <a href="Othertools.html">Other Tools</a>
+                      </div>
+                    </div>
+
+                    <div class="dropdown">
+                      <button class="dropbtn">List of Services 
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-content">
+                        <a href="Services.html">Services page Overview</a>
+                        <a href="DVWA.html">DVWA</a>
+                        <a href="BadStore.html">BadStore</a>
+                        <a href="bonus.html">Additional Tasks</a>
+                      </div>
+                  </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Misc. Resources
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Misc.html">Misc Resources page</a>
+                          <a href="EDB.html">ExploitDB</a>
+                          <a href="Kali.html">Kali</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Legal + Ethics 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="LandE.html">Legal and Ethics Overview</a>
+                          <a href="Legal.html">Useful Legal info</a>
+                          <a href="Ethics.html">Ethics info</a>
+                          <a href="Disclaimer.html">Disclaimer page</a>
+                        </div>
+                      </div>
+
+                      <div class="dropdown">
+                        <button class="dropbtn">Further Reading 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Next.html">What to do next?</a>
+                          <a href="HTB.html">HTB</a>
+                          <a href="TryHackMe.html">TryHackMe</a>
+                          <a href="Programming.html">Programming</a>
+                        </div>
+                      </div>
+                  </div>
+                  
+            </nav>
+    
+
+        </header>
+
+        <main>
+        
+          <h2 style="padding-left: 10px;" id="Start"><u>DVWA Exploitation</u></h2>
+          <button class="button"><a href="Services.html"><span>Back to Overview</span></a></button>
+          <hr>
+          <div>
+ <!-- Code based off the following:https://www.tipsandtricks-hq.com/simple-table-of-contents-toc-using-pure-html-and-css-code-9217-->
+            <p><b><u>Table of contents</u></b></p>
+            <ul style="  border: 1px solid black;
+            padding-right: 0px;
+            padding-left: 28px;
+            width: 240px;
+            border-radius: 5px;">
+            <li><a href="#Q">1. Questions</a></li>
+            <li><a href="#A">2. Answers</a></li>
+            </ul>
+            </div>
+
+
+          <hr>
+          <h3 style="padding-left: 10px;"><u>General Info</u></h3>
+          
+          <p>
+            DVWA (Damn Vulnerable Web Application) is a publicly available web application designed to be vulnerable. 
+            It is a good starting point when it comes to learning how to use tools against an intentionally vulnerable service. <br>
+            This page will provide activities to undergo against the DVWA website, mostly looking at Nmap, Burp Suite and Nikto.
+        </p>  
+        <hr>
+
+
+        <!-- This is the start of the Questions-->
+
+        <h3 style="padding-left: 10px;" id="Q"><u>Questions</u></h3>
+        <hr>
+        <h4 style="text-align: center;" >
+          1.	Find and access the DVWA port. Also state it's service version, and see 
+          if any vulnerabilities can be found for the service by looking on Google.
+        </h4>
+        <hr>
+
+        <p>
+          Usually web services are hosted on port 80 or port 443. On this virtual machine I have changed the port location for DVWA. 
+          Your first task is to find the port and access the DVWA site. <br> As a freebie hint, when you find what port 
+          DVWA is running on add a colon after the IP address with the port number like so <br>
+        <img src="images/dvwalocalhostport.png" alt = "localhost:xxx OR 127.0.0.1:xxx">
+        </p>
+        <p>
+          In this case, finding the service version is of little relevance, however if you are dealing with an out of date service 
+          it will be important. This is because if it is of a certain version it may have certain vulnerabilities. Famous examples 
+          include the Log4j vulnerability, Heartbleed and shellshock.
+        </p>
+
+        <!-- Button used to show and hide hints. This appears frequently-->
+        <button onclick="showqQ1H1()">Click Me to show/hide hints</button>
+
+        <div id="q1hint1" style="display: none;">
+            <p>Hint 1: Web Services are seen in nmap as HTTP</p>
+            <button onclick="showqQ1H2()">Click Me to show/hide hint 2</button>
+            <div id="q1hint2" style="display: none;">
+
+                <p>Hint 2: The port number may actually be above 1000, maybe even 10000!</p>
+                <button onclick="showqQ1H3()">Click Me to show/hide hint 3</button>
+                <div id="q1hint3" style="display: none;">
+
+                    <p>Hint 3: I wonder if there is a way to make the scan show more information?</p>
+                    <button onclick="showqQ1H4()">Click Me to show/hide hint 4</button>
+                    <div id="q1hint4" style="display: none;">
+                        <p> Hint 4: One piece of information collected when doing an nmap scan with a certain argument 
+                            is the HTTP title.</p>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <h5 style="text-align: center;">
+          1.1 (Optional) What operating system(s) versions did EternalBlue work against?
+        </h5>
+
+        <hr>
+        <h4 style="text-align: center;" >
+          2. When you get to the DVWA login page, can you guess the username and password?
+        </h4>
+        <hr>
+        <p>NB the credentials have been left unchanged</p>
+        <button onclick="showqQ2H1()">Click Me to show/hide hints</button>
+
+        <div id="q2hint1" style="display: none;">
+            <p>Hint 1 – What password would a default admin have? Might be worth guessing</p>
+            <button onclick="showqQ2H2()">Click Me to show/hide hint 2</button>
+            <div id="q2hint2" style="display: none;">
+
+                <p>Hint 2 – Often times default credentials can be found easily on the internet</p>
+
+            </div>
+        </div>
+
+        <hr>
+        <h4 style="text-align: center;" >
+          3. When logged in, change the security level in DVWA to low.
+        </h4>
+        <hr>
+        <p>The tabs on the left will help.<br>
+        NB this tasks needs to be done many times as DVWA frequently switches back to impossible security</p>
+
+        <hr>
+        <h4 style="text-align: center;" >
+          4. On the DVWA site a interesting directory has been hidden. Using Nikto, can you identify the folder name?
+        </h4>
+        <hr>
+        <p>NB: You will find more than one interesting directory, the one we are interested in right now begins with S</p>
+
+        
+        <button onclick="showqQ4H1()">Click Me to show/hide hints</button>
+
+        <div id="q4hint1" style="display: none;">
+            <p>Hint 1: Remember, entering ‘localhost’ does not work!</p>
+            <button onclick="showqQ4H2()">Click Me to show/hide hint 2</button>
+            <div id="q4hint2" style="display: none;">
+
+                <p>Hint 2: Don’t forget to specify the port as well</p>
+
+            </div>
+        </div>
+
+        <hr>
+        <h4 style="text-align: center;" >
+          5. Access the interesting folder (found in task 4) and download the wordlists present
+        </h4>
+        <hr>
+        <p>NB: you can either use a tool or copy and paste the contents into a file</p>
+        <p>
+          As a freebie hint, when you move into a directory called ‘hello’ you go from localhost to localhost/hello
+        </p>
+
+        <button onclick="showqQ5H1()">Click Me to show/hide hints</button>
+
+        <div id="q5hint1" style="display: none;">
+            <p>Hint 1: you could use either curl or wget to download the files</p>
+            <button onclick="showqQ5H2()">Click Me to show/hide hint 2</button>
+            <div id="q5hint2" style="display: none;">
+
+                <p>Hint 2: if you wish to download the file through the browser, open the file and select CTRL + A and CTRL + C</p>
+
+            </div>
+        </div>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          6. With the wordlists downloaded (or copy and pasted), read the contents of the wordlists (through the console or 
+          text editor).
+        </h4>
+        <hr>
+        <p>
+          NB: This task is fairly simple, it’s just to make sure the wordlist was recovered intact
+        </p>
+
+        <button onclick="showqQ6H1()">Click Me to show/hide hints</button>
+
+        <div id="q6hint1" style="display: none;">
+            <p>Hint 1: Linux ‘cat’ or a text editor like ‘geddit’ would be suitable. I have also provided ‘vim’, but 
+              I do not recommend using it unless you have prior experience, just because it’s quite messy.</p>
+        </div>
+      
+
+        <hr>
+        <h4 style="text-align: center;" >
+          7. With the wordlists collected, the brute force setup can begin. <br>Using Burp Suite, intercept the 
+          HTTP request for the DVWA Brute Force page (the tab on the left) after attempting to login as a random user 
+        </h4>
+        <hr>
+        <p>
+          NB: Use the Burp Suite built in browser. Ensure security is still set to low. If for some reason the difficult gets stuck at
+          'Impossible', go into the Chromium browser settings and reset the browser back to default.
+        </p>
+
+        <button onclick="showqQ7H1()">Click Me to show/hide hints</button>
+
+        <div id="q7hint1" style="display: none;">
+            <p>Hint 1: The inbuilt browser can be opened in the ‘proxy’ tab. In the same tab, intercept can be 
+              turned off until you get to the brute force page (so you don’t need to press ‘forward’ whenever you 
+              change pages)</p>
+              <button onclick="showqQ7H2()">Click Me to show/hide hint 2</button>
+              <div id="q7hint2" style="display: none;">
+  
+                  <p>Hint 2: When you get onto the brute force page, don’t forget to turn the proxy back on and 
+                    enter some test data so the HTTP request is generated</p>
+                  <button onclick="showqQ7H3()">Click Me to show/hide hint 3</button>
+                  <div id="q7hint3" style="display: none;">
+      
+                      <p>Hint 3: If you don’t see the HTTP request in Burp Suite (and you see a different request 
+                        instead) press forward, if everything was done correctly it should show up (the request 
+                        should contain your test data).</p>
+      
+                  </div>
+              </div>
+        </div>
+
+        <h5 style="text-align: center;">
+          7.1. In the proxy tab once the HTTP request was intercepted, what category can the ‘username’ and 
+          ‘password’ category be found when looking at inspector? (Click the dropdown to see more).
+        </h5>
+        <br>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          8. With task 7 done, forward the HTTP request (the login page in chromium should give an error). <br>
+          In the ‘HTTP history’ tab under ‘Proxy’, find the HTTP request you sent - it should also be accompanied 
+          with a response. <br>What line can the login error message be found in the HTTP response? 
+        </h4>
+        <hr>
+        <p>
+          NB: This is what the login page looks like if an incorrect login is added<br>
+          <img src="images/dvwabruteforceloginfail.png" alt = "DVWA failed login">
+        </p>
+
+        <button onclick="showqQ8H1()">Click Me to show/hide hints</button>
+
+        <div id="q8hint1" style="display: none;">
+            <p>Hint 1: Click the fields found to view the request (and if possible the response). If the 
+              HTTP history gets messy, you can right click and select ‘clear history’ and enter more test 
+              data into the login page.</p>
+        </div>
+
+        <hr>
+        <h4 style="text-align: center;" >
+          9. In Burp Suite, under the ‘Target’ tab go into ‘Site map’. This time find the Brute Force 
+          page via the sitemap. <br>Select the page containing your test data if multiple pages can be seen. 
+          <br>Once selected, go into ‘Response’ and find the error line again.
+        </h4>
+        <hr>
+        <p>
+          NB: this task is very similar to task 8. Click the folder dropdowns to reveal additional info.
+        </p>
+
+        <button onclick="showqQ9H1()">Click Me to show/hide hints</button>
+
+        <div id="q9hint1" style="display: none;">
+            <p>Hint 1: Folders/files that have been greyed out are areas you have not viewed, but Burp Suite knows exist.</p>
+        </div>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          10. Using either task 8 or 9 to get to the HTTP request, send the HTTP request to the intruder tab.
+        </h4>
+        <hr>
+        <p>
+          NB: Normally you would directly send the HTTP request to the intruder tab from the proxy intercept tab. The reason this 
+          round about method was used was to get you to look at the sitemap and history tab (and in case you lose the HTTP request!).
+        </p>
+
+        <button onclick="showqQ10H1()">Click Me to show/hide hints</button>
+
+        <div id="q10hint1" style="display: none;">
+            <p>Hint 1: Right click when you hover over the HTTP request</p>
+        </div>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          11. With the HTTP request in the intruder tab (task 10) and the wordlists recovered (task 5), the details for brute 
+          forcing can now be setup. <br>Whilst in the intruder tab in ‘Positions’ (with the brute force login page HTTP Request 
+          selected) remove all payload markers and only select the login credential fields as the payload position.
+        </h4>
+        <hr>
+
+        <button onclick="showqQ11H1()">Click Me to show/hide hints</button>
+
+        <div id="q11hint1" style="display: none;">
+            <p>Hint 1: Use the buttons on the right to add or remove positions</p>
+        </div>
+
+
+        <h5 style="text-align: center;">
+          11.1. In the HTTP request, an interesting parameter, a cookie, can be found. 
+          <br>What is the name of the parameter, and how would we add it as a payload position (we wont need to)?
+        </h5>
+
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          12. With the payload position markers setup, the correct attack type now needs to be selected. <br>Under 
+          ‘attack type’, read the type of attacks available and select the attack suitable for brute forcing the login page.
+        </h4>
+        <hr>
+
+        <button onclick="showqQ12H1()">Click Me to show/hide hints</button>
+
+        <div id="q12hint1" style="display: none;">
+            <p>Hint 1: The attack will be using two sets of payloads (wordlists) – the username and password list</p>
+            <button onclick="showqQ12H2()">Click Me to show/hide hint 2</button>
+
+            <div id="q12hint2" style="display: none;">
+                <p>Hint 2: Every login combination will need to be tested.</p>
+            </div>
+        </div>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          13. In the intruder tab under ‘payloads’, add the username wordlist to 
+          ‘payload set 1’ and the password wordlist to ‘payload set 2’.
+        </h4>
+        <hr>
+        <p>
+          NB: The ‘payload set’ has a drop down you need to click on to change between sets. The payload type does not 
+          need to be changed, ‘simple list’ is enough.
+        </p>
+
+        <button onclick="showqQ13H1()">Click Me to show/hide hints</button>
+
+        <div id="q13hint1" style="display: none;">
+            <p>Hint 1: Use the ‘load …’ button to load file content into the payload set. Alternatively, you can 
+              type the contents manually, or copy the contents and press paste</p>
+        </div>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          14. With task 13 done, the intruder tab should now be setup to brute force the login page. <br>Double check 
+          everything has been done correctly, then start the attack. <br>The aim of the attack is to find a successful 
+          login credential.
+        </h4>
+        <hr>
+        <p>
+          NB: If you take too long, you may logout of DVWA – this will influence the response of the brute force. 
+          If this is the case, just login again and setup the HTTP request again like before.<br>
+          This is what it looks like when it you have logged out of DVWA – notice the length.<br>
+          <img src="images/dvwafailedbruteforce.png" alt = "DVWA failed brute force" style="height: 450px;">
+        </p>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          15. With the brute forcing complete, all that’s left to do is see the results. When brute forcing started a window should of opened
+          (‘Intruder attack’). <br>Many of the brute force credential attempts responded with the length of ‘4532’. What type of 
+          response was given to these credentials?
+        </h4>
+        <hr>
+        <p>
+          NB: Being able to differentiate ‘successful’ and ‘failed’ responses will be very useful when it comes to looking 
+          for working credentials, especially with a much larger sample size.
+        </p>
+
+        <button onclick="showqQ15H1()">Click Me to show/hide hints</button>
+
+        <div id="q15hint1" style="display: none;">
+            <p>Hint 1: You will need to look at the response tab after you select a request</p>
+            <button onclick="showqQ15H2()">Click Me to show/hide hints</button>
+
+            <div id="q15hint2" style="display: none;">
+                <p>Hint 2: Try entering one of these (incorrect) credentials into the site itself, and look at what response 
+                  it gives. Then look for the same response in the HTTP response in the brute force window.</p>
+            </div>
+        </div>
+
+        <hr>
+        <h4 style="text-align: center;" >
+          16. With the establishment of responses with the length of ‘4532’ are most likely brute forcing attempts that failed, 
+          they can be ignored. <br>Look for a request of another length. 
+        </h4>
+        <hr>
+
+        <button onclick="showqQ16H1()">Click Me to show/hide hints</button>
+
+        <div id="q16hint1" style="display: none;">
+            <p>Hint 1: Click the ‘Length’ column to filter by size</p>
+        </div>
+
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          17. A second length, ‘4570’, could also be found. Investigate the HTTP response tab and 
+          look at what type of response was given.
+        </h4>
+        <hr>
+        <p>
+          NB: Same task as task 15
+        </p>
+
+        <hr>
+        <h4 style="text-align: center;" >
+          18. Using the payload content of the request containing the length ‘4570’, enter the credentials into 
+          the login page. <br>Does it work, and what can be seen?
+        </h4>
+        <hr>
+        <p>
+          NB: This is confirming the results of task 17.
+        </p>
+
+        <button onclick="showqQ18H1()">Click Me to show/hide hints</button>
+
+        <div id="q18hint1" style="display: none;">
+            <p>Hint 1: Payload 1 is the username, payload 2 is the password</p>
+        </div>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          19. Back to DVWA, navigate to the SQL Injection page, and try out the Injection page by entering numbers and looking at the response.<br> 
+          Once familiar with it, repeat the past tasks to acquire a HTTP request. Once acquired, send the HTTP request to REPEATER          
+        </h4>
+        <hr>
+        <p>
+          NB: don’t forget to enter test data to make the request. 
+          I also recommend viewing the hyperlinks found on the injection page, they hold useful information regarding SQLi.
+        </p>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          20. In the repeater tab, insert numbers from 1-4 in the UD field. Look for each result of the ID number in the response    
+        </h4>
+        <hr>
+
+        <hr>
+        <h4 style="text-align: center;" >
+          21. Return to the DVWA page, enter a SQLi query into the ID field to present all the user IDs on the page (make sure intercept is turned off)    
+        </h4>
+        <hr>
+        <p>
+          NB: Use the links found in the SQLi page to find out how SQLi works. 
+        </p>
+
+        <button onclick="showqQ21H1()">Click Me to show/hide hints</button>
+
+        <div id="q21hint1" style="display: none;">
+            <p>Hint 1: Try the following 1' or 1=1# </p>
+        </div>
+
+        <h5 style="text-align: center;">
+          21.1. Use the same command for task 21 again, except this time insert it directly into the HTTP request in the repeater page. Does it work?
+        </h5>
+        <hr>
+        <h4 style="text-align: center;">
+          22. Repeat task 21, but this time turn the intercept on. Compare the HTTP Request received from task 21 and compare it to 21.1. <br>
+          Afterwards, send the HTTP Request to repeater and send it forward, does it work this time?
+        </h4>
+        <p>
+          NB: what is %27 and %23?
+        </p>
+
+
+
+
+
+
+        <!-- This is the end of the Questions-->
+
+
+
+
+
+
+
+
+
+
+
+        <!-- This is the start of the Answers-->
+
+
+        <hr>
+        <h3 style="padding-left: 10px;" id="A"><u>Answers</u></h3>
+        <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+        <hr>
+        <br>
+        <button onclick="showansw()">Click Me to show/hide the answers </button> <p></p><hr>
+        <div id ="answ" style="display: none;">
+
+      <h4 style="text-align: center;" >
+        1.	Find the DVWA port, the site and state the server version
+      </h4>
+      <hr>
+      <p>
+        The port can be found by adding the –p- argument to the nmap scan.<br>
+        <div><pre><code> nmap -p- localhost</code></pre></div><br>
+        <img src="images/dvwa1a.png" alt = "running nmap with -p-"><br>
+        Doing this however does not reveal the service, nor specifically which one is DVWA
+      </p>
+      <p>
+        Adding –A to the command provides the additional information needed. It does however also produce a wall of text, but near 
+        the bottom of the information, info regarding DVWA can be found, including the service version.<br>
+        <img src="images/dvwa1b.png" alt = "running nmap with -A">
+      </p>
+      <p>
+        The Apache server version was 2.4.41.
+      </p>
+      <hr>
+      <h5 style="text-align: center;" >
+        1.1.	(optional) Find the Operating Systems versions EternalBlue worked against.
+      </h5>
+      <hr>
+      <p>
+        The main target of the EternalBlue are a range of Windows Machines, 2016 all the way to 2000. HTB has a machine called ’Blue’ 
+        that is based off the EternalBlue exploit, it is a fairly simple box to exploit. TryHackMe also has a free alternative, 
+        also just called ‘Blue’.<br>
+        Here is the list to the Exploitdb site of an exploit found from just looking off Google:
+        https://www.exploit-db.com/exploits/42315<br>
+        <img src="images/dvwaoslist.png" alt = "eternal blue os list">
+      </p>
+
+      <hr>
+      <h4 style="text-align: center;" >
+        2. What is the DVWA login credentials?
+      </h4>
+      <hr>
+      <p>
+        The username is <b>admin</b>, the password is <b>password</b>. It was fine to use google to get the credentials, especially 
+        since I used the default credentials for this purpose. In many companies default credetnials for services and admin accounts
+        are often still used.<br>
+        <img src="images/dvwacred.png" alt = "DVWA credentials online">
+      </p>
+
+
+
+      <hr>
+      <h4 style="text-align: center;" >
+        3. When logged in, change the security level in DVWA to low.
+      </h4>
+      <hr>
+      <p>
+        Navigate to the DVWA security tab, select the drop down and select 'low'.<br>
+        <img src="images/dvwa3a.png" alt = "DVWA security page ">
+      </p>
+      <p>Besides the need to adjust the DVWA settings every time it resets, some systems actually work like this when it comes to 
+        system security. This is why its important to ensure the admin account remains secure and not have it compromised in the
+        first place.</p>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          4. On the DVWA site a interesting directory has been hidden. Using Nikto, can you identify the folder name?
+        </h4>
+        <hr>
+        <p>
+          Nikto with the host and port specified is enough to get the job done<br>
+          <div><pre><code> nikto -host 127.0.0.1 -port 45080</code></pre></div><br>
+          <img src="images/dvwa4a.png" alt = "DVWA nikto scan">
+        </p>
+        <p>From the results, a folder called ‘secret’ can be found. This is a folder I have made. If you find one out in 
+          the wild, it will most likely contain information you’re not supposed to see!<br>
+          <img src="images/dvwa4b.png" alt = "DVWA nikto scan 2"></p>
+          <p>The other folders, tests and database are also very valuable. Tests may contain sensitive documents or forgotten 
+            credentials, such as a long lost test user with admin credentials. As it is an ‘experimental’ user it may have 
+            more permissions then the normal user. In this case it contains a file used to trim down on waste. Database files also
+            have the same value as well.</p>
+
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          5. Access the interesting folder (found in task 4) and download the wordlists present
+        </h4>
+        <hr>
+        <p>
+          First I went into the area of the interesting directory and found two wordlist files.<br>
+          <img src="images/dvwa5a.png" alt = "DVWA secret folder">
+        </p>
+        <p>I then proceeded to copy the URL to this page and added the file name to the end of it, so it looked like this.<br>
+          <img src="images/dvwa5b.png" alt = "DVWA nikto scan 2"><br>
+          <img src="images/dvwa5c.png" alt = "DVWA nikto scan 2"></p>
+
+          <p>I then copy and pasted the URLs into a curl command and added the –o operator to save the file on the VM.</p>
+          <div><pre><code>curl localhost:45080/secret/passwords.txt -o passwords.txt  <br>curl localhost:45080/secret/usernames.txt -o usernames.txt </code></pre></div>
+          <p><img src="images/dvwa5d.png" alt = "DVWA nikto scan 2"></p>
+          <p>With that I then got the files on my VM to be used as a wordlist.</p>
+                
+        <hr>
+        <h4 style="text-align: center;" >
+          6. With the wordlists downloaded (or copy and pasted), read the contents of the wordlists (through the console or 
+          text editor).
+        </h4>
+        <hr>
+        <p>
+          Simple enough, cat ‘filename’ is sufficient. Gedit could also be used<br>
+          <img src="images/dvwa6cat.png" alt = "DVWA using cat to read the files"><br>
+          <img src="images/dvwa6gedit.png" alt = "DVWA using gedit to read the files">
+        </p>
+
+        <hr>
+        <h4 style="text-align: center;" >
+        7. With the wordlists collected, the brute force setup can begin. Using Burp Suite, intercept the HTTP request 
+        for the DVWA Brute Force page after attempting to login as a random user.
+        </h4>
+        <hr>
+        <p>
+          First open the Burp Suite browser by going into the proxy tab. I turned intercept off for the time being for convenience.<br>
+          <img src="images/dvwa7openbrowser.png" alt = "DVWA using Burp Suite to open the browser">
+        </p>
+        <p>
+          Once on, using the Chromium browser navigate back onto DVWA (and logging back into DVWA) go onto the Brute Force page. Ensure security 
+          is still set to low.<br>
+          <img src="images/dvwa7bruteforcetab.png" alt = "DVWA highlighted brute force tab">
+        </p>
+        <p>
+          Make sure intercept is turned back on and enter some test data.<br>
+          <img src="images/dvwa7bruteforce.png" alt = "DVWA entering data into the brute forcing system">
+        </p>
+        <p>
+          If everything has been done correctly, a HTTP request should be intercepted by Burp Suite. The first line 
+          should contain the test data. If it is not on the first line, the difficultly of DVWA is likely not set to low.<br>
+          <img src="images/dvwa7bruteforceHTTPreq.png" alt = "DVWA the brute force HTTP request">
+        </p>
+
+        <hr>
+        <h5 style="text-align: center;" >
+          7.1. In the proxy tab once the HTTP request was intercepted, what category can the ‘username’ and 
+          ‘password’ category be found when looking at inspector? <br>(Click the dropdown to see more).
+        </h5>
+        <hr>
+        <p>
+          The username and password can be found in the request query parameters section of inspector.<br>
+          <img src="images/dvwa7.1inspector.png" alt = "DVWA inspector">
+        </p>
+
+        
+        <hr>
+        <h4 style="text-align: center;" >
+          8. With task 7 done, forward the HTTP request (the login page in chromium should give an error). <br>
+          In the ‘HTTP history’ tab under ‘Proxy’, find the HTTP request you sent - it should also be accompanied 
+          with a response. <br>What line can the login error message be found in the HTTP response? 
+        </h4>
+        <hr>
+        <p>
+          The HTTP request in this case will most likely be the one with a tick mark in the ‘params’ field. It should also have a 
+          longer URL (containing the username and password field).<br>
+          <img src="images/dvwa8HTTPhistory.png" alt = "DVWA Burp Suite HTTP history">
+        </p>
+        <p>
+          Once located, click on it to view it. The Request and 
+          Response tabs can be seen. Scroll down in the Response tab (to line 85) and the error message can be found.<br>
+          <img src="images/dvwa8HTTPResponse.png" alt = "DVWA Burp Suite HTTP history HTTP response"> 
+        </p>
+
+        
+        <hr>
+        <h4 style="text-align: center;" >
+          9. In Burp Suite, under the ‘Target’ tab go into ‘Site map’. This time find the Brute Force 
+          page via the sitemap. <br>Select the page containing your test data if multiple pages can be seen. 
+          <br>Once selected, go into ‘Response’ and find the error line again.
+        </h4>
+        <hr>
+        <p>
+          The sitemap can be explored by clicking the dropdowns, revealing more folders and files. Folders that have 
+          not been investigated have been greyed out, and can be ignored<br>
+          <img src="images/dvwa9sitemap.png" alt = "DVWA Burp Suite site map">
+        </p>
+        <p>
+          Once located, click on it to view it. The Request and 
+          Response tabs can be seen. Scroll down in the Response tab (to line 85) and the error message can be found.<br>
+          <img src="images/dvwa9sitemapreq.png" alt = "DVWA Burp Suite site map request"> <br>
+          <img src="images/dvwa9sitemapresponse.png" alt = "DVWA Burp Suite site map HTTP response">
+          
+        </p>
+
+        <hr>
+        <h4 style="text-align: center;" >
+        10. Using either task 8 or 9 to get to the HTTP request, send the HTTP request to the intruder tab
+        </h4>
+        <hr>
+        <p>
+          In this example I accessed the HTTP request through the HTTP history. 
+          I right clicked the HTTP Request, and selected ‘Send to Intruder’. Ctrl+I also works<br>
+          <img src="images/dvwa10tointruder.png" alt = "DVWA Burp Suite sending to intruder">
+        </p>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          11. With the HTTP request in the intruder tab (task 10) and the wordlists recovered (task 5), the details for brute 
+          forcing can now be setup. <br>Whilst in the intruder tab in ‘Positions’ (with the brute force login page HTTP Request 
+          selected) remove all payload markers and only select the login credential fields as the payload position.
+        </h4>
+        <hr>
+        <p>
+          This is what the HTTP request looks like with all the possible payload positions highlighted.<br>
+          <img src="images/dvwa11intruderdefault.png" alt = "DVWA Burp Suite intruder default" >
+        </p>
+        <p>
+          First, select the ‘Clear’ button (on the right) to remove all payloads from the request.<br>
+          <img src="images/dvwa11resetpos.png" alt = "DVWA Burp Suite resetting the payload positions" style="height: 330px;"> 
+        </p>
+        <p>
+          Then highlight one of the credential fields by click and dragging over the data 
+          (one of the fields containing the test data), then selecting 'Add'. The email address field (test data) 
+          will then be marked as a payload and will look as such. It will also change colours<br>
+          <img src="images/dvwa11highlightdata.png" alt = "DVWA Burp Suite highlighting data to mark it as payload position"><br>
+          <img src="images/dvwa11payloadmarkeddata.png" alt = "DVWA Burp Suite data marked as payload position">
+        </p>
+        <p>
+          Repeat the previous steps with the password field. In the end the HTTP request will look like this. Only 
+          the username and password parameters need to be selected for the payload position.<br>
+          <img src="images/dvwa11payloadmarked.png" alt = "DVWA Burp Suite payload fully marked">
+        </p>
+
+        <hr>
+        <h5 style="text-align: center;" >
+          11.1. In the HTTP request, an interesting parameter, a cookie, can be found. What is the name of the parameter, 
+          and how would we add it as a payload position?
+        </h5>
+        <hr>
+        <p>
+          The parameter is called ‘PHPSESSID’. If you had another users cookie, you could potentially use it 
+          for a session hijacking attack. It can be selected as a payload position by following task 11, 
+          selecting the cookie data itself and selecting the ‘Add’ button.<br>
+          <img src="images/dvwa11.1cookiemarked.png" alt = "DVWA Burp Suite cookie payload marked">
+        </p>
+
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          12. With the payload position markers setup, the correct attack type now needs to be selected. <br>Under 
+          ‘attack type’, read the type of attacks available and select the attack suitable for brute forcing the login page.
+        </h4>
+        <hr>
+        <p>The attack being done is called a ‘Cluster Bomb’.</p>
+        <p>
+          This attack type is being used because two separate payloads (wordlists) are being used for brute forcing – the 
+          username and password list. Sniper attack could be used however it would take too long – it would go through all 
+          the payload combinations (and so try the password wordlist in the username field, which would take up time).<br>
+          <img src="images/dvwa12clusterbombtext.png" alt = "DVWA Burp Suite cluster bomb description">
+        </p>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+        13. In the intruder tab under ‘payloads’, add the username wordlist to ‘payload set 1’ and the password wordlist to ‘payload set 2’.
+        </h4>
+        <hr>
+        <p>In this example, I will be adding the username wordlist.</p>
+        <p>
+          First ensure ‘payload set 1’ is selected. Once confirmed, select the ‘load’ button, 
+          then select the file and press open <br>
+          <img src="images/dvwa13loadingwordlist.png" alt = "DVWA Burp Suite loading username wordlist"><br>
+          With that, the first payload is ready. <br>
+          <img src="images/dvwa13payload1done.png" alt = "DVWA Burp Suite loading username wordlist 2">
+        </p>
+        <p>
+          Then select payload set 2 and repeat the following for the password wordlist.<br>
+          <img src="images/dvwa13loadingwordlistpassword.png" alt = "DVWA Burp Suite loading password wordlist">
+        </p>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          14. With task 13 done, the intruder tab should now be setup to brute force the login page. <br>Double check 
+          everything has been done correctly, then start the attack. <br>The aim of the attack is to find a successful 
+          login credential.
+        </h4>
+        <hr>
+        <p>Ensure the correct payload positions have been selected, the correct attack type, 
+          the correct payload sets containing the correct word lists. Once confirmed, select start attack. <br>
+          <img src="images/dvwa14startattack.png" alt = "DVWA Burp Suite start attack button">
+        </p>
+        <p>
+          Upon starting the attack, a Burp Suite warning will appear regarding the use of the community version, ignore it. 
+          Then a window like below will appear (and one by one the brute force response will be returned).<br>
+          <img src="images/dvwa14bruteforcewindow.png" alt = "DVWA Burp Suite brute force window">
+        </p>
+
+        <hr>
+        <h4 style="text-align: center;" >
+          15. With the brute forcing complete, all that’s left to do is see the results. When brute forcing started a window should of opened
+          (‘Intruder attack’). <br>Many of the brute force credential attempts responded with the length of ‘4532’. What type of 
+          response was given to these credentials?
+        </h4>
+        <hr>
+        <p>First I selected a request with the length ‘4532’. Then I clicked on the response tab and scrolled through it. 
+          When I got to line 85 I saw the error response.<br>
+          <img src="images/dvwa15bruteforcewindow.png" alt = "DVWA Burp Suite brute force window bad response">
+        </p>
+        <p>
+          With this information I concluded that all of the responses with the length ‘4532’ are likely to be failed 
+          attempts. This meant looking at them would pointless, and so can be ignored.
+        </p>
+
+        
+        <hr>
+        <h4 style="text-align: center;" >
+          16. With the establishment of responses with the length of ‘4532’ are most likely brute forcing attempts that failed, 
+          they can be ignored. <br>Look for a request of another length.
+        </h4>
+        <hr>
+        <p>By clicking on the length column title, the table can be filtered by length highest to lowest (and 
+          also lowest to highest), making finding other lengths much easier.<br>
+          <img src="images/dvwa16lengthcomparison.png" alt = "DVWA Burp Suite comparing the lengths on the brute force window">
+        </p>
+
+        <hr>
+        <h4 style="text-align: center;" >
+        17. A second length, ‘4570’, was found. Investigate the HTTP response tab and look at what type of response was given.
+        </h4>
+        <hr>
+        <p>Repeat the steps taken in task 16, except this time for length '4750'. Upon investigating it, a 
+          successful login was found<br>
+          <img src="images/dvwa17goodresponse.png" alt = "DVWA Burp Suite brute force window finding a good response">
+        </p>
+
+        <hr>
+        <h4 style="text-align: center;" >
+          18. Using the payload content of the request containing the length ‘4570’, enter the credentials into 
+          the login page. <br>Does it work, and what can be seen?
+        </h4>
+        <hr>
+        <p>Using the following payload of the request with the length '4570' as the username and password:<br>
+          <img src="images/dvwa18credentials.png" alt = "DVWA Burp Suite brute force window correct credentials">
+        </p>
+        <p>
+          And entering said credentials into the brute force page on DVWA:<br>
+          <img src="images/dvwa18login.png" alt = "DVWA entering the correct credetnials">
+        </p>
+        <p>
+          This confirmed the credentials found from brute forcing were correct.
+        </p>
+
+
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          19. Back to DVWA, navigate to the SQL Injection page, and try out the Injection page by entering numbers and looking at the response.<br> 
+          Once familiar with it, repeat the past tasks to acquire a HTTP request. Once acquired, send the HTTP request to REPEATER          
+        </h4>
+        <hr>
+        <p>
+          Tab can be found on the left just like before, this time below brute force. Remember to keep security at low.
+          The following page should show up. Have a play around with the field found, take a look at the 
+          hyperlinks found as well for additional information about SQLi.<br>
+          <img src="images/dvwa19sqltab.png" alt = "DVWA the SQL tab">
+          <img src="images/dvwa19userid.png" alt = "DVWA the SQL user id field">
+        </p>
+        <p>
+          Once ready, make sure Burp Suites intercept is turned on and enter test data into the User ID box. 
+          Once done, right click and move the HTTP request to Repeater.<br>
+          <img src="images/dvwa19useridfilled.png" alt = "DVWA the SQL user id field filled with 1"><br>
+          <img src="images/dvwa19useridhttpreq.png" alt = "DVWA user id in http req"><br>
+          <img src="images/dvwa19useridtorepeater.png" alt = "DVWA sending to repeater">
+        </p>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          20. In the repeater tab, insert numbers from 1-4 in the UD field. Look for each result of the ID number in the response    
+        </h4>
+        <hr>
+        <p>
+          The ID field can be found as so on the first line. If it is not found here then it most likely means the incorrect security setting is being used.<br>
+          <img src="images/dvwa20enteringidinrepeater.png" alt = "DVWA changing user id in repeater">
+        </p>
+        <p>
+          Once the request is sent look at the response tab and look for the response from the website. If the ID exists names should be seen.<br>
+          <img src="images/dvwa20idrepeaterresponse.png" alt = "DVWA looking through repeater response"><br>
+          Repeat the process for the other user IDs, looking at those responses as well.
+        </p>
+
+        <hr>
+        <h4 style="text-align: center;" >
+          21. Return to the DVWA page, enter a SQLi query into the ID field to present all the user IDs on the page (make sure intercept is turned off)    
+        </h4>
+        <hr>
+        <p>
+          Enter 1' or 1=1# into the ID area like so, and the following IDs will be seen<br>
+          <img src="images/dvwa21listofids.png" alt = "DVWA list of all responses">
+        </p>
+        <p>
+          Broken down, the apostrophe (') closes out the SQL query early. What follows next is a True statement (or 1=1), which will always be true.<br>
+          This results in the database then reporting back all user IDs. The hash (#) is used to escape the statement early, cutting the rest of the query off.
+
+        </p>
+
+
+        <h5 style="text-align: center;">
+          21.1. Use the same command for task 21 again, except this time insert it directly into the HTTP request in the repeater page (in the ID field). 
+          Does it work?
+        </h5>
+        <p>
+          Copy and paste the same command into the HTTP request we left in the repeater tab. Paste it into the ‘id’ parameter.<br>
+          <img src="images/dvwa21sqlinhttp.png" alt = "DVWA attempting to do SQL through Burp Suite"><br>
+          An error is received this time. The reason for this error is because the query had not been encoded properly<br>
+          <img src="images/dvwa21sqlinhttperror.png" alt = "DVWA error caused by SQL">
+        </p>
+        <hr>
+        <h4 style="text-align: center;">
+          22. Repeat task 21, but this time turn the intercept on. Compare the HTTP Request received from task 21 and compare it to 21.1. <br>
+          Afterwards, send the HTTP Request to repeater and send it forward, does it work this time?
+        </h4>
+        <p>
+          Now the query appears in the proper, encoded manner. <br>
+          You can find the encoded values here, as well try out encoding URL: <a href="https://www.w3schools.com/tags/ref_urlencode.asp">
+            https://www.w3schools.com/tags/ref_urlencode.asp</a><br>
+            <img src="images/dvwa22sqliencoded.png" alt = "DVWA SQL again but this time its encoded">
+        </p>
+        <p>
+          This time when the HTTP Request is sent, the following Response can be received, listing all IDs:<br>
+          <img src="images/dvwa22sqliencodedsuccess.png" alt = "DVWA SQL successful response">
+        </p>
+
+        <p>
+          %27 is the encoded version of an apostrophe('), the %23 is an encoded hash (#).
+        </p>
+
+
+        <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+
+
+
+
+      </div> <!-- This is the end of Answers -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- These are the scripts used to show and hide the hints. Check the questions section for the button it is connected to-->
+        <!-- The scripts used to hide and show were based off https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp-->
+
+      <script>
+        function showqQ1H1() {
+          var i = document.getElementById("q1hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ1H2() {
+        var i = document.getElementById("q1hint2");
+        if (i.style.display === "none") {
+            i.style.display = "block";
+        } else {
+            i.style.display = "none";
+        }
+        }
+
+
+        function showqQ1H3() {
+        var i = document.getElementById("q1hint3");
+        if (i.style.display === "none") {
+            i.style.display = "block";
+        } else {
+            i.style.display = "none";
+        }
+        }
+
+
+        function showqQ1H4() {
+        var i = document.getElementById("q1hint4");
+        if (i.style.display === "none") {
+            i.style.display = "block";
+        } else {
+            i.style.display = "none";
+        }
+        }
+
+
+      function showqQ2H1() {
+      var i = document.getElementById("q2hint1");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ2H2() {
+      var i = document.getElementById("q2hint2");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ4H1() {
+      var i = document.getElementById("q4hint1");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ4H2() {
+      var i = document.getElementById("q4hint2");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ5H1() {
+      var i = document.getElementById("q5hint1");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ5H2() {
+      var i = document.getElementById("q5hint2");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ6H1() {
+      var i = document.getElementById("q6hint1");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ7H1() {
+      var i = document.getElementById("q7hint1");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ7H2() {
+      var i = document.getElementById("q7hint2");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ7H3() {
+      var i = document.getElementById("q7hint3");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ8H1() {
+      var i = document.getElementById("q8hint1");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ9H1() {
+      var i = document.getElementById("q9hint1");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ10H1() {
+      var i = document.getElementById("q10hint1");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ11H1() {
+      var i = document.getElementById("q11hint1");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ12H1() {
+      var i = document.getElementById("q12hint1");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ12H2() {
+      var i = document.getElementById("q12hint2");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ13H1() {
+      var i = document.getElementById("q13hint1");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ15H1() {
+      var i = document.getElementById("q15hint1");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ15H2() {
+      var i = document.getElementById("q15hint2");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ16H1() {
+      var i = document.getElementById("q16hint1");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ18H1() {
+      var i = document.getElementById("q18hint1");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+
+      function showqQ21H1() {
+      var i = document.getElementById("q21hint1");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+    </script>  
+
+
+
+
+    <script>
+      function showansw() {
+      var i = document.getElementById("answ");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        </main>
+
+        <div class="footer">
+          <p>Pen Testing is hard at first, but could be worse</p>
+        </div>
+    </body>
+</html>
+

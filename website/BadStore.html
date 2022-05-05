@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, inital-scale=1">
+        <meta name="description" content="A place to learn basic pen testing info!">
+        <meta name="author" content="Mujeeb">
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
+        <title>Penting - Bad Store</title>
+
+    </head>
+    <body>
+        <header>
+            <h1>Penting Bad Store</h1>
+            <!-- Navigation bar based off https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp-->
+            <nav>
+                <div class="navbar">
+                    <a href="index.html">Home</a>
+
+                    <div class="dropdown">
+                      <button class="dropbtn">List of Tools 
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-content">
+                      <a href="Tools.html">Tools page Overview</a>
+                      <a href="Nmap.html">Nmap</a>
+                      <a href= "Nikto.html">Nikto</a>
+                      <a href="BurpSuite.html">BurpSuite</a>
+                      <a href="Othertools.html">Other Tools</a>
+                    </div>
+                  </div>
+
+                    <div class="dropdown">
+                      <button class="dropbtn">List of Services 
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-content">
+                        <a href="Services.html">Services page Overview</a>
+                        <a href="DVWA.html">DVWA</a>
+                        <a href="BadStore.html">BadStore</a>
+                        <a href="bonus.html">Additional Tasks</a>
+                      </div>
+                  </div>
+
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Misc. Resources
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Misc.html">Misc Resources page</a>
+                          <a href="EDB.html">ExploitDB</a>
+                          <a href="Kali.html">Kali</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Legal + Ethics 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="LandE.html">Legal and Ethics Overview</a>
+                          <a href="Legal.html">Useful Legal info</a>
+                          <a href="Ethics.html">Ethics info</a>
+                          <a href="Disclaimer.html">Disclaimer page</a>
+                        </div>
+                      </div>
+
+                      <div class="dropdown">
+                        <button class="dropbtn">Further Reading 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Next.html">What to do next?</a>
+                          <a href="HTB.html">HTB</a>
+                          <a href="TryHackMe.html">TryHackMe</a>
+                          <a href="Programming.html">Programming</a>
+                        </div>
+                      </div>
+                  </div>
+                  
+            </nav>
+    
+
+        </header>
+
+        <main>
+            <h2 style="padding-left: 10px;" id ="Start"><u>BadStore Exploitation</u></h2>
+            <button class="button"><a href="Services.html"><span>Back to Overview</span></a></button>
+            <hr>
+ <!-- Code based off the following:https://www.tipsandtricks-hq.com/simple-table-of-contents-toc-using-pure-html-and-css-code-9217-->
+            <p><b><u>Table of contents</u></b></p>
+            <ul style="  border: 1px solid black;
+            padding-right: 0px;
+            padding-left: 28px;
+            width: 240px;
+            border-radius: 5px;">
+            <li><a href="#Q">1. Questions</a></li>
+            <li><a href="#A">2. Answers</a></li>
+            </ul>
+            </div>
+
+            <hr>
+            <h3 style="padding-left: 10px;"><u>General Info</u></h3>
+            
+            <p>
+                Unlike DVWA, Bad Store is a virtual machine hosting a extremely vulnerable web site. <br>Just like DVWA, it 
+                is also publicly available and designed to be vulnerable. <br><br>I have 
+                chosen not to attach Bad Store onto the same virtual machine to help clean up the Nmap response (and to 
+                try and simulate penetration testing an external target).<br><br>
+                Bad store is a simple starting point for learning how to attack websites, some of the vulnerability’s Bad Store has to 
+                offer are more non-technical, with some vulnerabilities being caused due to bad practices.<br><br>
+                <b>Whenever you are using BadStore, you MUST run the BadStore VM at the same time. Otherwise you cannot find it. 
+                    The BadStore folder can be found in the same location as the Penting folder.</b>
+          </p>
+          <hr>
+          <h3 style="padding-left: 10px;"><u>Setting up Bad Store</u></h3>
+          <p>
+          In case this is your first time setting up Bad Store and you cannot connect to it, 
+          click here to see the instructions in case Bad Store is not working<br><br>
+          If you are using Vbox, you will need to remake the BadStore VM. I have placed the BadStore ISO in the BadStore folder. <br>
+          Warning: reading these instructions may spoil the answers for some of the tasks:<br>
+          </p>
+
+          <button onclick="showEx()">Click Me</button>
+
+        <div id="setup" style="display: none;">
+            <ol>
+                <li> First run both BadStore VM and Penting VM<br><img src="images/badstore.png" alt = "BadStore setup" style="height: 800px;"></li>
+                <li> Once on, check the IP address of Bad Store. This can be done using ifconfig. <br>
+                    <div><pre><code> ifconfig</code></pre></div>
+                    <img src="images/badstore2.png" alt = "BadStore setup 2">
+                    </li>
+                <li>
+                    Then in Penting, go to the terminal try to ping the IP address of BadStore<br>
+                    <div><pre><code> ping IP</code></pre></div><br>
+                    <img src="images/badstore3.png" alt = "BadStore setup 3">
+                </li>
+                <li>
+                    If you are getting responses from the IP then it means you are connected. You can also double check it works 
+                    by then trying the IP out on the website, though I wouldn’t because it may spoil the tasks.
+                </li>
+                    
+
+            </ol>
+        <p>If setting it up for Vbox, make sure you select the following settings:</p>
+        <p>
+            <img src="images/badv.png" alt = "BadStore settings 1"><br>
+        </p>   
+        </div>
+
+
+
+
+
+
+        <!-- This is the start of the Questions-->
+
+          <hr>
+          <h3 style="padding-left: 10px;"id ="Q"><u>Questions</u></h3>
+          <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+          <hr>
+          <h4 style="text-align: center;" >
+            1.	After turning on the Bad Store virtual machine, find out what it's IP address
+          </h4>
+          <hr>
+          <p>
+            NB: this task may require you to run ifconfig on the BadStore virtual machine if the 3rd section 
+            of the IP address (192.168.section 3.1) has a different IP to the Penting VM. If this is the case adapt 
+            the command and base it off the BadStore IP instead of Penting. 
+          </p>
+          <p>
+            This task consists of finding the target on the network. In a real penetration test you may be explicitly told what the 
+            target address is or what addresses to stay away from. <br>
+            As a freebie hint, unlike DVWA, you will not be looking at localhost and instead at a 'normal' IP address.
+          </p>
+
+          <!-- Button used to show and hide hints. This appears frequently-->
+          <button onclick="showqQ1H1()">Click Me to show/hide hints</button>
+
+          <div id="q1hint1" style="display: none;">
+              <p>Hint 1: the Nmap Host discovery section would be very useful to look at! -sn</p>
+              <button onclick="showqQ1H2()">Click Me to show/hide hint 2</button>
+              <div id="q1hint2" style="display: none;">
+  
+                  <p>Hint 2: you can find your own IP using ifconfig, use the result as part of the input!</p>
+                  <button onclick="showqQ1H3()">Click Me to show/hide hint 3</button>
+                  <div id="q1hint3" style="display: none;">
+                      <p>Hint 3: don’t forget the 0/24 to scan for all hosts!</p>
+                  </div>
+              </div>
+          </div>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            2. Using Nmap, scan the IP address revealed in task 1 and identify what port the web service is running on and its version. <br>Then proceed to
+            access the website through the browser
+          </h4>
+          <hr>
+          <p>Compared to DVWA, accessing the browser should be much easier this time.</p>
+          <button onclick="showqQ2H1()">Click Me to show/hide hints</button>
+
+          <div id="q2hint1" style="display: none;">
+              <p>Hint 1: No need to overthink this question, it’s just like using nmap before except it’s not against localhost.</p>
+          </div>
+
+
+          <hr>
+          <h4 style="text-align: center;" >
+            3.	Using nikto, scan the IP addresses web service found. Name any ‘interesting’ directories found
+          </h4>
+          <hr>
+          <p>NB: don’t forget the –host tag!</p>
+
+          <button onclick="showqQ3H1()">Click Me to show/hide hints</button>
+
+          <div id="q3hint1" style="display: none;">
+              <p>Hint 1: The interesting directories I’m referring to can also be found from scanning with Nmap</p>
+          </div>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            4. What file revealed the location of these directories, and how do you access that file? Also highlight where the issue is.
+          </h4>
+          <hr>
+
+          <button onclick="showqQ4H1()">Click Me to show/hide hints</button>
+
+          <div id="q4hint1" style="display: none;">
+              <p>Hint 1: Beep Boop Beep</p>
+          </div>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            5.	Take a look at each of the interesting directories, one of them should have an even more interesting file. 
+            <br>What is its name?
+          </h4>
+          <hr>
+          <p>Access the folders the same way you accessed task 4!</p>
+
+
+
+          <hr>
+          <h4 style="text-align: center;" >
+            6. Identify what type of hash was used against the content of the files, and decrypt it. <br>Can you tell what file 
+            it resembles?
+          </h4>
+          <hr>
+          <p>
+            NB: When you realise what file these credentials may be from and its implications, these credentials should 
+            definitely not be available.
+          </p>
+
+          <button onclick="showqQ6H1()">Click Me to show/hide hints</button>
+
+          <div id="q6hint1" style="display: none;">
+              <p>Hint 1: Copy and paste the content of the file into a online hash identifier and cracker </p>
+              <button onclick="showqQ6H2()">Click Me to show/hide hint 2</button>
+
+              <div id="q6hint2" style="display: none;">
+                  <p>Hint 2: You may recognise it from a certain, sensitive Linux file.</p>
+              </div>
+          </div>
+
+
+          <hr>
+          <h4 style="text-align: center;" >
+            7. Now to look at the website. Enter the Bad Store IP address into the 
+            URL. <br>Once in, navigate to the 'my account' page and read the information regarding the password 
+            reset system. What do you notice?
+          </h4>
+          <hr>
+
+        
+          <button onclick="showqQ7H1()">Click Me to show/hide hints</button>
+
+          <div id="q7hint1" style="display: none;">
+              <p>Hint 1: look at what information you would need in order to reset a user’s password </p>
+              <button onclick="showqQ7H2()">Click Me to show/hide hint 2</button>
+
+              <div id="q7hint2" style="display: none;">
+                  <p>Hint 2: the password hint is looking kind of small and restricted, and not exactly user created</p>
+              </div>
+          </div>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            8. If you haven't already, try to reset a random user’s password. <br>What do you 
+            notice about the result of the password reset?
+          </h4>
+          <hr>
+
+          <button onclick="showqQ8H1()">Click Me to show/hide hints</button>
+
+          <div id="q8hint1" style="display: none;">
+              <p>Hint 1: The user’s password is always reset to a hard coded password </p>
+          </div>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            9. The password reset system works based off entering a username and a password hint (giving the 
+            user a hard coded password), which the password hint consists of a pool of 6 colours. <br>Based off this 
+            information, make a password hint wordlist from the password hint dropdown menu.
+          </h4>
+          <hr>
+          <p>
+            NB: This task is fairly simply, but being able to make your own wordlists will be quite useful in the future.
+          </p>
+          <button onclick="showqQ9H1()">Click Me to show/hide hints</button>
+
+          <div id="q9hint1" style="display: none;">
+              <p>Hint 1: use geddit or vim.  </p>
+          </div>
+
+
+          <hr>
+          <h4 style="text-align: center;" >
+            10. Just like with task 9, make a wordlist based off possible <b>admin</b>istration account names.
+            It does not have to be large
+          </h4>
+          <hr>
+          <p>
+            NB: most of the time services may not actually bother changing the default name of admin accounts. 
+            As you can probably guess, this is a huge security risk (one we will be exploiting)
+          </p>
+          <button onclick="showqQ10H1()">Click Me to show/hide hints</button>
+
+          <div id="q10hint1" style="display: none;">
+              <p>Hint 1: make sure to use common admin names like root, admin, administrator etc.  </p>
+          </div>
+
+
+          <hr>
+          <h4 style="text-align: center;" >
+            11. With the wordlists setup it’s time for the HTTP Request, use the inbuilt Burp Suite browser to access 
+            Bad Store and head to the ‘my accounts’ page. <br>Using Burp Suite, intercept the HTTP request after entering 
+            a random username as test data into the email address field.
+          </h4>
+          <hr>
+          <p>
+            <b><u>WARNING</u></b> – When doing this task I  encountered some issues with connecting to the Bad Store site through 
+            Burp Suite (but had no issue when accessing it through Firefox). <br>
+            If you get an error message ‘No route to 
+            host’ try restarting Bad Store and Penting, that fixed it for me. Also make sure you enter the correct IP!
+          </p>
+          <button onclick="showqQ11H1()">Click Me to show/hide hints</button>
+
+          <div id="q11hint1" style="display: none;">
+              <p>Hint 1: The inbuilt browser can be opened in the ‘proxy’ tab. In the same tab, intercept can be 
+                turned off until you get to the password reset page (so you don’t need to press ‘forward’ whenever 
+                you change pages) – you will find doing this to be very convenient</p>
+                <button onclick="showqQ11H2()">Click Me to show/hide hint 2</button>
+
+                <div id="q11hint2" style="display: none;">
+                    <p>Hint 2: don’t forget to turn intercept on when trying to intercept the HTTP request!</p>
+                    <button onclick="showqQ11H3()">Click Me to show/hide hint 3</button>
+
+                    <div id="q11hint3" style="display: none;">
+                        <p>Hint 3: If you don’t see the HTTP request in Burp Suite (and you see a different request instead) 
+                          press forward, if everything was done correctly it should show up (the request should contain your 
+                          test data).</p>
+                    </div>
+                </div>
+          </div>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            12.<b>(You may skip this task if you have done task 8 on DVWA).</b><br>
+            When you have the HTTP Request, forward it. 
+             In the ‘HTTP history’ tab under ‘Proxy’, find the HTTP request you sent - it should also be accompanied 
+            with a response. What line can the password reset message be found in the HTTP response?
+          </h4>
+          <hr>
+          <p>
+            NB: Upon forwarding the HTTP Request, the password reset page in chromium should change to the page stating 
+            ‘test data’ has its password reset to ‘Welcome’. This is what the page looks like after pressing ‘forward’.<br>
+            <img src="images/bad12passwordresetoutput.png" alt = "Bad Store password reset message" style="height: 50px;">
+          </p>
+          <button onclick="showqQ12H1()">Click Me to show/hide hints</button>
+
+          <div id="q12hint1" style="display: none;">
+              <p>
+                Hint 1: If the HTTP history gets messy, you can right click and select ‘clear history’ and enter 
+                more test data into the login page. Click the fields found to view the request (and if possible the response). 
+              </p>
+          </div>
+
+
+          <hr>
+          <h4 style="text-align: center;" >
+            13.<b>(You may skip this task if you have done task 9 on DVWA).</b><br>
+            In Burp Suite, under the ‘Target’ tab go into ‘Site map’. This time find the password reset page via the 
+            sitemap. <br> Select the page containing your test data if multiple pages can be seen. Once selected, go into 
+            ‘Response’ and find the password reset response line again.
+          </h4>
+          <hr>
+          <p>
+            NB: This task is very similar to task 12. Click the folder dropdowns to reveal additional info.
+          </p>
+          <button onclick="showqQ13H1()">Click Me to show/hide hints</button>
+
+          <div id="q13hint1" style="display: none;">
+              <p>
+                Hints 1: Folders/files that have been greyed out are areas you have not viewed, but Burp Suite knows exist.
+              </p>
+          </div>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            14. Using either task 12 or 13, send the HTTP request to the intruder tab. <br>Alternatively, if these tasks where 
+            skipped, send the HTTP request directly from the proxy intercept tab if you have not yet dropped or forwarded 
+            the HTTP request.
+          </h4>
+          <hr>
+          <p>
+            NB: Normally you would directly send the HTTP request to the intruder tab from the proxy intercept tab. 
+            The reason this round about method was used was to get you to look at the sitemap and history tab. If you 
+            have already done the DVWA tasks, however, you can skip to just sending it directly from intercept.
+          </p>
+          <button onclick="showqQ14H1()">Click Me to show/hide hints</button>
+
+          <div id="q14hint1" style="display: none;">
+              <p>
+                Hint 1: Right click when you hover over the HTTP request
+              </p>
+          </div>
+
+          
+          <hr>
+          <h4 style="text-align: center;" >
+            15. Whilst in the intruder tab in ‘Positions’ (with the password reset HTTP request selected) 
+            remove all payload markers and only select the email address and password hint fields as the payload position.
+          </h4>
+          <hr>
+          <p>
+            NB: With the wordlists made (task 9, 10) and the HTTP Request acquired (task 14), we can attempt to brute force 
+            the password reset page. This will consist of attempting to change any possible admin accounts to the reset 
+            password of ‘Welcome’.
+          </p>
+          <button onclick="showqQ15H1()">Click Me to show/hide hints</button>
+
+          <div id="q15hint1" style="display: none;">
+              <p>
+                Hint 1: Use the buttons on the right to remove payload positions, as well as add payload positions
+              </p>
+          </div>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            16.	With the payload positions setup, the correct attack type now needs to be selected. <br>Under ‘attack type’, 
+            read the type of attacks available and select the attack suitable for brute forcing the password reset page.
+          </h4>
+          <hr>
+
+          <button onclick="showqQ16H1()">Click Me to show/hide hints</button>
+
+          <div id="q16hint1" style="display: none;">
+              <p>
+                Hint 1: The attack will be using two sets of payloads (wordlists) – the possible admin names and password hint
+                </p>
+                <button onclick="showqQ16H2()">Click Me to show/hide hint 2</button>
+
+                <div id="q16hint2" style="display: none;">
+                    <p>
+                      Hint 2: Every combination of the admin name and password hint will need to be tested.
+                    </p>
+                </div>
+          </div>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            17. In the intruder tab under ‘payloads’, add the admin name wordlist to ‘payload set 1’ and the password 
+            hint wordlist to ‘payload set 2’.
+          </h4>
+          <hr>
+          <p>
+            NB: The ‘payload set’ has a drop down you need to click on to change between sets. The payload type does not need to 
+            be changed, ‘simple list’ is enough
+          </p>
+
+          <button onclick="showqQ17H1()">Click Me to show/hide hints</button>
+
+          <div id="q17hint1" style="display: none;">
+              <p>
+                Hint 1: Use the ‘load …’ button to load file content into the payload set. Alternatively, you can type the 
+                contents manually, or copy the contents and press paste.
+                </p>
+          </div>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            18. With task 17 done, the intruder tab should now be setup to brute force the password reset page. <br>Double 
+            check everything has been done correctly, then start the attack. 
+          </h4>
+          <hr>
+          <p>
+            NB: The aim of the attack is to spray many possible admin names (alongside all the possible password hints) in order 
+            to attempt to reset the admin password to ‘Welcome’
+          </p>
+
+          <hr>
+          <h5 style="text-align: center;">
+            18.1 Depending on the username you entered, you will receive responses of different length. Why are these 
+            length different?
+          </h5>
+          <p>
+            NB: In this case it has nothing to do with success or failed password resets (remember, despite what is entered into 
+            the password reset page the output is always ‘test data password has been changed to ‘Welcome’).
+          </p>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            19. With the potential admin passwords changed to ‘Welcome’, we can now try to brute force the login page and 
+            try to get an admin account.  <br>
+            Intercept the HTTP request of the login page, and send it straight to the intruder page
+          </h4>
+          <hr>
+          <p>
+            NB: Under normal circumstances (brute forcing to find a valid login), you would look at the response to find a valid 
+            credential – however from this brute force we have attempted to change the admins password to ‘Welcome’, and all of 
+            the brute force attempts gave the same response (output page) so it would be pointless to look through them. We must 
+            now try out the credentials
+          </p>
+
+          <button onclick="showqQ19H1()">Click Me to show/hide hints</button>
+
+          <div id="q19hint1" style="display: none;">
+              <p>
+                Hint 1: Follow task 11, but adapt it for the login page.
+                </p>
+          </div>
+
+
+          <hr>
+          <h4 style="text-align: center;" >
+            20.	With the HTTP request in the intercept tab, we need to reassign the payload again. <br>
+            This time only assign a payload to the email field (and not the password, 
+            so enter ‘Welcome’ into the password field instead). <br>
+            Additionally, what attack type would we need to be done this time if only one payload was being used? <br>
+            In the payload set, add the possible admin names word list.
+          </h4>
+          <hr>
+          <p>
+            NB: The password field is not part of the payload as we already know what the possible password is. This is because 
+            previously we attempted to reset the possible admin passwords, so if the admin account exist (with the names we have tried)
+            they WILL have the password ‘Welcome’.
+          </p>
+
+
+          <hr>
+          <h4 style="text-align: center;" >
+            21. With the brute force setup, start the attack. Depending on how many names you entered it should finish 
+            relatively quickly. <br>Many of the brute force attempts will response with ‘4201’, what type of response is this?
+          </h4>
+          <hr>
+          <p>
+            NB: being able to differentiate ‘successful’ and ‘failed’ responses will be very useful when it comes to looking 
+            for working credentials.
+          </p>
+
+          <button onclick="showqQ21H1()">Click Me to show/hide hints</button>
+
+          <div id="q21hint1" style="display: none;">
+              <p>
+                Hint 1: You will need to look at the response tab after you select a request
+                </p>
+                <button onclick="showqQ21H2()">Click Me to show/hide hints</button>
+
+                <div id="q21hint2" style="display: none;">
+                    <p>
+                      Hint 2: Try entering one of these (incorrect) credentials into the site itself, and look at what response 
+                      it gives. Then look for the same response in the HTTP response in the brute force window.
+                      </p>
+                </div>
+          </div>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            22. With the establishment that responses with the length of ‘4201’ are most likely credentials that do 
+            not exist, they can be ignored. <br>Look for a request of another length.
+          </h4>
+          <hr>
+          <p>
+            NB: In this example, the sample size is quite small meaning finding a request of another length is very easy. 
+            If you did not guess the correct ADMIN username you may not find the request.
+          </p>
+
+          <button onclick="showqQ22H1()">Click Me to show/hide hints</button>
+
+          <div id="q22hint1" style="display: none;">
+              <p>
+                Hint 1: click the ‘Length’ column to filter by size
+              </p>
+          </div>
+
+
+          <hr>
+          <h4 style="text-align: center;" >
+            23. A second length, ‘4417’, was found. <br>Investigate the HTTP response tab and look at what type of response was given.
+          </h4>
+          <hr>
+          <p>
+            NB: Same task as task 21, a different response however will be seen instead around the same area
+          </p>
+
+
+          <hr>
+          <h4 style="text-align: center;" >
+            24. Using the payload content of the request containing the length ‘4417’, enter the credentials into the login 
+            page. <br>Does it work, and what can be seen?
+          </h4>
+          <hr>
+          <p>
+            NB: This is confirming the results of task 23, as the response found in task 23 can only be confirmed as not having 
+            the SAME error message as the other responses – we don’t necessarily know if the credential worked or not until we 
+            try it.
+          </p>
+
+          <button onclick="showqQ24H1()">Click Me to show/hide hints</button>
+
+          <div id="q24hint1" style="display: none;">
+              <p>
+                Hint 1: Don’t forget what we reset the admin password to!
+              </p>
+          </div>
+
+
+          <hr>
+          <h4 style="text-align: center;" >
+           25. Due to the sample size of the wordlists being used (my wordlist only used three words) it took longer to setup the brute 
+           force process compared to manually entering the credentials.<br>
+           As such, repeat task 19. This time, however, send the HTTP Request to repeater instead of Intruder.
+          </h4>
+
+
+          <hr>
+          <h4 style="text-align: center;" >
+            26. In the repeater tab, enter the credential ‘Welcome’ into the passwd field. Then in the email field, enter an email address from your word list.
+            <br>Then press send and look through the HTTP response to see if the credential received an error or ‘welcome to Bad Store’ reply.<br>
+            If an error was given, move onto the next email  and repeat. 
+          </h4>
+          <hr>
+          <p>
+            NB: if you only get errors, don’t worry. Look at hint 1 to see a possible admin name. If you get the welcome response, then you logged in.<br>
+            Remember, the reason why we are using the password ‘Welcome’ for all the credentials is because 
+            we changed the passwords for these users to ‘Welcome’
+          </p>
+
+          <button onclick="showqQ26H1()">Click Me to show/hide hints</button>
+
+          <div id="q26hint1" style="display: none;">
+              <p>
+                Hint 1: Try the name ‘admin’
+              </p>
+          </div>
+
+
+
+
+
+
+
+        <!-- This is the end of the Questions-->
+
+
+
+        <!-- This is the start of the Answers-->
+
+          <hr>
+          <h3 style="padding-left: 10px;" id ="A"><u>Answers</u></h3>
+          <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+          <hr>
+          <br>
+          <button onclick="showansw()">Click Me to show/hide the answers </button> <p></p><hr>
+          <div id ="answ" style="display: none;">
+        <h4 style="text-align: center;" >
+          1.	After turning on the Bad Store virtual machine, find out what its IP address is
+        </h4>
+        <hr>
+        <p>
+          First I got the IP address of the Penting VM using ifconfig <br>
+          <img src="images/bad1a.png" alt = "ifconfig penting">
+        </p>
+        <p>
+          Then with the IP address of Penting and nmap command I did two nmap host discovery scans – one in which BadStore 
+          was turned off, another when it was turned on. This made it so the Bad Store IP would show up and be identified 
+          in the second scan. <br>
+          <div><pre><code> nmap -sn IP.0/24</code></pre></div><br>
+          <img src="images/bad1b.png" alt = "nmap host discovery bad store">
+        </p>
+        <hr>
+        <h4 style="text-align: center;" >
+          2. Using Nmap, scan the IP address revealed in task 1 and identify what port the web service is running on and its version. <br>Then proceed to
+          access the website through the browser
+        </h4>
+        <hr>
+        <p>First I did a nmap -p- IP -A to scan all the ports and get full information.<br>
+          <div><pre><code> nmap -p- -A IP</code></pre></div><br>
+          <img src="images/bad2a.png" alt = "nmap bad store scan"><br>
+          As you can tell the service version is very out of date.<br>
+          And this is what the site looks like:<br>
+          <img src="images/bad2b.png" alt = "bad store" style="height: 500px;"><br>
+          NB: the HTTPS version does not actually work.
+        </p>
+
+        <hr>
+        <h4 style="text-align: center;" >
+          3. Using nikto, scan the IP addresses web service found. Name the ‘interesting’ directories found
+        </h4>
+        <hr>
+        <p>For this task, just doing nikto -host IP is enough<br>
+          <div><pre><code> nikto -host IP </code></pre></div><br>
+          <img src="images/bad3a.png" alt = "nikto bad store scan"><br>
+          The interesting directories found are the backup and supplier directories. Right now I will not do anything with them, 
+          but it’s best to be aware of them for later.<br>
+          <img src="images/bad3b.png" alt = "nikto bad store scan result"><br>
+        </p>
+
+        <hr>
+        <h4 style="text-align: center;" >
+          4. What page revealed the location of these directories, and how do you access that file? Also highlight where the issue is.
+        </h4>
+        <hr>
+        <p>The page that mostly revealed the directories is robots.txt (files, like backup, would have been picked up by nikto anyway but 
+          because it was stored in here it was found much easily). If the supplier directory however was not in robots.txt then it may 
+          not have been detected by nikto.</p>
+        <p>The page can be accessed through the browser by adding ‘robots.txt’ to the IP address. Many websites have a robots.txt file, it’s 
+          used to help the site get scanned by Google. <br>
+          <img src="images/bad4a.png" alt = "bad store robots.txt"><br>
+          The issue is the disallow section. The directories are listed here to stop scan bots from looking at these directories, 
+          however that doesn’t stop us from looking at them.<br>
+          <img src="images/bad4b.png" alt = "bad store robots.txt 2"><br>
+        </p>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          5.	Take a look at each of the interesting directories, one of them should have an even more interesting file. What is its name? 
+        </h4>
+        <hr>
+        <p>In the supplier directory a file called ‘accounts’ can be found<br>
+          <img src="images/bad5a.png" alt = "bad store supplier"><br>
+          Within the accounts file hash values can be found<br>
+          <img src="images/bad5b.png" alt = "bad store accounts 1"><br>
+        </p>
+
+        
+        <hr>
+        <h4 style="text-align: center;" >
+          6. Identify what type of hash was used against the content of the files, and decrypt it. <br>Can you tell what file 
+          it resembles?
+        </h4>
+        <hr>
+        <p>The hash is base64. The site I used to identify the has ‘hashes.com’. <br>
+          <img src="images/bad6hashID.png" alt = "bad store hash identification"></p>
+        <p>
+          The decryption of the hashes can be found below. These look like credentials from a Linux passwd file.
+          The site used for decryption was ‘CyberChef’.<br>
+          <img src="images/bad6hashcrack.png" alt = "bad store accounts 1" style="height: 400px;">
+        </p>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          7. Now to look at the website. Enter the Bad Store IP address into the 
+          URL. <br>Once in, navigate to the 'my account' page and read the information regarding the password 
+          reset system. What do you notice?
+        </h4>
+        <hr>
+        <p>In order to change a users password, you only need the email address and a password hint. Not too bad so far but… <br>
+          <img src="images/bad7passwordreset.png" alt = "bad store password reset page"></p>
+        <p>
+          The password hint only provides a selection of 6 choices, as opposed to using a user generated answer. 
+          This makes it susceptible to brute force attacks (an attacker could use this list to reset a list of account passwords).<br>
+          <img src="images/bad7passwordhint.png" alt = "bad store password hint list">
+        </p>
+
+        <hr>
+        <h4 style="text-align: center;" >
+          8.	After looking at the page, try to reset a random user’s password. 
+          <br>What do you notice about the result of the password reset?
+        </h4>
+        <hr>
+        <p>Regardless of what the user’s password hint and username was (look at the username I entered, it most definetly 
+          does not exist), the password will always be reset to ‘Welcome’. This is a 
+          <b>MAJOR</b> flaw in the system, this meant by just knowing the username (and guessing the hint) a random person could
+          reset another users account. <br>
+          <img src="images/bad8passwordresetresponse.png" alt = "bad store password reset page - response"></p>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            9. The password reset system works based off entering a username and a password hint (giving the 
+            user a hard coded password), which the password hint consists of a pool of 6 colours. <br>Based off this 
+            information, make a password hint wordlist from the password hint dropdown menu.
+          </h4>
+          <hr>
+          <p>Use a text editor, like gedit, to manually enter the password hint colours into a text file<br>
+            <img src="images/bad9colourwordlist.png" alt = "bad store colour wordlist">
+          </p>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            10.	Just like with task 9, make a wordlist based off possible/common administration account names.
+          </h4>
+          <hr>
+          <p>Like last time, use a text editor, like gedit, to manually enter possible/comomon admin names into a text file<br>
+            <img src="images/bad10adminwordlist.png" alt = "bad store admin name wordlist">
+          </p>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            11. With the wordlists setup it’s time for the HTTP Request, use the inbuilt Burp Suite browser to access 
+            Bad Store and head to the ‘my accounts’ page. <br>Using Burp Suite, intercept the HTTP request after entering 
+            a random username as test data into the email address field.
+          </h4>
+          <hr>
+          <p>First open the Burp Suite browser by going into the proxy tab. I turned intercept off for the time being for 
+            convenience (wouldn’t need to continuously return to Burp Suite to forward every HTTP request when changing pages).<br>
+            <img src="images/bad11openingbrowser.png" alt = "bad store opening Burp Suite browser">
+          </p>
+          <p>
+            When turned on, navigate to the Bad Store IP address and onto the ‘my account’ page containing the password reset 
+            system. When ready, turn intercept back on and enter some test data. If everything was done correctly, a HTTP Request
+            should be intercepted by Burp Suite. The last line should contain the test data (and password hint colour).<br>
+            <img src="images/bad11testdata.png" alt = "bad store entering test data"><br>
+            <img src="images/bad11HTTPReqtestdata.png" alt = "bad store seeing test data in HTTP request">
+          </p>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            12. When you have the HTTP Request, forward it. <br>In the ‘HTTP history’ tab under ‘Proxy’, find the HTTP request 
+            you sent - it should also be accompanied with a response. <br>What line can the password reset message be found in 
+            the HTTP response?
+          </h4>
+          <hr>
+          <p>In this case, you can identify the HTTP request by the POST method, the URL, the parameter and the page title 
+            (if you look at the HTTP request in task 11 you may notice on the first line its using a POST method and not GET).<br>
+            <img src="images/bad12HTTPhistory.png" alt = "bad store Burp Suite HTTP history">
+          </p>
+          <p>
+            Once located, click on it to view it. The Request and Response tabs can be seen. Scroll down in the Response tab 
+            (to line 100) and the password reset message can be found. As you can see, the password 
+            is not auto generated and instead is hard coded.<br>
+            <img src="images/bad12HTTPhistoryresponse.png" alt = "bad store Burp Suite response in HTTP history ">
+          </p>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            13. In Burp Suite, under the ‘Target’ tab go into ‘Site map’. This time find the password reset page via the 
+            sitemap. <br> Select the page containing your test data if multiple pages can be seen. Once selected, go into 
+            ‘Response’ and find the password reset response line again.
+          </h4>
+          <hr>
+          <p>The sitemap can be explored by clicking the dropdowns, revealing more folders and files. Folders that have not 
+            been investigated have been greyed out, and can be ignored<br>
+            <img src="images/bad13Sitemap.png" alt = "bad store Burp Suite site map"><br>
+            <img src="images/bad13Sitemapresponse.png" alt = "bad store Burp Suite site map http response ">
+          </p>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            14. Using either task 12 or 13, send the HTTP request to the intruder tab. <br>Alternatively, if these tasks where 
+            skipped, send the HTTP request directly from the proxy intercept tab if you have not yet dropped or forwarded 
+            the HTTP request.
+          </h4>
+          <hr>
+          <p>In this example I accessed the HTTP request through the Site map. I right clicked the HTTP Request, and 
+            selected ‘Send to Intruder’. Ctrl+I also works.<br>
+            <img src="images/bad14Sitemaptoint.png" alt = "bad store Burp Suite sending request to Intruder">
+          </p>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            15. Whilst in the intruder tab in ‘Positions’ (with the password reset HTTP request selected) 
+            remove all payload markers and only select the email address and password hint fields as the payload position.
+          </h4>
+          <hr>
+          <p>This is what the HTTP request looks like with all the possible payload positions highlighted.<br>
+            <img src="images/bad15payloadall.png" alt = "bad store Burp Suite all possible payloads positions highlighted">
+          </p>
+          <p>
+            First, select the ‘Clear’ button to remove all payloads from the request.<br>
+            <img src="images/bad15payloadclear.png" alt = "bad store Burp Suite all possible payloads positions cleared">
+          </p>
+          <p>
+            Then highlight one of the needed fields by click and dragging over the data 
+            (in this example, the email address test data). Once highlighted, press the 'Add' button to convert it to a payload
+            position. The email address field (test data) will then be marked as a payload and will look as such. 
+            It will also change colours <br>
+            <img src="images/bad15makepayloadposition.png" alt = "bad store Burp Suite making the payload position">
+          </p>
+          <p>
+            Repeat the previous steps with the password hint field. In the end the HTTP request will look like this. 
+            Only the email address and password hint parameters need to be selected for the payload position.<br>
+            <img src="images/bad15positioncomplete.png" alt = "bad store Burp Suite payload positioning complete">
+          </p>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            16.	With the payload positions setup, the correct attack type now needs to be selected. <br>Under ‘attack type’, 
+            read the type of attacks available and select the attack suitable for brute forcing the password reset page.
+          </h4>
+          <hr>
+          <p>The attack being done is called a ‘Cluster Bomb’.
+            This attack type is being used because two separate payloads (wordlists) are being used 
+            for brute forcing – the admin name and password hint list. Sniper attack could be used however it would 
+            take too long – it would go through all the payload combinations (and so try the password hint wordlist 
+            in the email address field, which would take up time).
+            <br>
+            <img src="images/bad16cluster.png" alt = "bad store Burp Suite cluster bomb description">
+          </p>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            17.	In the intruder tab under ‘payloads’, add the admin name wordlist to ‘payload set 1’ and the password 
+            hint wordlist to ‘payload set 2’.
+          </h4>
+          <hr>
+          <p>In this example, I will be adding the admin name wordlist.</p>
+          <p>
+            First ensure ‘payload set 1’ is selected. Once confirmed, select the ‘load’ button, then select the adminname file, 
+            and then press open.<br>
+            <img src="images/bad17adminpayload.png" alt = "bad store Burp Suite admin name payload"><br>
+            <img src="images/bad17adminpayloadresult.png" alt = "bad store Burp Suite admin name payload result">
+          </p>
+          <p>
+            Then select payload set 2 and repeat the previous task followed for the password hint wordlist.<br>
+            <img src="images/bad17passwordhintpayload.png" alt = "bad store Burp Suite password hint payload">
+          </p>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            18. With task 17 done, the intruder tab should now be setup to brute force the password reset page. <br>Double 
+            check everything has been done correctly, then start the attack. 
+          </h4>
+          <hr>
+          <p>Ensure the correct payload positions have been selected, the correct attack type, the correct payload 
+            sets containing the correct word lists. Once confirmed, select start attack.<br>
+            <img src="images/bad18startattackbutton.png" alt = "bad store Burp Suite start attack"><br>
+          </p>
+          <p>
+            Upon starting the attack, a Burp Suite warning will appear regarding the use of the community version, ignore it. 
+            Then a window like this will appear (and one by one the brute force response will be returned).<br>
+            <img src="images/bad18bruteforcewindow.png" alt = "bad store Burp Suite brute force window">
+          </p>
+
+          <hr>
+          <h5 style="text-align: center;">
+            18.1 Depending on the username you entered, you will receive responses of different length. Why are these 
+            length different?
+          </h5>
+          <p>
+            The reason for the different length is solely because of the size of the email address/username added (see above). 
+            For example, look at the difference of the length between when payload 1 used root and when it used admin. 
+            Root is one letter shorter than admin, and as such it always has a length shorter than admin by one.
+          </p>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            19. With the potential admin passwords changed to ‘Welcome’, we can now try to brute force the login page and 
+            try to get an admin account.<br>
+            Intercept the HTTP request of the login page, and send it straight to the intruder page
+          </h4>
+          <hr>
+          <p>Go onto the login page and enter some test data. Once done, ensure intercept is turned on in Burp Suite, 
+            then press the login button.<br>
+            <img src="images/bad19loginpage.png" alt = "bad store login page"><br>
+          </p>
+          <p>
+            The following HTTP request (for the login page) should then appear. Proceed to right click and send it to 
+            Intruder afterwards.<br>
+            <img src="images/bad19loginHTTPReq.png" alt = "bad store Burp Suite login HTTP request"><br>
+            <img src="images/bad19loginHTTPReqtoint.png" alt = "bad store Burp Suite login HTTP request to intruder">
+          </p>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            20.	With the HTTP request in the intercept tab, we need to reassign the payload again. <br>
+            This time only assign a payload to the email field (and not the password, 
+            so enter ‘Welcome’ into the password field instead). <br>
+            Additionally, what attack type would we need to be done this time if only one payload was being used? <br>
+            In the payload set, add the possible admin names word list.
+          </h4>
+          <hr>
+          <p>Just like in task 15, remove all the payload positions using the clear button. Then click and drag the email 
+            field and press the add button to turn it into a payload position. Don’t forget to change the ‘passwd’ field to 
+            ‘Welcome’.
+          </p>
+          <p>
+            This is what the HTTP Request should look like, with the payloads all set:<br>
+            <img src="images/bad20payloadpositionset.png" alt = "bad store Burp Suite payload position set for login">
+          </p>
+          <p>
+            For the attack type, snipe would be suitable. Technically speaking Battering ram would also work, 
+            but since we are only working with a single payload position it would be more ‘elegant’ to stick with sniper.<br>
+            <img src="images/bad20attacktype.png" alt = "bad store Burp Suite attack type set to sniper">
+          </p>
+          <p>
+            When it comes to adding the payload, select ‘load’, the wordlist, open and done (see task 17 for recap):<br>
+            <img src="images/bad20payloadcontent.png" alt = "bad store Burp Suite attack type set to sniper">
+          </p>
+
+
+          <hr>
+          <h4 style="text-align: center;" >
+            21. With the brute force setup, start the attack. Depending on how many names you entered it should finish 
+            relatively quickly. <br>Many of the brute force attempts will response with ‘4201’, what type of response is this?
+          </h4>
+          <hr>
+          <p>Here is the result I got from brute forcing (only a small sample was used):<br>
+            <img src="images/bad21bruteforceresult.png" alt = "bad store Burp Suite brute force result"><br>
+          </p>
+          <p>
+            First I selected a request with the length ‘4201’. Then I clicked on the response tab and scrolled through it. 
+            When I got to line 99-100 I saw an error response. <br>
+            <img src="images/bad21bruteforceanalysis.png" alt = "bad store Burp Suite brute force analysis">
+          </p>
+          <p>
+            With this information I concluded that all of the responses with the length ‘4201’ are likely to be 
+            failed attempts. This meant looking at them would pointless, and so can be ignored.
+          </p>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            22. With the establishment that responses with the length of ‘4201’ are most likely credentials that do 
+            not exist, they can be ignored. <br>Look for a request of another length.
+          </h4>
+          <hr>
+          <p>By clicking on the length column title, the table can be filtered by length highest to lowest (and also 
+            lowest to highest), making finding other lengths much easier. In this case the sample size is small so 
+            it wasn’t useful, but knowing this feature would save a lot of time if a larger sample was used.<br>
+            <img src="images/bad22bruteforceresultfilter.png" alt = "bad store Burp Suite brute force result filtering by length">
+          </p>
+
+          <hr>
+          <h4 style="text-align: center;" >
+            23. A second length, ‘4417’, was found. <br>Investigate the HTTP response tab and look at what type of response was given.
+          </h4>
+          <hr>
+          <p>This time an error response was not found, so it looks more promising than the other HTTP Requests. 
+            However, there is also nothing indicating a successful response as well. We can only confirm it did not give
+            the same error as the other HTTP Responses. <br>
+            <img src="images/bad23bruteforcegoodresult.png" alt = "bad store Burp Suite brute force finding a good result">
+          </p>
+
+
+          <hr>
+          <h4 style="text-align: center;" >
+            24. Using the payload content of the request containing the length ‘4417’, enter the credentials into the login 
+            page. <br>Does it work, and what can be seen?
+          </h4>
+          <hr>
+          <p>The payload used in the ‘successful’ response was ‘admin’, so that would be entered as the username.<br>
+            <img src="images/bad24adminname.png" alt = "bad store Admin name 'admin'">
+          </p>
+          <p>
+            Because we previously reset the ‘admin’ password to ‘Welcome’ (task 18), we will enter ‘Welcome’ into the password field 
+            (inspect element was used to show the password).<br>
+            <img src="images/bad24loginadmin.png" alt = "bad store logging in as admin">
+          </p>
+          <p>
+            Congratulations, we logged in as the master system admin! We can do whatever we want!<br>
+            <img src="images/bad24masteradmin.png" alt = "bad store logging in as master system admin">
+          </p>
+
+
+          <hr>
+          <h4 style="text-align: center;" >
+            25. Due to the sample size of the wordlists being used (my wordlist only used three words) it took longer to setup the brute 
+            force process compared to manually entering the credentials.<br>
+            As such, repeat task 19. This time, however, send the HTTP Request to repeater instead of Intruder.    
+          </h4>
+          <hr>
+          <p>Do the usual steps to get the HTTP Request (go to the page, turn intercept on, enter test data). Right click and send the Request to repeater.<br>
+            <img src="images/bad25adminrepeater.png" alt = "Bad Store using repeater">
+          </p>
+
+          
+          <hr>
+          <h4 style="text-align: center;" >
+            26. In the repeater tab, enter the credential ‘Welcome’ into the passwd field. Then in the email field, enter an email address from your word list.
+            <br>Then press send and look through the HTTP response to see if the credential received an error or ‘welcome to Bad Store’ reply.<br>
+            If an error was given, move onto the next email  and repeat.                        
+          </h4>
+          <hr>
+          <p>The HTTP request should look as so in the repeater tab. In the proposed username slot (the email) is where the possible word list names go.<br>
+            <img src="images/bad26adminrepeater.png" alt = "Bad Store using repeater">
+          </p>
+          <p>
+            Just like before, this should be seen if a credential combination fails<br>
+            <img src="images/bad26adminrepeatererror.png" alt = "Bad Store using repeater - incorrect credential" style="height: 550px;">
+          </p>
+          <p>
+            And if the combination succeeds, a welcome response can be seen.<br>
+            <img src="images/bad26adminrepeaterwlecome.png" alt = "Bad Store using repeater - good credential" style="height: 550px;">
+          </p>
+
+
+          <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+
+
+      </div> <!-- This is the end of Answers -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <script>
+        function showEx() {
+          var i = document.getElementById("setup");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+      </script>
+
+
+        <!-- These are the scripts used to show and hide the hints-->
+        <!-- The scripts used to hide and show were based off https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp-->
+
+        <script>
+          function showqQ1H1() {
+            var i = document.getElementById("q1hint1");
+            if (i.style.display === "none") {
+              i.style.display = "block";
+            } else {
+              i.style.display = "none";
+            }
+          }
+
+  
+
+          function showqQ1H2() {
+          var i = document.getElementById("q1hint2");
+          if (i.style.display === "none") {
+              i.style.display = "block";
+          } else {
+              i.style.display = "none";
+          }
+          }
+
+  
+
+          function showqQ1H3() {
+          var i = document.getElementById("q1hint3");
+          if (i.style.display === "none") {
+              i.style.display = "block";
+          } else {
+              i.style.display = "none";
+          }
+          }
+
+
+
+
+        function showqQ2H1() {
+          var i = document.getElementById("q2hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ3H1() {
+          var i = document.getElementById("q3hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ4H1() {
+          var i = document.getElementById("q4hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ6H1() {
+          var i = document.getElementById("q6hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ6H2() {
+          var i = document.getElementById("q6hint2");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ7H1() {
+          var i = document.getElementById("q7hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ7H2() {
+          var i = document.getElementById("q7hint2");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ8H1() {
+          var i = document.getElementById("q8hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ9H1() {
+          var i = document.getElementById("q9hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ10H1() {
+          var i = document.getElementById("q10hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ11H1() {
+          var i = document.getElementById("q11hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ11H2() {
+          var i = document.getElementById("q11hint2");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ11H3() {
+          var i = document.getElementById("q11hint3");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ12H1() {
+          var i = document.getElementById("q12hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ13H1() {
+          var i = document.getElementById("q13hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ14H1() {
+          var i = document.getElementById("q14hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ15H1() {
+          var i = document.getElementById("q15hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ16H1() {
+          var i = document.getElementById("q16hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ16H2() {
+          var i = document.getElementById("q16hint2");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ17H1() {
+          var i = document.getElementById("q17hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ19H1() {
+          var i = document.getElementById("q19hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ21H1() {
+          var i = document.getElementById("q21hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ21H2() {
+          var i = document.getElementById("q21hint2");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ22H1() {
+          var i = document.getElementById("q22hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ24H1() {
+          var i = document.getElementById("q24hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+
+        function showqQ26H1() {
+          var i = document.getElementById("q26hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+      </script>
+
+
+
+
+
+
+      <script>
+        function showansw() {
+        var i = document.getElementById("answ");
+        if (i.style.display === "none") {
+            i.style.display = "block";
+        } else {
+            i.style.display = "none";
+        }
+        }
+      </script>
+
+
+
+
+        </main>
+
+        <div class="footer">
+          <p>Pen Testing is hard at first, be careful not to do difficult challenges early</p>
+        </div>
+    </body>
+</html>
+

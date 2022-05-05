@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, inital-scale=1">
+        <meta name="description" content="A place to learn basic pen testing info!">
+        <meta name="author" content="Mujeeb">
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
+        <title>Penting - Nikto</title>
+
+    </head>
+    <body>
+        <header>
+            <h1>Penting Nikto</h1>
+            <!-- Navigation bar based off https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp-->
+            <nav>
+                <div class="navbar">
+                    <a href="index.html">Home</a>
+
+                    <div class="dropdown">
+                      <button class="dropbtn">List of Tools 
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-content">
+                      <a href="Tools.html">Tools page Overview</a>
+                      <a href="Nmap.html">Nmap</a>
+                      <a href= "Nikto.html">Nikto</a>
+                      <a href="BurpSuite.html">BurpSuite</a>
+                      <a href="Othertools.html">Other Tools</a>
+                    </div>
+                  </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">List of Services 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Services.html">Services page Overview</a>
+                          <a href="DVWA.html">DVWA</a>
+                          <a href="BadStore.html">BadStore</a>
+                          <a href="bonus.html">Additional Tasks</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Misc. Resources
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Misc.html">Misc Resources page</a>
+                          <a href="EDB.html">ExploitDB</a>
+                          <a href="Kali.html">Kali</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Legal + Ethics 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="LandE.html">Legal and Ethics Overview</a>
+                          <a href="Legal.html">Useful Legal info</a>
+                          <a href="Ethics.html">Ethics info</a>
+                          <a href="Disclaimer.html">Disclaimer page</a>
+                        </div>
+                      </div>
+
+                      <div class="dropdown">
+                        <button class="dropbtn">Further Reading 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Next.html">What to do next?</a>
+                          <a href="HTB.html">HTB</a>
+                          <a href="TryHackMe.html">TryHackMe</a>
+                          <a href="Programming.html">Programming</a>
+                        </div>
+                      </div>
+                  </div>
+                  
+            </nav>
+    
+
+        </header>
+
+        <main>
+
+          <h2 style="padding-left: 10px;"id ="Start"><u>Nikto</u></h2>
+          <button class="button"><a href="Tools.html"><span>Back to Overview</span></a></button><br>
+          Here is the URL to the offical Nikto GitHub page: <a href="https://github.com/sullo/nikto">https://github.com/sullo/nikto</a>
+          <hr>
+
+          <div>
+             <!-- Code based off the following:https://www.tipsandtricks-hq.com/simple-table-of-contents-toc-using-pure-html-and-css-code-9217-->
+            <p><b><u>Table of contents</u></b></p>
+            <ul style="  border: 1px solid black;
+            padding-right: 0px;
+            padding-left: 28px;
+            width: 240px;
+            border-radius: 5px;">
+            <li><a href="#General">1. General Info + Tool Purpose</a></li>
+            <li><a href="#How to use the tool">2. How to use the tool</a></li>
+            <li><a href="#Arguments">3. Arguments</a>
+
+                <ul style="  border: 1px solid rgb(190, 255, 233);
+                padding-right: 0px;
+                padding-left: 28px;
+                width: 200px;
+                border-radius: 5px;">
+
+                <!-- This style was put in to fix formatting issues-->
+
+                    <li><a href="#core">3.1 Core Arguments</a></li>
+                    <li><a href="#helpful">3.2 Helpful Arguments</a></li>
+                    <li><a href="#adv">3.3 Advanced Arguments</a></li>
+                  </ul>
+            </li>
+
+            <li><a href="#handinhand">4. Nikto and Nmap Together</a></li>
+            <li><a href="#help">5. Nikto Help page</a></li>
+            </ul>
+            </div>
+          <hr>
+          <h3 style="padding-left: 10px;" id="General">1. General Info + Tool Purpose</h3>
+          <p>
+            Nikto is a web server scanner that does vulnerability scans against target, checking it for anything that can be 
+            exploited such as files or programs in places they shouldn’t be, outdated server versions etc. it can also look for 
+            things like configuration error. Upon finding something of interest it will output the results back to the terminal.
+          </p>
+          <p>
+            Nikto is considered to be one of the more popular web server scanning tools. One of the reasons is because its open 
+            source and up to date. Another reason is because it’s just a good tool – it’s easy to use and effective.
+          </p>
+
+          <h4 style="padding-left: 10px;" id="NVN">Nikto VS Nmap</h4>
+          <p>
+            The difference between nikto and nmap is nmap is used for port scanning and host identification. It just so happens 
+            HTTP/websites are a port (and so it gets scanned). Nikto is made specifically to scan targets like HTTP/S, and 
+            provides a much greater depth of information against the website. As websites are such a common target Nikto mostly 
+            outshines Nmap in many areas concerning sites. <br><br>
+            Nmap has something called NSE (Nmap scripting engine) in which 
+            scripts can be used with the Nmap scan – I will not cover them in this guide, as 
+            they can be quite advanced, but they help expand the abilities of Nmap).
+          </p>
+          <p>
+            As Nikto is a web server scanner it will primarily work against targets that work over the HTTP/S protocol (this does  
+            mean it only works against port 80 and 443!).
+          </p>
+          <hr>
+          <h3 style="padding-left: 10px;" id="How to use the tool">2. How to use the tool:</h3>
+          <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+          <p>
+            The tool can be used by entering ‘nikto’ into the command line to run nikto 2.1.5. 
+          </p>
+          <div><pre><code> nikto </code></pre></div>
+          <p><img src="images/nikto1.png" alt = "running nikto via  nikto"> </p>
+
+          <p>
+            If you wish to run nikto 2.1.6: <br>When in the command line, move to the dmu home directory (should automatically be in 
+            this area when you launch the console), move into the nikto folder and then  into the program folder, and once in use 
+            perl to run nikto.pl.
+          </p>
+
+          <p>
+            <div><pre><code> cd /home/dmu/nikto/program | perl nikto.pl </code></pre></div>
+          </p>
+          <p><img src="images/nikto2.png" alt = "running nikto via  nikto"> </p>
+          <p>
+            If you wish to run commands in nikto 2.1.6 you will need to always specify ‘perl nikto.pl’ and then add the arguments afterwards. 
+            You may notice also the output of ‘perl nikto.pl’ is different to just ‘nikto’ – this is because the former runs the full 
+            help text as well, in order to get the same output for nikto 2.1.5 enter ‘nikto -H’.<br><br>
+            For this guide I will be using nikto 2.1.5 as it has little difference to 2.1.6, and its much easier to run (don’t 
+            need to move into nikto/program directory every time or add perl and .pl to the end of nikto).
+          </p>
+
+          <p>
+            If you wish to see examples of the Nikto command, click <a href="#handinhand">here</a>. This will take you to an example of using Nmap and 
+            Nikto together.
+          </p>
+
+
+          <hr>
+
+
+          <h3 style="padding-left: 10px;" id="Arguments">3. Arguments:</h3>
+          <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+          <hr>
+          <p>
+            Just like nmap, if nikto is ran with no arguments it just spits back out the help page, so if you want it to run you need 
+            to use arguments! <br><br>However, also unlike nmap, if you wish to scan a IP address you must enter the -host argument to run 
+            before the IP (compared to nmap where you could just enter the ip address and the program would identify it as the IP address).
+          </p>
+          <h4 style="padding-left: 10px;" id="core">3.1 Core Arguments:</h4>
+          <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+          <p>
+            These are the arguments you should know when using nikto. Normally these would be ‘enough’ to scan a target (would give 
+            adequate information).
+          </p>
+
+          <p>
+            <b>-host</b> - the -host argument is quite self-explanatory, it tells the nikto program what the target 
+            IP address is. <br>If this argument is missing then the command would fail (even if the IP address is included without this
+            argument).<br>
+
+
+            <div><pre><code> nikto -host 127.0.0.1</code></pre></div>
+            <p>
+              Have a go yourself!<br>
+              <!-- Embedded link to terminal page-->
+              <iframe src="http://localhost:7681" height="600" width="60%"></iframe><br>   
+            </p>
+
+            <!--Button to show example when clicked by user -->
+            <img id="localhostcheck" src="" />
+            <button type="button"
+                onclick="show()" id="btnID">
+                See what I found
+            </button>
+
+            <script>
+                function show() {
+         
+                    /* Get image and change value
+                    of src attribute */
+                    let image = document.getElementById("localhostcheck");
+         
+                    image.src ="images/nikh.png"
+         
+                    document.getElementById("btnID")
+                            .style.display = "none";
+                }
+            </script>
+            <p>NB entering localhost in place of the IP address (using localhost instead of 127.0.0.1) does not work</p>
+            <p><img src="images/nikh2.png" alt = "running nikto localhost"> </p>
+
+
+            <p>
+            <b>-ssl</b> this argument is used if the target has SSL enabled (in otherwords, the host is running on port 
+            443/HTTPS). This argument makes it so you also scan the targets SSL certificate for additional information. <br><br>
+            In this guide I have not included any HTTPS targets, however if a target does not setup SSL properly 
+            it can introduce additional vulnerabilities (despite the fact HTTPS is said to be more secure than HTTP). <br>
+            Below is an example of what you would expect from adding the -ssl argument. See links at the bottom of the page to 
+            see where I got the screenshot from.<br>
+            </p>
+
+
+            <div><pre><code> nikto -host 127.0.0.1 -ssl</code></pre></div>
+            <p><img src="images/nikhssl.png" alt = "running nikto localhost ssl"> </p>
+
+            <p>
+            <b>-port</b> just like the -host command, the -port argument does what it says – it points nikto against a 
+            specific port on the target machine.</p>
+
+            <div><pre><code>nikto –host 127.0.0.1 –port 12345<br>nikto –host 127.0.0.1 –port 80
+            </code></pre></div>
+            <p><img src="images/nikp.png" alt = "running nikto port"> </p>
+            <p>
+              The reason why you would use the -port argument is to change the port you want nikto to focus against. Although 
+              traditionally web services are run on port 80 (or 443) it is possible to run web services on other ports. <br><br>
+              For example normally you would run the DVWA website on port 80, however I have moved it to a different port. I have also done
+              the same for the Guide Website as well - can you try to scan the Guide website?
+              <br><br>
+              By default, the port to be scanned is port 80. Using this argument will change the target to whatever you 
+              want it to be. However make sure the target your scanning is a web server, using nikto against a MySQL 
+              server isn’t going to make nikto magically convert it to a Apache server and scan it!
+            </p>
+            <p><img src="images/nikmy.png" alt = "running nikto MySQL"> </p>
+            <hr>
+            <h4 style="padding-left: 10px;" id="helpful">3.2 Helpful Arguments:</h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+
+            <p>
+              These are helpful arguments that can be used, not necessarily needed but using or being aware of them can help 
+              you when you’re in need of something niche. 
+            </p>
+
+            <p>
+            <b>-output</b> with the -output command you can save the nikto scan into a file<br><br>  
+            By using the -format argument you can 
+            choose the file format of the file, but stating the file extension at the end of the file is good enough. 
+            </p>
+
+            <div><pre><code> nikto -host 127.0.0.1 -output nikto1.txt</code></pre></div>
+            <p><img src="images/niko1.png" alt = "running nikto output"> </p>
+            <p><img src="images/niko2.png" alt = "running nikto output"> </p>
+            
+            <p>
+            <b>-format</b> – this argument is used alongside the -output argument, it specifies the file format. It is it not a hard 
+            requirement. You can simply add the extension in the -output argument and you wouldn’t need to us this argument.
+            </p>
+
+            <div><pre><code> nikto -host 127.0.0.1 -output nikto1 -format csv</code></pre></div>
+            <p><img src="images/nikf.png" alt = "running nikto format" style="height: 150px;"> <br>
+            <img src="images/nikf1.png" alt = "running nikto format 2"><br>
+            <img src="images/nikf2.png" alt = "running nikto format 3" > </p>
+            
+            <p>
+            <b>-display</b> – the display argument can be used in combination with a number or letter to choose a display option (can
+            be seen using the help function -Help)
+            <br><img src="images/nikd.png" alt = "running nikto display"> </p>
+              <p>
+                Most of these options throw a wall of text back at you (which may confuse you) and as such I only recommend taking 
+                a look at them. A useful option though is the S argument. The S option is also a good choice if you need to share 
+                the output with someone but do not wish to share any confidential vulnerable information.
+              </p>
+
+            <div><pre><code> nikto -host 127.0.0.1 -Display S</code></pre></div>
+            <p><img src="images/nikS.png" alt = "running nikto scrub output"> </p>
+              <hr>
+
+
+            <h4 style="padding-left: 10px;" id="adv">3.3 Advanced Arguments:</h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+
+
+            <p>
+              The arguments here are what I consider to be advanced arguments. I don’t believe you will use them anytime soon 
+              (they need to be used in niche/difficult conditions) but I think they are interesting enough to look at.
+            </p>
+
+            <p>
+            <b>-evasion</b> - this tag is used purely to hide from intrusion detection systems. Normally practice machines do not 
+            use any security systems so you would likely not be using this.<br>
+            <img src="images/nikoe.png" alt = "nikto evasion "> </p>
+
+            <p>
+            <b>-tuning</b> this argument allows you to select and look for a specific vulnerability. I don’t think you would 
+            be using this argument just because when you’re looking for vulnerabilities you’re normally looking for everything 
+            (unless you’ve received a tip off on what to look for).<br>
+            <img src="images/nikt1.png" alt = "nikto tuning list "> </p>
+            
+            For example, if I only wish to look for information disclosure related vulnerabilities I’d use the 3 operator.
+
+            <p><img src="images/nikt2.png" alt = "running nikto tuning " style="height: 270px;"> </p>
+            <hr>
+
+            <h4 style="padding-left: 10px;" id="handinhand">4. Example of using Nikto and Nmap</h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>For Nmap page click <a href="Nmap.html">here</a></p>
+            <p>
+              First I would use nmap to look for any available host targets using nmap –sn IP/24.
+            </p>
+            <div><pre><code>nmap –sn IP/24</code></pre></div>
+            <p><img src="images/nmapsn2.png" alt = "nmap -sn example"> </p>
+            <p>
+              Then I would do another nmap scan to scan the target for any ports and see if a web service is running.
+            </p>
+            <div><pre><code>nmap –p1-100 -sV localhost</code></pre></div>
+            <p><img src="images/nmapnik.png" alt = "nmap finding apache port"> </p>
+            <p>
+              If a web service is present (in which case yes), I would then run nikto against that port and see 
+              what result I would get.
+            </p>
+            <div><pre><code>nikto –port 80 –host 127.0.0.1  –output niktotest.txt</code></pre></div>
+            <p><img src="images/nmapnik2.png" alt = "nmap finding apache port"> </p>
+
+            <p>
+              Now skipping the first nmap command, have a go yourself! Try scanning the Guide website as well.<br>
+
+              <!-- Embedded link to terminal page-->
+               <iframe src="http://localhost:7681" height="600" width="60%"></iframe><br>   
+            </p>
+
+
+
+
+            <hr>
+            <h3 style="padding-left: 10px;" id="help">5. Help page</h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p><img src="images/nikhelp1.png" alt = "nikto help page 1 " style="height: 800px;"> </p>
+            <p><img src="images/nikhelp2.png" alt = "nikto help page 2 " style="height: 450px;"> </p>
+
+
+        </main>
+
+        <div class="footer">
+          <p>Pen Testing is hard at first, be careful not to do difficult challenges early</p>
+        </div>
+    </body>
+</html>
+

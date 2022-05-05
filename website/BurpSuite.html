@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, inital-scale=1">
+        <meta name="description" content="A place to learn basic pen testing info!">
+        <meta name="author" content="Mujeeb">
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
+        <title>Penting - Burp Suite</title>
+
+    </head>
+    <body>
+        <header>
+            <h1>Penting Burp Suite</h1>
+            <!-- Navigation bar based off https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp-->
+            <nav>
+                <div class="navbar">
+                    <a href="index.html">Home</a>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">List of Tools 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                        <a href="Tools.html">Tools page Overview</a>
+                        <a href="Nmap.html">Nmap</a>
+                        <a href= "Nikto.html">Nikto</a>
+                        <a href="BurpSuite.html">BurpSuite</a>
+                        <a href="Othertools.html">Other Tools</a>
+                      </div>
+                    </div>
+
+                    <div class="dropdown">
+                      <button class="dropbtn">List of Services 
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-content">
+                        <a href="Services.html">Services page Overview</a>
+                        <a href="DVWA.html">DVWA</a>
+                        <a href="BadStore.html">BadStore</a>
+                        <a href="bonus.html">Additional Tasks</a>
+                      </div>
+                  </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Misc. Resources
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Misc.html">Misc Resources page</a>
+                          <a href="EDB.html">ExploitDB</a>
+                          <a href="Kali.html">Kali</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Legal + Ethics 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="LandE.html">Legal and Ethics Overview</a>
+                          <a href="Legal.html">Useful Legal info</a>
+                          <a href="Ethics.html">Ethics info</a>
+                          <a href="Disclaimer.html">Disclaimer page</a>
+                        </div>
+                      </div>
+
+                      <div class="dropdown">
+                        <button class="dropbtn">Further Reading 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Next.html">What to do next?</a>
+                          <a href="HTB.html">HTB</a>
+                          <a href="TryHackMe.html">TryHackMe</a>
+                          <a href="Programming.html">Programming</a>
+                        </div>
+                      </div>
+                  </div>
+                  
+            </nav>
+    
+
+        </header>
+
+        <main>
+
+            <h2 style="padding-left: 10px;"id ="Start"><u>Burp Suite</u></h2>
+            <button class="button"><a href="Tools.html"><span>Back to Overview</span></a></button><br>
+            Here is the URL to the offical Burp Suite page: <a href="https://portswigger.net/burp">https://portswigger.net/burp</a>
+
+            <hr>
+            <div>
+               <!-- Code based off the following:https://www.tipsandtricks-hq.com/simple-table-of-contents-toc-using-pure-html-and-css-code-9217-->
+              <p><b><u>Table of contents</u></b></p>
+              <ul style="  border: 1px solid black;
+              padding-right: 0px;
+              padding-left: 28px;
+              width: 240px;
+              border-radius: 5px;">
+              <li><a href="#General">1. General Info + Tool Purpose</a></li>
+              <li><a href="#How to use the tool">2. How to open the tool</a></li>
+              <li><a href="#IntB">3. Intercepting with Burp Suite</a></li>
+                <ul style="  border: 1px solid rgb(190, 255, 233);
+                padding-right: 0px;
+                padding-left: 28px;
+                width: 200px;
+                border-radius: 5px;">
+                      <li><a href="#IntB1">3.1 Through the inbuilt browser:</a></li>
+                      <li><a href="#IntB2">3.2 Through an external browser:</a></li>
+              </ul>
+              <li><a href="#taban">4. Each Tab analysed:</a>
+                  <ul style="  border: 1px solid rgb(190, 255, 233);
+                  padding-right: 0px;
+                  padding-left: 28px;
+                  width: 200px;
+                  border-radius: 5px;">
+                      <li><a href="#Dash">4.1 Dashboard</a></li>
+                      <li><a href="#Targ">4.2 Target </a></li>
+                      <li><a href="#Prox">4.3 Proxy</a></li>
+                      <li><a href="#Intruder">4.4 Intruder</a></li>
+                      <li><a href="#Repeater">4.5 Repeater</a></li>
+
+                    </ul>
+              </li>
+
+              <li><a href="#ExI">5. Example of using the Intercept tab</a></li>
+              <li><a href="#ExR">6. Example of using the Repeater tab</a></li>
+              <li><a href="#help">7. Burp Suite help page</a></li> 
+              <li><a href="#Alt">8. Alternative to Burp Suite</a></li>
+
+              </ul>
+              </div>
+            <hr>
+            <h3 style="padding-left: 10px;" id="General"><u>General Info + Tool Purpose</u></h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+              Burp Suite is a excellent multipurpose tool, it’s main usage is a proxy interception tool, sitting 
+              between your device and the target domain and intercepting HTTP requests and response. In addition 
+              to this it can also do many things such as spider (discover) directories in a website to being used 
+              as a brute forcing tool. There is also a premium/paid version of brute force that allows the 
+              usage of extensions! <br><br>In this guide I will look at using Burp Suite as an intercept tool and going 
+              over the common features Burp Suite has to offer (including intercepting and also brute forcing). 
+              <br><br>Interception consists of interrupting the transfer of the HTTP message between the host and target. 
+              When interrupted we then have the opportunity to alter the contents of the HTTP message (we can edit 
+              or remove values in the message, for example change the password fields and then continue to send it off).
+            </p>
+            <hr>
+
+            <h3 style="padding-left: 10px;" id="How to use the tool"><u>How to open the tool:</u></h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+              One way (and the simplest way) to open the tool is to click on the Burp Suite icon on the left hand side on the bar.
+            </p>
+
+            <p><img src="images/bshort.png" alt = "running Burp via shortcut" height="300"> </p>
+
+            <p>
+              Alternatively it is also possible to open up Burp Suite through the console if you are missing the shortcut. The 
+              command can be found in the text file on the desktop. 
+            </p>
+
+            <div><pre><code>java -jar /home/dmu/BurpSuiteCommunity/burpsuite_community.jar</code></pre></div>
+
+
+            <p><img src="images/burptextfile.png" alt = "Burp Suite command in text file" height="300" > 
+            <img src="images/burpcon.png" alt = "running Burp via console" >
+            
+            
+            </p>
+
+            <p>From either way, a popup will appear. Just select next and then start Burp.</p>
+            <p><img src="images/bint1.png" alt = "BurpSuite screen 1" height="400"><br>
+            <img src="images/bint2.png" alt = "BurpSuite screen 2" height="400"> </p>
+
+            <p>The dashboard will then appear.</p>
+            <p><img src="images/bfirstlook.png" alt = "BurpSuite dashboard" height="900"><br>
+            Before I go over what each tab does, I'll first go over the interception feature of Burp Suite </p>
+
+            <hr>
+            <h3 style="padding-left: 10px;" id="IntB"><u>Intercepting with Burp Suite</u></h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+              Burp Suite allows you to either intercept with your browser or with its inbuilt browser. Previously, I used to
+              use my own browser (this required a lot of configuration to be used properly) but I found the inbuilt 
+              browser to be much better. <br><br> 
+              For the purpose of demonstration I have covered setting up Burp Suite for external browsers, however 
+              I recommend using the inbuilt browser within Burp Suite because its much easier to use, literally no 
+              configuration required.
+            </p>
+
+              <h4 style="padding-left: 10px;" id="IntB1"><u>Through the inbuilt browser:</u></h4>
+              <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+
+              <p>
+                Starting from the Burp Suite dashboard, move your mouse to the tabs to the top. Select either the ‘proxy’ 
+                tab:
+              <img src="images/btab1.png" alt = "Opening Burp browser 1" > </p>
+              
+              <p>
+                Then on either page select the open browser button – either from the left or topside within the tab <br>
+                <img src="images/btab2.png" alt = "Opening Burp browser 2" height="450">
+              </p>
+
+              <p>
+                Upon selecting open browser, the Burp Suite browser opens up.
+              </p>
+
+              <p><img src="images/btab3.png" alt = "Opening Burp browser 3" height="500"></p>
+
+              <p>We can test it works by going to localhost and seeing if Burp Suite gets populated by intercepts. Upon 
+                entering localhost come to proxy, successfully got an intercept</p>
+              <p><img src="images/btab4.png" alt = "Opening Burp browser 4" height="330"></p>
+
+              <hr>
+              <h4 style="padding-left: 10px;" id="IntB2"><u>Through an external browser:</u></h4>
+              <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+              <p>
+                If you want Burp Suite to run through your own browser you need to do a lot more configurations. 
+                I also found the external browser doesn’t always  work, so I recommend only looking at this if you're interested
+                in the process.
+              </p>
+
+              <!-- Button to show/hide example-->
+              <button onclick="showEx()">Show/Hide external browser config</button>
+
+              <div id="baseset" style="display: none;">
+                Click the button again to hide
+                <p>
+                  In proxy tab go to options. Ensure the interface is 127.0.0.1:8080, change it to 127.0.0.1:8081 
+                  (this step can be skipped, I put it in case you  have some issues keeping it on 8080).
+                </p>
+                <p><img src="images/bex1.png" alt = "BurpSuite external browser 1"  >
+                  <img src="images/bex2.png" alt = "BurpSuite external browser 2" >
+
+                  <img src="images/bex3.png" alt = "BurpSuite external browser 3" ></p>
+                  <p>
+                    Next, go to your browser (I have used Firefox) and go to the menu button in the top left, 
+                    then settings. Once in, use the search bar and look for network settings.<br>
+                      <img src="images/bexset1.png" alt = "BurpSuite external browser settings 1" height="500" >
+                      <img src="images/bexset2.png" alt = "BurpSuite external browser settings 2" height="200">
+                  </p>
+                  <p>
+                    In manual proxy configurations enter 127.0.0.1 and the port number you selected <br>
+                    Tick the box to use it for https as well<br>
+                    <img src="images/bexset3.png" alt = "BurpSuite external browser settings 3" height="700" >
+                  </p>
+                  <p>
+                    Now we need the Burp Suite certificate. Next, go to the URL bar and enter http://burpsuite and click
+                    the certificate in the top right to download it. As this is my second time setting it up, I already had a 
+                    cacert, so I got another one (giving me cacert(1)). <br>
+                    <img src="images/bexca1.png" alt = "BurpSuite external browser CA 1"  >
+                    <img src="images/bexca2.png" alt = "BurpSuite external browser CA 2" >
+                  </p>
+                  <p>
+                    Back to the settings page, return to the search bar and look for certificates this time. Click 'view
+                    Certificates'<br>
+                    <img src="images/bexca3.png" alt = "BurpSuite external browser CA 3" >
+                    <img src="images/bexca4.png" alt = "BurpSuite external browser CA 4" >
+                  </p>
+                  <p>
+                    In the ‘Authorities’ tab, select the ‘Import…’ button. Then go to where you downloaded the certificate, 
+                    and select the certificate. If you can’t see it, make sure you turn on all files (from selecting the drop
+                    down in the bottom right). In this case I will be selecting cacert(1).<br>
+                    <img src="images/bexca5.png" alt = "BurpSuite external browser CA 5" height="700"><br><br>
+                    And in the 'Downloading Certificate' screen, make sure both CA trust boxes are ticked - it's needed for 
+                    Burp Suite to work. <br>
+                    <img src="images/bexca6.png" alt = "BurpSuite external browser CA 6" >
+                  </p>
+                  <p>
+                    As you can see, using the inbuilt browser is much easier than setting up an external browser. 
+                    Especially when they both do the same thing.
+                  </p>
+
+              </div>
+    
+              <!-- Script to show/hide button content-->
+              <script>
+                function showEx() {
+                  var i = document.getElementById("baseset");
+                  if (i.style.display === "none") {
+                    i.style.display = "block";
+                  } else {
+                    i.style.display = "none";
+                  }
+                }
+              </script>
+
+
+            <hr>
+            <h3 style="padding-left: 10px;" id="taban"><u>Each Tab analysed:</u></h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>I will now go over the most commonly used tabs</p>
+            <hr>
+
+            <h4 style="padding-left: 10px;" id="Dash"><u>Dashboard</u></h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>This is what the dashboard looks like when split into four groups</p>
+            <p><img src="images/bdashboard.png" alt = "BurpSuite dashboard2" > </p>
+            <hr>
+
+            <p><b><u>1 - Tasks:</u></b> The task menu allows you to define and use background tasks that will run as you use Burp 
+              Suite. I will ignore it as the default mode (live passive crawl – which logs the pages visited) 
+              will be enough </p>
+            <p><img src="images/bdashboardt.png" alt = "BurpSuite dashboard task" height="500"> </p>
+            <hr>
+
+            <p><b><u>2 - Event Log:</u></b> The event log tab states what Burp Suite is doing. In the event log below you can see I 
+                 attempted to access the BBC website.</p>
+            <p><img src="images/bdashboarde.png" alt = "BurpSuite dashboard event log" > </p>
+            <hr>
+
+            <p><b><u>3 - Issue Activity:</u></b> Issue activity is part of the Burp Suites premium features. This section would 
+              list all the vulnerabilities found using Burp Suites automated scanners, and once found would filter and 
+              rank the vulnerabilities by severity and showcase the biggest threats. </p>
+            <p><img src="images/bdashboardi.png" alt = "BurpSuite dashboard Issue activity" > </p>
+            <hr>
+
+            <p><b><u>4 - Advisory:</u></b> Below issue activity is the advisory tab. After double clicking the issue in the issue 
+              activity tab, this tab provides information about the vulnerability in question. </p>
+            <p><img src="images/bdashboarda.png" alt = "BurpSuite dashboard advisory" > </p>
+            <hr>
+            <h4 style="padding-left: 10px;" id="Targ"><u>Target</u></h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+              In the <b>target</b> tab the site map can be found. This contains the structure of the websites visited, highlighting 
+              all directories, files and pages found. The HTTP response and request can also be found in the middle. 
+            <br>
+            <img src="images/btarget.png" alt = "BurpSuite target" height="700" > </p>
+
+            <p>
+              Here is the sitemap from logging into the DVWA website. The sitemap feature 'spiders' the site (in the premium version) 
+              and shows the path of all pages found. <br>
+              Notice how some files are greyed out. Burp Suite know they exist, it just hasn't accessed it
+              <br>
+            <img src="images/btargetd.png" alt = "BurpSuite target sitemap" > </p>
+
+            <p>
+              The <b>inspector</b> tab on the right simplifies the HTTP request and outlines key information a user may be interested in. <br> <br>
+              For example from 
+              the DVWA login page request it organizes the cookies into its own tab, identifying the php session ID (which can 
+              be used in a attack for session high jacking) and the sites security level. <br>Later on when I showcase brute 
+              forcing the site the password and username fields can also be seen.
+            <br>
+            <img src="images/btargeti.png" alt = "BurpSuite target inspector" > </p>
+
+            <p>
+              Burp Suite also has the ability to add a target in (and out of scope), only showing the relevant addresses. By 
+              right clicking the host you can add it to the scope list (as well as among other things like compare it 
+              to the sitemap of another host). In doing so Burp Suite will then only log whats within the scope. This helps reduce clutter.
+            <br>
+            <img src="images/btargets.png" alt = "BurpSuite target scope" > 
+              <img src="images/btargets2.png" alt = "BurpSuite target scope" > </p>
+            
+            <p>
+              The address entered into scope can then be seen in the scope tab. You can also enter scope through this page as well.<br>
+              And just as how you can put targets into scope, you can also explicitly ignore certain targets as well by putting it in 
+              ‘exclude from scope’. 
+            <br>
+            <img src="images/btargets3.png" alt = "BurpSuite target scope 2" height="400"></p>
+
+            <p>
+            The <b>issue definitions</b> tab is used in conjunction with the issue advisory section in the dashboard. This is where 
+            the relevant information is stored.
+            <img src="images/btargetis.png" alt = "BurpSuite target issue definitions" height="600"></p>
+
+            <hr>
+            <h4 style="padding-left: 10px;" id="Prox"><u>Proxy</u></h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+
+            <p>Considered the most important tab, due to being able to seen intercepted requests.</p>
+            <p>
+              When a HTTP request is intercepted, it can be found in the <b>proxy</b> area (in the intercept tab). HTTP requests are 
+              sent whenever anything is done in the browser – such as changing pages, clicking on a link, submitting a form, 
+              entering log in information etc. <br><br>Here is an example of me using my proxy browser to access DVWA:
+            <br>
+            <img src="images/bproxy.png" alt = "BurpSuite proxy" height="350"></p>
+
+            <p>
+              The forward button can be clicked to push the request through, drop to delete it. You can also write in it
+            <br>
+            <img src="images/bproxy1.png" alt = "BurpSuite proxy changing 1" >
+            <img src="images/bproxy2.png" alt = "BurpSuite proxy changing 2" ><br>
+            By changing the fields in the HTTP request form you can also change the response you would normally get. For 
+              example you could change your session id to someone else’s and you may log in as them. We will use this page later to 
+            brute force the login.</p>
+
+            <p>
+              In this page you can also right click the HTTP request to see a set of options:<br>
+            <img src="images/bproxylist.png" alt = "BurpSuite proxy set of options" ><br>
+            The most important functions right now are the send to x options. This allows you to copy and paste the 
+            HTTP request into the other tabs.<br> By moving the request into the intruder tab you can attempt to brute 
+            force pages for example.
+          </p>
+
+          <p>
+            The <b>HTTP history</b> has the history of the requests. Knows if it’s a request you edited earlier etc. useful if you 
+            need to look back at a request you dealt with previously instead of having to try and force it again.
+          <br>
+          <img src="images/bproxyhist.png" alt = "BurpSuite proxy HTTP History" height="300"></p>
+
+          <p>
+            There is also a tab called, Websocket history, which records history of traffic between web socket and app. 
+            Will ignore it in this guide as not used often. This is what can be found on the page if you go onto it:
+          <br>
+          <img src="images/bproxysock.png" alt = "BurpSuite proxy Web Socket screen" ></p>
+          
+          <p>
+            There is also an <b>options</b> tab, containing the rules for interceptions and more. It allows you to select proxy listeners 
+            and filer client request, as well as server response. <br>Can also be configured to automatically modify certain parts 
+            of the response. Also has other settings that can be played with – for now I will leave it alone to prevent 
+            confusion, it is worth a look though.
+          </p>
+
+          <!-- Button to show/hide content-->
+          <button onclick="showSettings()">Show/Hide options sceenshot</button>
+
+          <div id="baseset2" style="display: none;">
+            Click the button again to hide
+            <p><img src="images/bproxyop1.png" alt = "BurpSuite proxy options 1" >
+              <img src="images/bproxyop2.png" alt = "BurpSuite proxy options 2" >
+              <img src="images/bproxyop3.png" alt = "BurpSuite proxy options 3" ></p>
+          </div>
+
+          <!-- Javascript used to show/hide content for button-->
+          <script>
+            function showSettings() {
+              var i = document.getElementById("baseset2");
+              if (i.style.display === "none") {
+                i.style.display = "block";
+              } else {
+                i.style.display = "none";
+              }
+            }
+            </script>
+
+            <hr>
+            <h4 style="padding-left: 10px;" id="Intruder"><u>Intruder</u></h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+              The <b>intruder</b> tab is where the brute force based activities occur. This is what it looks like in full: 
+            <br>
+            <img src="images/bintruder.png" alt = "BurpSuite Intruder"  ></p>
+
+            <p>
+              The intruder tab mostly consists of getting the request from the proxy tab, highlight the areas where the 
+              payloads should be placed (normally the password and username field) and when done uses a wordlist and cycles 
+              it into the payload field and try out all possible combinations. The successful response can normally be 
+              identified by having a different length size compared to the failed response (e.g. failed response = 200 
+              length, successful response = 212 length). I will present an example of using the intruder page later.
+            </p>
+            
+            <p>Four types of attacks can be executed - Sniper, Battering ram, Pitchfork and Cluster bomb <br>
+              <img src="images/bintrudertypes.png" alt = "BurpSuite Intruder types of attacks" ><br>
+              The sniper attack is the most common type of attack, this is often used when you know what the username is but don’t 
+              know the password so you use a password wordlist (which is a very large file containing many commonly used passwords) 
+              and enter every individual password with the username.<br><br>
+              The cluster bomb is the second most common attack, its usually used to brute force a websites login page if the 
+              username and password is unknown. It enables the use of two payloads at once instead of a single one, enabling the use 
+              of a password wordlist and username wordlist.       
+            </p>
+
+            <p>
+              The <b>payload</b> page is where the payload is loaded in. you can either load in a file containing a list of 
+              usernames and passwords (or other fields) or manually type it in. Depending on what attack you select, 
+              additional payload fields may appear (I.E. a box for payload 1, a box for payload 2).
+              <br>
+              <img src="images/bintruderpay.png" alt = "BurpSuite Intruder Payload" height="650">
+            </p>
+            <p>
+            The resource pool tab allows you to group tasks together and make them share a quota of resources. 
+            Each pool can then also be configured so they can have delays, run requests concurrently etc.
+            <br> This page isn’t often used unless you are doing wide scale tasks and as such I would ignore it for now.
+
+              <img src="images/bintruderres.png" alt = "BurpSuite Intruder Resource pool" >
+            </p>
+
+            <hr>
+            <h4 style="padding-left: 10px;" id="Repeater"><u>Repeater</u></h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>The repeater tag is a page that has two panels – the request and response panel. 
+              <br>
+              <img src="images/binrep.png" alt = "BurpSuite Repeater" height="600"></p>
+
+            <p>
+              Its intended use is to be used as a sort of side by side comparison for a HTTP requests and its response. 
+              When a HTTP request is sent its response can be seen on the right, however the HTTP request remains. 
+              This allow you to quickly make changes to the HTTP request to try and get a new response. <br><br>
+              It is commonly used in activities such as SQL injection or just to quickly change field content (quickly enter passwords).<br>
+              I will present an example of using the repeater page later.
+            </p>
+            <hr>
+
+            <h3 style="padding-left: 10px;" id="ExI"><u>Example of using the Intercept tab:</u></h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+              In order to use the intruder tab, you must first get a HTTP request containing fields you want to 
+              brute force. In this example I will use DVWA bruteforce page. You can try it yourself by following the steps
+              In the <a href= DVWA.html>services page</a> on this site.
+            </p>
+            <h4 style="padding-left: 10px;"><u>Getting the HTTP Requst</u></h4>
+            <p>
+              First I opened the Burp Suite inbuilt browser and turned off the intercept option (this was so I didn’t intercept any HTTP requests as I got to the page).<br> 
+              I then went to the DVWA site and onto the Brute Force section.
+              <br><img src="images/bintexoff.png" alt = "Burp Suite Intruder intercept off" >
+              <br> I then entered a random password into the password field. I knew there was a user called admin so I 
+              entered admin into the user field. I then went back into Burp Suite to re-enable the intercept option, 
+              and then pressed the login button on the DVWA page.
+              <br>
+              <img src="images/bintex1.png" alt = "Burp Suite Intruder example 1" ></p>
+            <p>
+              Back to the Burp Suite application, a HTTP request was then intercepted and can be seen in the proxy tab (if this 
+              request cannot be seen just press the ‘forward’ button to push through some requests). <br><br>
+              Eventually, a HTTP request containing the username and password fields can be seen, with what I entered. 
+              This can also be seen in the inspectors tab.
+              <br>
+              <br><img src="images/bintex2.png" alt = "Burp Suite Intruder example 2" height="400" ><br><br>
+              I then right clicked the page and selected ‘send to intruder’.<br>
+              <img src="images/bintex3.png" alt = "Burp Suite Intruder example 3" ><br><br>
+              The HTTP request was then moved to intruder.<br>
+              <img src="images/bintex4.png" alt = "Burp Suite Intruder example 4" height="400"><br>
+            </p>
+
+            <hr>
+            <h4 style="padding-left: 10px;"><u>HTTP Request in Intruder</u></h4>
+            <p>
+              For this attack, I only want to Brute Force the password, so I made sure the attack type was set to sniper. 
+              I then pressed the clear button to delete all brute force parameters
+              <br>
+              <img src="images/bintclear.png" alt = "Burp Suite Intruder clear button" ></p>
+
+            <p>
+              I then selected the password field (containing the test data I entered earlier ‘test’) and selected 
+              the add button to re add the parameters to the password field.
+              <br>
+            <img src="images/bintex5.png" alt = "Burp Suite Intruder example 5" height="100"><br>
+            <img src="images/bintadd.png" alt = "Burp Suite Intruder add button" >
+            <img src="images/bintex6.png" alt = "Burp Suite Intruder example 6" ></p>
+
+            <p>
+              I then switched to the payloads page and loaded up a text file called ‘passwords.txt’. This was a short password file 
+              I made (in practice you will use a significantly larger password file, such as rockyou.txt, but for now I will use 
+              this to decrease the size of the result).<br>
+              <img src="images/bintpassfile.png" alt = "Burp Suite Intruder password file"><br>
+              <img src="images/bintpassfileload.png" alt = "Burp Suite Intruder password file 2" height="600">
+            </p>
+
+            <p>
+              Once loaded in the payload field became populated with the passwords. <br>
+              <img src="images/bintpassfileload2.png" alt = "Burp Suite Intruder password file 3">
+            </p>
+
+            <p>
+              I then pressed the start attack button in the top right and the Brute Forcing process began. <br>
+              <img src="images/bintbf.png" alt = "Burp Suite Intruder brute forcing"><br>
+              If you have the free version the brute forcing is a lot slower, but as I used a small wordlist the process 
+              finished very quickly. 
+            </p>
+
+            <hr>
+            <h4 style="padding-left: 10px;"><u>End of Brute Forcing</u></h4>
+            <p>
+              With the brute forcing complete, I looked at the response of the first password (by double clicking it and 
+              clicking on the response tab) and scrolled down to see the password and username field. <br><br>
+              Within it I saw a failed 
+              response, so I deemed any request with the same length as that payload (4532) would be an incorrect password 
+              and disregarded them.
+              <br><img src="images/bintbf2.png" alt = "Burp Suite Intruder brute forcing 2" height="600">
+            </p>
+
+            <p>
+              From spending more time looking at the length of the brute forcing, I noticed one of the payloads (the payload 
+              that used ‘password’ as the password) had a larger length then the rest, meaning it gave a different response to the usual fail. <br>
+              You can also click on the length tab to reorder by descending or 
+              ascending lengths.
+              <br><img src="images/bintbf3.png" alt = "Burp Suite Intruder brute forcing 3">
+            </p>
+
+            <p>
+              I went into the ‘password’ payload to look at the response and success message. From 
+              looking at the HTTP content, a success message was found.
+              <br><img src="images/bintbf4.png" alt = "Burp Suite Intruder brute forcing 4">
+            </p>
+            <p>
+              And to confirm it worked, I entered the credentials into the website normally, and I managed to log in
+              <br><img src="images/bintbf5.png" alt = "Burp Suite Intruder brute forcing 5">
+            </p>
+
+            <hr>
+            <h3 style="padding-left: 10px;" id="ExR"><u>Example of using the Repeater tab:</u></h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <h4 style="padding-left: 10px;"><u>Getting the HTTP Requst</u></h4>
+            
+            <p>
+              First I got the HTTP request for the login page again (see intruder example for how to get it). <br>This time I used a 
+              different method to get the request – as I had already been to the page it could be found in the sitemap. 
+              <br>
+              <img src="images/brsitemap.png" alt = "Burp Suite Repeater sitemap " height="650">
+            </p>
+            <p>
+              I then right clicked and selected ‘send to repeater’, moving it to the repeater tab.
+              <br><img src="images/brtorep.png" alt = "Burp Suite Repeater sitemap 2">
+              <img src="images/br1.png" alt = "Burp Suite Repeater example 1">
+            </p>
+            <h4 style="padding-left: 10px;"><u>Using Repeater</u></h4>
+            <p>
+              The password I used previously was ‘test’. I changed the password to ‘abc’ to 
+              go and see what response I would get, and pressed send.
+              <br>
+              <img src="images/br2.png" alt = "Burp Suite Repeater example 2" height="700">
+              <br>
+              As expected, it was a failure. However the HTTP request on the side still remains so 
+              I tried again but this time with the password as ‘password’, and sent it off again.
+              <br>
+              <img src="images/br3.png" alt = "Burp Suite Repeater example 3">
+              <br>
+              This time a different, successful response can be seen.
+            </p>
+
+            <hr>
+            <h3 style="padding-left: 10px;" id="help"><u>Burp Suite 'help page'</u></h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+              As Burp Suite is not a traditional terminal tool, it does not have a man or help page like nmap does. It does however 
+              have extensive documentation, and as it’s been used by many people if you have an issue the solution is likely available on Google. <br>
+              Here is a link to the full documentation page of Burp Suite.
+            </p>
+            <p><a href="https://portswigger.net/burp/documentation/contents">
+              https://portswigger.net/burp/documentation/contents</a></p>
+            <hr>
+            <h3 style="padding-left: 10px;" id="Alt"><u>Alternative to Burp Suite</u></h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+              Burp Suite itself is considered to be a one of a kind jewel, however there is another tool on par with Burp Suite. 
+              That is <b>OWASP ZAP</b>.
+            </p>
+
+            <p>OWASP ZAP is like a free version of Burp Suite Premium except it can do much more. One feature is ZAP 
+              has the ability to completely attack a website by going into ‘attack mode’, finding vulnerabilities and 
+              reporting back on them (and sometimes exploit them).
+            </p>
+            <p>
+              The main reason why I didn’t cover ZAP in this guide is because of the lack of documentation/guides. 
+              If you get stuck with Burp Suite, you can easily find the answer out online because many people use it 
+              and your issue would probably been answered in the past. <br><br>
+              ZAP on the other hand would be more difficult and more akin to 
+              a treasure hunt, and would most likely need to bugfix it yourself, which is an issue if you are just Starting
+              to learn the tool. As ZAP also automates some part of the ‘exploitation process’, and so you may not fully understand 
+              how to exploit a vulnerability properly which may negatively impact the learning process.
+            </p>
+
+            <p>
+              I do recommend having a look at it at a later stage once you are more familiar with exploiting vulnerabilities.
+            </p>
+        </main>
+
+        <div class="footer">
+          <p>Pen Testing is hard at first so take your time!</p>
+        </div>
+    </body>
+</html>
+

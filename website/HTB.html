@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, inital-scale=1">
+        <meta name="description" content="A place to learn basic pen testing info!">
+        <meta name="author" content="Mujeeb">
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
+        <title>Penting - HTB</title>
+
+    </head>
+    <body>
+        <header>
+            <h1>Penting HackTheBox</h1>
+            <!-- Navigation bar based off https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp-->
+            <nav>
+                <div class="navbar">
+                    <a href="index.html">Home</a>
+
+                    <div class="dropdown">
+                      <button class="dropbtn">List of Tools 
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-content">
+                      <a href="Tools.html">Tools page Overview</a>
+                      <a href="Nmap.html">Nmap</a>
+                      <a href= "Nikto.html">Nikto</a>
+                      <a href="BurpSuite.html">BurpSuite</a>
+                      <a href="Othertools.html">Other Tools</a>
+                    </div>
+                  </div>
+
+                  <div class="dropdown">
+                    <button class="dropbtn">List of Services 
+                      <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                      <a href="Services.html">Services page Overview</a>
+                      <a href="DVWA.html">DVWA</a>
+                      <a href="BadStore.html">BadStore</a>
+                      <a href="bonus.html">Additional Tasks</a>
+                    </div>
+                </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Misc. Resources
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Misc.html">Misc Resources page</a>
+                          <a href="EDB.html">ExploitDB</a>
+                          <a href="Kali.html">Kali</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Legal + Ethics 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="LandE.html">Legal and Ethics Overview</a>
+                          <a href="Legal.html">Useful Legal info</a>
+                          <a href="Ethics.html">Ethics info</a>
+                          <a href="Disclaimer.html">Disclaimer page</a>
+                        </div>
+                      </div>
+
+                      <div class="dropdown">
+                        <button class="dropbtn">Further Reading 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Next.html">What to do next?</a>
+                          <a href="HTB.html">HTB</a>
+                          <a href="TryHackMe.html">TryHackMe</a>
+                          <a href="Programming.html">Programming</a>
+                        </div>
+                      </div>
+                  </div>
+                  
+            </nav>
+    
+
+        </header>
+
+        <main>
+            <h2 style="padding-left: 10px;"id="Start"><u>HTB: HackTheBox</u></h2>
+            <button class="button"><a href="Next.html"><span>Back to Overview</span></a></button><br>
+            Here is the URL to HTB: <a href="https://www.hackthebox.com/">https://www.hackthebox.com/</a>
+            <hr>
+
+            <div>
+               <!-- Code based off the following:https://www.tipsandtricks-hq.com/simple-table-of-contents-toc-using-pure-html-and-css-code-9217-->
+              <p><b><u>Table of contents</u></b></p>
+              <ul style="  border: 1px solid black;
+              padding-right: 0px;
+              padding-left: 28px;
+              width: 240px;
+              border-radius: 5px;">
+              <li><a href="#what">1. What is it?</a></li>
+              <li><a href="#issue">2. Issues with HTB</a></li>
+              <li><a href="#overall">3. Overall</a></li>
+              </ul>
+            </div>
+
+            <hr>
+            <p style="color: red;"> I recommend trying out HTB <i>after</i>
+            other starting options (like TryHackMe). This is purely because HTB may be too large of
+            a leap regarding the difficulty of some boxes. The easiest boxes also require membership.
+            </p>
+            <h3 style="padding-left: 10px;"id="what"><u>1. What is HTB?</u></h2>
+            <p>
+                HTB is an excellent platform for practicing your penetration skills through the use of CTF (capture the flag). 
+                It’s a platform based around hosting test machines for users to try exploits against and 
+                try to get root user (aka full control). <br><br>The user’s main objective is to access the root 
+                flag, flag.txt, that only the root user can access. <br>The reason for this is to try and 
+                simulate a real attack – flags are supposed to represent the sensitivity of documents you can access – you 
+                got the user flag? Well done, you managed to access the user’s files. Now go get root access and get root files! 
+            </p>
+
+            <p>Here is an example of what HTB looks like. Notice the difficulty, user ratings and 'System owns'</p>
+            <p><img src="images/HTB.png" alt = "HTB screenshot" height="650"> </p>
+
+            <p>
+                HTB consists of attacking a machine (you have been authorized to attack) with the intent 
+                of trying to get a user foothold in the target. <br>Once done, your goal would be to look for the flag 
+                (a text file with a hash) and enter it into the website for points (to make the activity a little bit 
+                more competitive). <br><br>With the user flag collected, you would then move onto the next stage – to escalate and get to 
+                root user (and then the root user flag). <br><br>HTB has a very large range of boxes, and on a regular basis new machines are 
+                added to be attacked. <br>Some machines are removed, however, and added to a membership exclusive pool called 'retired'.
+                Some retired machines do become free every now and then. 
+            </p>
+            <p>
+              HTB also has 'challenges'. They are mostly quick tasks you can do. I recommend doing them casually. Just like the machines,
+              you can find 'active' challenges and 'retired' challenges (which also require VIP). From the screenshot below, you can see
+              a large range of different types of challenges.<br>
+              <img src="images/htbchallenge.png" alt = "HTB challenges" height="550">
+            </p>
+
+            <hr>
+            <h3 style="padding-left: 10px;"id="issue"><u>2. Issues with HTB</u></h2>
+              <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+                The main issue I have with HTB is – if you are a beginner pen tester, any box you touch 
+                (including easy ratings) there is a high chance you will not know how to do it. <br><br>This is because there are so many 
+                vulnerabilities and exploitation techniques around that it's impossible for a beginner to know them all at the 
+                start so you will get confused, and with no hints available you would not know what direction to move towards (and possibly
+                what area of vulnerabilities to look towards).<br><br>
+                The HTB activities can also be quite creative, so in some cases the creator may intentionally set up many pitfalls to confuse you, 
+                or they may alter a vulnerability so you would need to alter a exploitation program to make it work.<br><br>
+                As such, a new 
+                person may get fed up if they keep getting stuck and may eventually give up with pen testing as a whole (HTB also has a policy with 
+                ‘live machines’ that you cannot share walkthroughs or help). And so HTB can be a coin flip activity for newbies, if they 
+                struggle too early with it they may get fed up with pen testing and leave.
+            </p>
+
+            <p>
+                If you do wish to do HTB, I recommend using a guide instead of doing it blind and try to learn from the walkthrough, 
+                it will help prepare and solidify your knowledge as some of the content will be relevant in real pen tests.
+            </p>
+
+            <p class="description">
+                One issue with HTB has is, most of the boxes are blocked behind a membership paywall (they are known as ‘retired’). 
+                The price is around £10 for VIP a month to access it.<br> This is a good deal, however if you cannot do the box, it may 
+                be best to wait a bit.The new boxes are always free
+                 <em>(but remember – no guides available and stay away from hard boxes!)</em>. <br><br>
+                 Sometimes retired boxes are rotated into the free machine pool, so keep an eye out for that! <br><br>HTB also 
+                offers VIP+, the main difference it will make to you is for an extra £5 a month your instance of the machine will be 
+                personal not shared (I've never had any issue with shared boxes). I believe the normal VIP is more than enough.
+            </p>
+            <p><img src="images/HTBprice.png" alt = "HTB cost"> </p>
+
+            <hr>
+            <h3 style="padding-left: 10px;"id="Overall"><u>3. Overall</u></h2>
+              <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p > I believe HTB is one of the best CTF platforms around, and although newbies can try 
+                to use HTB I believe they will struggle. As such its best if they stay away from HTB until users become more confident. 
+                I believe a platform like TryHackMe is more suitable to be done before HTB due to how it more teaching oriented (and 
+                how it has CTFs that are easier to complete).
+            </p>
+            
+
+                <h4 style="padding: 10px;"><a href="Next.html"><b>Back to future paths</b></a></h4>
+        </main>
+
+        <div class="footer">
+          <p>Pen Testing is hard at first, walk before you fly!</p>
+        </div>
+    </body>
+</html>
+

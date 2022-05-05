@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, inital-scale=1">
+        <meta name="description" content="A place to learn basic pen testing info!">
+        <meta name="author" content="Mujeeb">
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
+        <title>Penting - Programming Tips</title>
+
+    </head>
+    <body>
+        <header>
+            <h1>Penting Programming Tips</h1>
+            <!-- Navigation bar based off https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp-->
+            <nav>
+                <div class="navbar">
+                    <a href="index.html">Home</a>
+
+                    <div class="dropdown">
+                      <button class="dropbtn">List of Tools 
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-content">
+                      <a href="Tools.html">Tools page Overview</a>
+                      <a href="Nmap.html">Nmap</a>
+                      <a href= "Nikto.html">Nikto</a>
+                      <a href="BurpSuite.html">BurpSuite</a>
+                      <a href="Othertools.html">Other Tools</a>
+                    </div>
+                  </div>
+
+                  <div class="dropdown">
+                    <button class="dropbtn">List of Services 
+                      <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                      <a href="Services.html">Services page Overview</a>
+                      <a href="DVWA.html">DVWA</a>
+                      <a href="BadStore.html">BadStore</a>
+                      <a href="bonus.html">Additional Tasks</a>
+                    </div>
+                </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Misc. Resources
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Misc.html">Misc Resources page</a>
+                          <a href="EDB.html">ExploitDB</a>
+                          <a href="Kali.html">Kali</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Legal + Ethics 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="LandE.html">Legal and Ethics Overview</a>
+                          <a href="Legal.html">Useful Legal info</a>
+                          <a href="Ethics.html">Ethics info</a>
+                          <a href="Disclaimer.html">Disclaimer page</a>
+                        </div>
+                      </div>
+
+                      <div class="dropdown">
+                        <button class="dropbtn">Further Reading 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Next.html">What to do next?</a>
+                          <a href="HTB.html">HTB</a>
+                          <a href="TryHackMe.html">TryHackMe</a>
+                          <a href="Programming.html">Programming</a>
+                        </div>
+                      </div>
+                  </div>
+                  
+            </nav>
+    
+
+        </header>
+
+        <main>
+            <h2 style="padding-left: 10px;" id="Start"><u>Programming</u></h2>
+            <button class="button"><a href="Next.html"><span>Back to Overview</span></a></button>
+            <hr>
+            <div>
+              <!-- Code based off the following:https://www.tipsandtricks-hq.com/simple-table-of-contents-toc-using-pure-html-and-css-code-9217-->
+              <p><b><u>Table of contents</u></b></p>
+              <ul style="  border: 1px solid black;
+              padding-right: 0px;
+              padding-left: 28px;
+              width: 240px;
+              border-radius: 5px;">
+              <li><a href="#learning">1. Learning to Program</a></li>
+              <li><a href="#finding">2. Finding teaching material</a></li>
+              <li><a href="#overall">3. Overall</a></li>
+              </ul>
+            </div>
+
+            <hr>
+            <h3 style="padding-left: 10px;" id="learning"><u>1. Learning to Program</u></h3>
+            <p>
+                Another resource (well topic) I recommend looking into is programming languages. As someone in the penetration 
+                testing scene, it is generally recommended by the community that you should have a basic understanding of 
+                programming. This doesn’t mean you should be able to breathe binary but being able to read code is fine.
+            </p>
+            <p>
+                By being able to read code you can understand how an exploit program works. By understanding how the exploit works, 
+                you can modify the code as needed so it suits your need. <br><br>Alternatively, if the code is outdated/does not work, by 
+                knowing the code you’ll have the means to (try to) repair it yourself. This is especially useful when you use a 
+                niche exploit that is no longer maintained. <br><br>Furthermore, by being able to understand the code you can see if the 
+                exploit itself is malicious TO YOU. Although it is quite rare, it’s not unheard-of exploits to be used against 
+                the user themselves. 
+            </p>
+            <p>
+                Later on, when you become more advanced, you can start reading the code of applications and programs themselves, 
+                looking for any vulnerabilities in the code. <br><br>This could simply be looking for typos in the code to poor programming. 
+                An example of a real vulnerability is the Apple SSL/TLS issue in 2014, in which an extra line of ‘goto fail’ was 
+                added when it should not have, bypassing the need for SSL verification (see below for an example). 
+                This allowed attackers to potentially redirect users to fake HTTPS sites.<br>
+                <img src="images/programminggoto.png" alt = "Programming goto fail" >
+            </p>
+
+            <p>
+                Unfortunately, there is no ‘best’ language so I cannot just recommend a single language. In addition to this, 
+                there are a lot of exploits out there, and they all also don’t follow the same programming language. I also 
+                recommend you take your time when it comes to learning these languages, otherwise you may exert yourself. 
+            </p>
+            <p>
+                Below is a list of programming languages I recommend you take a look at. All of these are widely used so you 
+                will more than likely see them in your time during penetration testing, and learning one should be enough to be 
+                able to read code:
+            </p>
+                <ul>
+                    <li>Python</li>
+                    <li>PHP</li>
+                    <li>Perl</li>
+                    <li>Java</li>
+                    <li>C</li>
+                    <li>HTML</li>
+                    <li>JavaScript (not the same as Java) - mostly for website exploits</li>
+                </ul></p>
+            <p>
+                I recommend starting with Python. In my opinion, it is the easiest programming language in the list. <br><br>
+                Just to reiterate, you’re not expected to fully learn these languages, just having a basic understanding 
+                that allows you to read and make small changes as needed is enough for now.  <br><br>Learning all the languages to 
+                the full extent would also be quite difficult (and time consuming). As a plus, knowing multiple programming languages 
+                does make your CV look better!
+            </p>
+
+            <hr>
+            <h3 style="padding-left: 10px;"id="finding"><u>2. Finding teaching material</u></h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+
+            <p>
+                One way of finding teaching material is to look for online programming books using Google (or from asking around 
+                in programming communities, for example a python community can be found on Reddit called ‘r/python’).<br><br> When looking 
+                for these books, keep in mind how old the book is, and that it’s not too outdated for your programming language 
+                (it doesn’t have to be a 1-to-1 version, but some languages can have big differences if the version difference 
+                is wide enough).
+            </p>
+            
+            <p>
+                Another good place to find learning content for programming is YouTube. Enter 
+                ‘ProgrammingLanguage_XYZ full course’ into Youtube, and a list of courses (ranging from an hour to more than ten hours) 
+                can be found. Here is the query for Python. You are welcome to play around with the search terms to look for video 
+                courses (sites like Udemy can also be used).<br><br>
+                <img src="images/programmingyoutube.png" alt = "Programming python youtube" width ="700"> <br><br> 
+                The issue with this method is – there’s not really any 
+                questions/worksheets to try. As such, to supplement your teaching by looking for online 
+                worksheets (using the same method on Google, I found W3Schools provide online exercise for Python), or
+                using sites like CodeAcademy. 
+            </p>
+
+            <p>
+                Following on from before, I also recommend taking a look at sites like ‘CodeAcademy’, offering a teaching-based platform for programming 
+                languages and offering a Q&A based worksheet system, checking the code you have written is correct 
+                (and if it is incorrect, offers you hints).<br>
+                <img src="images/programmingCA.png" alt = "Programming CodeAcademy" width ="1000" >
+            </p>
+
+
+
+            <hr>
+            <h3 style="padding-left: 10px;"id="overall"><u>3. Overall</u></h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+                <p>
+                    Learning a programming language will help you out a significant amount in the future when it comes to 
+                    understanding and reading code, whether it is adapting an exploit to work against a particular vulnerability 
+                    to looking for vulnerabilities/badly done programming in a website. <br>It will also help out when you start 
+                    making your own scripts and exploits.
+                </p>
+                
+            
+
+            <h4 style="padding: 10px;"><a href="Next.html"><b>Back to future paths</b></a></h4>
+        </main>
+
+        <div class="footer">
+          <p>Pen Testing is hard at first, take a deep breath every now and then!</p>
+        </div>
+    </body>
+</html>
+

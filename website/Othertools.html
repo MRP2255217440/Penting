@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, inital-scale=1">
+        <meta name="description" content="A place to learn basic pen testing info!">
+        <meta name="author" content="Mujeeb">
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
+        <title>Penting - Other Tools</title>
+
+    </head>
+    <body>
+        <header>
+            <h1>Penting Other Tools</h1>
+            <!-- Navigation bar based off https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp-->
+            <nav>
+                <div class="navbar">
+                    <a href="index.html">Home</a>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">List of Tools 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                        <a href="Tools.html">Tools page Overview</a>
+                        <a href="Nmap.html">Nmap</a>
+                        <a href= "Nikto.html">Nikto</a>
+                        <a href="BurpSuite.html">BurpSuite</a>
+                        <a href="Othertools.html">Other Tools</a>
+                      </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">List of Services 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Services.html">Services page Overview</a>
+                          <a href="DVWA.html">DVWA</a>
+                          <a href="BadStore.html">BadStore</a>
+                          <a href="bonus.html">Additional Tasks</a>
+                        </div>
+                    </div>
+
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Misc. Resources
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Misc.html">Misc Resources page</a>
+                          <a href="EDB.html">ExploitDB</a>
+                          <a href="Kali.html">Kali</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Legal + Ethics 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="LandE.html">Legal and Ethics Overview</a>
+                          <a href="Legal.html">Useful Legal info</a>
+                          <a href="Ethics.html">Ethics info</a>
+                          <a href="Disclaimer.html">Disclaimer page</a>
+                        </div>
+                      </div>
+
+                      <div class="dropdown">
+                        <button class="dropbtn">Further Reading 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Next.html">What to do next?</a>
+                          <a href="HTB.html">HTB</a>
+                          <a href="TryHackMe.html">TryHackMe</a>
+                          <a href="Programming.html">Programming</a>
+                        </div>
+                      </div>
+                  </div>
+                  
+            </nav>
+        </header>
+
+        <main>
+            
+            <h2 style="padding-left: 10px;"id ="Start"><u>Other Tools</u></h2>
+            <button class="button"><a href="Tools.html"><span>Back to Overview</span></a></button><br>
+            Here is the URL to the offical Zenmap page: <a href="https://nmap.org/zenmap/">https://nmap.org/zenmap/</a>
+
+
+
+            <hr>
+            <p><b>Pre knowledge:</b> 
+                as a rule of thumb, its best to know common ports used beforehand. 
+                For example knowing SSH = port 22, DNS = 53, HTTP/s = 80/443. 
+                <br>This is because some services are bound to certain ports, and as such 
+                if you recognise an open port you may recognise what service its related to.
+            </p>
+
+            <div>
+                 <!-- Code based off the following:https://www.tipsandtricks-hq.com/simple-table-of-contents-toc-using-pure-html-and-css-code-9217-->
+                <p><b><u>Table of contents</u></b></p>
+                <ul style="  border: 1px solid black;
+                padding-right: 0px;
+                padding-left: 28px;
+                width: 340px;
+                border-radius: 5px;">
+                <li><a href="#Zen">1. Zenmap</a></li>
+                <ul style="  border: 1px solid rgb(190, 255, 233);
+                padding-right: 0px;
+                padding-left: 28px;
+                width: 280px;
+                border-radius: 5px;">
+                    <li><a href="#general">1.1 General info + Tool Purpose</a></li>
+                    <li><a href="#tool">1.2 Tool usage</a></li>
+                    <li><a href="#difference">1.3 Main difference between Nmap and Zenmap</a></li>
+                    <li><a href="#overall1">1.4 Nmap or Zenmap?</a></li>
+                  </ul>
+
+
+
+                <li><a href="#wgerl">2. Wget and cURL</a></li>
+                
+                <ul style="  border: 1px solid rgb(190, 255, 233);
+                padding-right: 0px;
+                padding-left: 28px;
+                width: 200px;
+                border-radius: 5px;">
+                <!-- Style is to fix formatting issues-->
+                
+                    <li><a href="#general2">2.1 General info + Tool Purpose and Usage</a></li>
+                    <li><a href="#wgetorcurl">2.2 Wget or cURL?</a></li>
+                  </ul>
+
+                <li><a href="#metasploit">3. Honourable mention - Metasploit</a></li>
+
+                </ul>
+                </div>
+
+            <hr>
+
+            <h3 style="padding-left: 10px;" id="Zen">Zenmap</h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+
+            <p><b>Note:</b> 
+                As I have already covered the arguments in the Nmap page, I will not cover it again here as 
+                they are the same. <br> Also, I have noticed some tabs in the Zenmap tool may randomly stop and start working.
+            </p>
+
+            <h4 style="padding-left: 10px;" id="general">General info + Tool Purpose</h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+                Zenmap is considered the ‘GUI’ version of Nmap. It does everything Nmap can do but it 
+                presents it in a nicer format. <br>
+                Zenmap and Nmap are made by the same organisation, so it has the same backing.<br>
+                <img src="images/zenmap.png" alt = "running zenmap as root with an example scan">
+            </p>
+
+
+            <p>Zenmap is seen as an alternative to Nmap. Compared to Nmap, it is much more beginner friendly – 
+                it’s a lot less daunting than the console variant. Zenmap uses the same commands as Nmap, 
+                the only difference is the formatting.<br><br> Zenmap organises the command in a more user friendly 
+                way by breaking the arguments down into sections around the application.
+            </p>
+
+            
+            <p>
+                For example, Zenmap has its own dedicated field were you can place the target IP address, 
+                making the input process more smooth line. It also chops up the Zenmap result and separates 
+                it across multiple tabs you can look through, making it easier to digest the info.<br>
+                <img src="images/zenmapsplittabs.png" alt = "Zenmap fields highlighted">
+            </p>
+
+            <p>
+                Zenmap also allows you to make and save your own profiles, which is a nice feature for advanced users when doing detailed scans.<br>
+                <img src="images/zenmapsaveprofile.png" alt = "Zenmap save profile feature">
+            </p>
+
+            <hr>
+            <h4 style="padding-left: 10px;" id="tool">Tool usage</h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+                Simply put, the tool can be run by just enter 'sudo zenmap'. It can also be run as 'zenmap' however doing 
+                so will launch a version without root privilege. <br> I have also provided shortcuts on the LHS, however I've found
+                they can sometimes act up.
+            </p>
+
+            <div><pre><code> sudo zenmap | zenmap </code></pre></div>
+
+            <hr>
+            <h4 style="padding-left: 10px;" id="difference">Main difference between Nmap and Zenmap</h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+                The main difference between the two outside of Zenmap being GUI based has to be the profile feature Zenmap has. 
+                Zenmap has a dropdown field called ‘Profile’. <br><br>The profile field contains a set of premade scans – profiles 
+                are group of commands that are categorised into options that are ready to go once selected and basicallyonly 
+                require the user to enter the target IP.<br>
+                <img src="images/zenmapprofilelist.png" alt = "list of profiles on zenmap">
+            </p>
+            <p>
+                This allows users to quickly change the commands they are using in the matter of seconds.<br>
+                <img src="images/zenmapprofileswapping.png" alt = "swapping between profiles">
+            </p>
+
+            <p>
+                Another difference is how the output is laid out. Like I mentioned previously, the Zenmap out is chopped 
+                up into multiple tabs – the Nmap output itself, port/hosts data, host details, and scan history and topology.<br><br>
+                The nmap output is just the usual nmap output, nothing is different.<br><br>
+                Ports/Hosts display all the port information found in a neat format<br>
+                <img src="images/zenmapportshosts.png" alt = "zenmap ports/hosts page">
+            </p>
+            <p> The topology tab tries to build a (visual) network topology based off the scan results (of a host discovery scan).<br>
+                <img src="images/zenmaptop.png" alt = "zenmap topology page">
+            </p>
+
+            <p>
+                And finally the host details contains information about all hosts scanned<br>
+                <img src="images/zenmaphostdetails.png" alt = "zenmap host details page">
+            </p>
+
+            <hr>
+            <h4 style="padding-left: 10px;" id="overall1">Nmap or Zenmap?</h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+                Overall, I recommend you take a look at Zenmap but primarily use Nmap. This is because many 
+                exploits and tools are command line based and the quicker you get to using the command line 
+                the better. <br>This is because when it comes to using tools on a victim machines you are remotely 
+                connected to, you won’t be able to run GUI tools like Zenmap.
+            </p>
+            
+            
+
+
+            <hr>
+            <h3 style="padding-left: 10px;" id="wgerl">Wget and cURL</h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+
+            <h4 style="padding-left: 10px;" id="general2">General info + Tool Purpose and usage</h4>
+            <p>
+                Wget and cURL are both tools used to transfer data to and from servers online. <br>They are commonly 
+                used in penetration testing to download files from a web server (for example downloading backup 
+                files that should not have been available online).
+            </p>
+            <div><pre><code> wget filebackup | curl filebackup </code></pre></div>
+
+            <p>
+                Here is a comparison of the two. When curl finishes transferring, it outputs to the screen the 
+                file content (so if it downloads a webpage it outputs the source code etc.).<br> Outside of this 
+                they have small differences (the biggest one being wget mostly works over FTP and HTTP).<br>
+                <img src="images/wgetcurl.png" alt = "running wget and curl">
+            </p>
+
+            <p>
+                Both commands can use arguments but for now I recommend skipping over it as you wont use them often (for now). 
+                As such, the arguments are out of 
+                this guides scope , just using the barebones of the 
+                command should be enough. <br><br>Both tools have a help page in case you wish to take a look at the arguments.
+            </p>
+            <div><pre><code> wget -h | curl -h </code></pre></div>
+
+            <hr>
+            <h4 style="padding-left: 10px;" id="wgetorcurl">Wget or cURL?</h4>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+                Truth be told, they both do the same thing. However, there are some cases were one tool works but the other does not. 
+                <br><br>Because of this I recommend remembering both of them (preferably starting with the wget command and if that fails 
+                switching to curl). <br><br>As they are both simple commands, they are easy to remember and can possibly save you if you’re in a tight spot.
+            </p>
+
+            <hr>
+
+            <h3 style="padding-left: 10px;" id="metasploit">Honourable mention - Metasploit</h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+
+            <p>
+                Metatsploit is an extremely powerful tool/framework that is considered one of the most widely used resources. 
+                It’s considered the ‘all-in-one’ tool.
+            </p>
+            <p>
+                Metasploit can be used to:
+                <ul>
+                    <li>Scan a target</li>
+                    <li>Find a vulnerability</li>
+                    <li>Find a exploit tool/program within Metasploit that can work against said vulnerability</li>
+                    <li>Execute the exploit with ease to compromise the vulnerability</li>
+                    <li>If the compromise is successful, can then proceed to do additional attacks, such as privilege 
+                        escalation attacks, changing from user to root user.</li>
+                </ul>
+                Summed up, Metasploit can do the entire exploitation process for you, with you doing the bare minimum work.
+            </p>
+            <p>
+                The reason why I have not included Metasploit in this guide is because Metasploit does most of the work for you, 
+                thus you would not be learning anything from it. <br>Many recruiters also like to test individuals to exploit 
+                vulnerable services without Metasploit, so it would be best not to become too reliant on it. <br><br>This does not 
+                change the fact Metasploit is a powerful tool, one you should take a look at once you become more proficient 
+                in penetration testing. <br>I have kept Metasploit in the VM if you wish to have a look at it. To run Metasploit enter ‘msfconsole’.
+            </p>
+            <div><pre><code> msfconsole </code></pre></div>
+            <img src="images/msf.png" alt = "running metasploit">
+
+        </main>
+
+
+
+
+
+        <div class="footer">
+          <p>Pen Testing is hard at first, be careful not to do difficult challenges early</p>
+        </div>
+    </body>
+</html>
+

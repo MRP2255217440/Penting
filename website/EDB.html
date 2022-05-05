@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, inital-scale=1">
+        <meta name="description" content="A place to learn basic pen testing info!">
+        <meta name="author" content="Mujeeb">
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
+        <title>Penting - EBD</title>
+
+    </head>
+    <body>
+        <header>
+            <h1>Penting ExploitDB</h1>
+            <!-- Navigation bar based off https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp-->
+            <nav>
+                <div class="navbar">
+                    <a href="index.html">Home</a>
+
+                    <div class="dropdown">
+                      <button class="dropbtn">List of Tools 
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-content">
+                      <a href="Tools.html">Tools page Overview</a>
+                      <a href="Nmap.html">Nmap</a>
+                      <a href= "Nikto.html">Nikto</a>
+                      <a href="BurpSuite.html">BurpSuite</a>
+                      <a href="Othertools.html">Other Tools</a>
+                    </div>
+                  </div>
+
+                  <div class="dropdown">
+                    <button class="dropbtn">List of Services 
+                      <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                      <a href="Services.html">Services page Overview</a>
+                      <a href="DVWA.html">DVWA</a>
+                      <a href="BadStore.html">BadStore</a>
+                      <a href="bonus.html">Additional Tasks</a>
+                    </div>
+                </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Misc. Resources
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Misc.html">Misc Resources page</a>
+                          <a href="EDB.html">ExploitDB</a>
+                          <a href="Kali.html">Kali</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Legal + Ethics 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="LandE.html">Legal and Ethics Overview</a>
+                          <a href="Legal.html">Useful Legal info</a>
+                          <a href="Ethics.html">Ethics info</a>
+                          <a href="Disclaimer.html">Disclaimer page</a>
+                        </div>
+                      </div>
+
+                      <div class="dropdown">
+                        <button class="dropbtn">Further Reading 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Next.html">What to do next?</a>
+                          <a href="HTB.html">HTB</a>
+                          <a href="TryHackMe.html">TryHackMe</a>
+                          <a href="Programming.html">Programming</a>
+                        </div>
+                      </div>
+                  </div>
+                  
+            </nav>
+    
+
+        </header>
+
+        <main>
+            <h2 style="padding-left: 10px;"id="Start"><u>ExploitDB</u></h3>
+              <button class="button"><a href="Misc.html"><span>Back to Overview</span></a></button> <br>
+            Here is the URL to ExploitDB: <a href="https://www.exploit-db.com/">https://www.exploit-db.com/</a>
+            <hr>
+
+            <div>
+               <!-- Code based off the following:https://www.tipsandtricks-hq.com/simple-table-of-contents-toc-using-pure-html-and-css-code-9217-->
+              <p><b><u>Table of contents</u></b></p>
+              <ul style="  border: 1px solid black;
+              padding-right: 0px;
+              padding-left: 28px;
+              width: 240px;
+              border-radius: 5px;">
+              <li><a href="#General">1. What is ExploitDB</a></li>
+              <li><a href="#search">2. ExploitDB Search Feature</a></li>
+              <li><a href="#search2">3. Using the Search Feature</a>
+              <li><a href="#analysis">4. ExploitDB Page analysis</a></li>
+              <li><a href="#overall">5. Overall</a></li>
+            </ul>
+          </div>
+
+
+
+
+            <h3 style="padding-left: 10px;"id="General"><u>What is ExploitDB</u></h3>
+            <p>
+                ExploitDB (also known as exploit database) put simply is a very large database of exploits. When a vulnerability is 
+                found, people will make programs to exploit those vulnerabilities. Once the exploitation program is created, they 
+                may then proceed to upload the program onto the internet. <br><br>ExploitDB is one of those hubs holding a collection of 
+                exploits (users are able to upload their own exploitation programs to ExploitDB). The database on ExploitDB 
+                contains exploits dating all the way back to 1988 (with some papers extending to 1984), showing you the size of 
+                exploits available on the site (and how long vulnerabilities have been around for).<br><br>
+
+                The ExploitDB site itself is well made and easy to use. The intended use of ExploitDB is to use the search feature 
+                to look for specific vulnerabilities you have found. <br><br>Once you find an appropriate exploit for the accompanying 
+                vulnerability, you can then download and execute it for exploitation. You can use the search feature to find the 
+                exploits, however commonly I type it into Google and find the ExploitDB page myself. <br><br>
+
+                Many other tools also use the exploit database available on ExploitDB, Nmap ‘vulscan’ for example gives users a 
+                list of potential exploits reflecting on the scan result, with the exploits coming from multiple databases (with 
+                ExploitDB being one of them).
+
+            </p>
+            <hr>
+            <h3 style="padding-left: 10px;" id="search"><u>ExploitDB Search Feature</u></h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a><br>
+            <img src="images/edbsearch.png" alt = "ExploitDB search" height="700"> 
+
+            <p>
+                The main fields you will most likely use will be title, platform and type. If you have the CVE available I also 
+                recommend using it, as its basically a vulnerability ID. It also has checkmarks. 
+                <ol>
+                    <li>Verified – tells you if the exploit has been verified to be working by EDB themselves</li>
+                    <li>Has application – the exploit works against a specific vulnerable application</li>
+                    <li>No Metasploit – if the exploit is not on Metasploit tool</li>
+                </ol>
+            </p>
+
+            <h4 style="padding-left: 10px;"><u>What is a CVE?</u></h4>
+            <p>
+                CVE stands for ‘common vulnerabilities and exposures’. It is basically a identification code given to each 
+                vulnerability found. For example, the EternalBlue CVE is 2017-0144. The CVE is in the format of Year discovered 
+                – ID_Number.<br><br>
+                Trying looking the EternalBlue CVE up on Google! In the NIST CVE database, details about the CVE vulnerability can 
+                be found, the details being the vulnerability description and severity.<br>
+                <img src="images/CVEeternal.png" alt = "ExploitDB search" height="700">
+            </p>
+
+            <hr>
+            <h3 style="padding-left: 10px;"id="search2"><u>Using the Search Feature</u></h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+                First, depending on the information you have collected on the service you are looking for a exploit for, you 
+                would enter what you know about the service (like its version) the into the fields. In this example I’m going 
+                to look for the remote exploit for a Windows machine (EternalBlue exploit).<br><br>
+
+                From the information I have gathered, I know the target is a Windows 7 machine. In the title I enter ‘windows 
+                7’ (if you’re looking at apache vulnerabilities, you would enter apache version_x), with the platform as ‘Windows’.
+
+            </p>
+            <img src="images/edbsearchwindows.png" alt = "ExploitDB search windows" width="900">
+
+            <p>
+            This is the response received:<br>
+            <img src="images/edbresponse1.png" alt = "ExploitDB Windows response " width="900"><br>
+            I then decide I want to try out a remote exploit, so I entered ‘remote’ into type.<br>
+            <img src="images/edbresponse2.png" alt = "ExploitDB Windows response 2 " width="900"><br>
+            And now the EternalBlue exploit, the exploit I’m looking for, can be found at the top of the list.
+            </p>
+
+            <hr>
+            <h3 style="padding-left: 10px;"id="analysis"><u>ExploitDB Page analysis</u></h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+            In this example I will be looking at the EternalBlue exploit 
+            (can be found  <a href="https://www.exploit-db.com/exploits/42315">here on ExploitDB</a> )
+
+            <img src="images/edbeternalblue.png" alt = "ExploitDB EternalBlue page" width="900" > <br>
+
+                <ul>
+                    <li>EBD-ID – this is the unique ID by EDB given to the exploit page<br>
+                        <img src="images/edburl.png" alt = "ExploitDB EternalBlue URL"></li>
+                    <li>CVE – the Common Vulnerability and exposure code – in this case its 2017-0144 to reflect 
+                        its for the vulnerability ‘EternalBlue’</li>
+                    <li>EBD verified – confirmation from EDB themselves whether or not the code actually works – in 
+                        this exploit EDB has confirmed it works</li>
+                    <li>Type – what type of exploit is it (for example, DOS, remote, local exploit) – in this case it’s type is 
+                        ‘remote’ (meaning it can be remotely executed)</li>
+                    <li>Platform – what platform the exploit works on – in this case, it works against Windows machines (and 
+                        in the title, the Windows versions has been specified)</li>
+                    <li>Date – the date of when the exploit was uploaded </li>
+                    <li>Vulnerable application – if relevant, what vulnerable application the exploit works against – in this case 
+                        nothing has been specified as the target is a range of Windows OS.</li>
+                    <li>Code at the bottom – the code at the bottom is actually the exploit code itself. In this case, this is the 
+                        code of the EternalBlue exploit. Regardless of what exploit you are using, you should ALWAYS read the code. 
+                        It may contain instructions, or have some issues or malicious lines of code (this is why having an understanding
+                        of programming is important in penetration testing!).</li>
+                </ul>
+            </p>
+
+            <hr>
+            <h3 style="padding-left: 10px;"id="overall"><u>Overall</u></h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+                ExploitDB is a treasure trove of exploits, 9 out of 10 times, if you are looking for an exploit it is highly 
+                likely you will find and download it from ExploitDB. Many other tools also integrate the ExploitDB database 
+                into its usage. An example of a tool is a Nmap script called ‘Vulscan’, which outputs relevant exploits based 
+                off the scan results (coming from a range of databases, ExploitDB included).  Some exploits have also started 
+                to popup on GitHub, however unless it is being regularly updated I believe it should be the same as its 
+                ExploitDB counterpart.
+            </p>
+
+            <a href="Misc.html"><h4 style="padding-left: 10px;"><b>Back to Miscellaneous resources</b></h4></a>
+        </main>
+
+        <div class="footer">
+          <p>Pen Testing is hard at first, walk before you fly!</p>
+        </div>
+    </body>
+</html>
+

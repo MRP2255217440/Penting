@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, inital-scale=1">
+        <meta name="description" content="A place to learn basic pen testing info!">
+        <meta name="author" content="Mujeeb">
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
+        <title>Penting - THM</title>
+
+    </head>
+    <body>
+        <header>
+            <h1>Penting TryHackMe</h1>
+            <!-- Navigation bar based off https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp-->
+            <nav>
+                <div class="navbar">
+                    <a href="index.html">Home</a>
+
+                    <div class="dropdown">
+                      <button class="dropbtn">List of Tools 
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-content">
+                      <a href="Tools.html">Tools page Overview</a>
+                      <a href="Nmap.html">Nmap</a>
+                      <a href= "Nikto.html">Nikto</a>
+                      <a href="BurpSuite.html">BurpSuite</a>
+                      <a href="Othertools.html">Other Tools</a>
+                    </div>
+                  </div>
+
+                  <div class="dropdown">
+                    <button class="dropbtn">List of Services 
+                      <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                      <a href="Services.html">Services page Overview</a>
+                      <a href="DVWA.html">DVWA</a>
+                      <a href="BadStore.html">BadStore</a>
+                      <a href="bonus.html">Additional Tasks</a>
+                    </div>
+                </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Misc. Resources
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Misc.html">Misc Resources page</a>
+                          <a href="EDB.html">ExploitDB</a>
+                          <a href="Kali.html">Kali</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Legal + Ethics 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="LandE.html">Legal and Ethics Overview</a>
+                          <a href="Legal.html">Useful Legal info</a>
+                          <a href="Ethics.html">Ethics info</a>
+                          <a href="Disclaimer.html">Disclaimer page</a>
+                        </div>
+                      </div>
+
+                      <div class="dropdown">
+                        <button class="dropbtn">Further Reading 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Next.html">What to do next?</a>
+                          <a href="HTB.html">HTB</a>
+                          <a href="TryHackMe.html">TryHackMe</a>
+                          <a href="Programming.html">Programming</a>
+                        </div>
+                      </div>
+                  </div>
+                  
+            </nav>
+    
+
+        </header>
+
+        <main>
+            <h2 style="padding-left: 10px;"id="Start"><u>THM: TryHackMe</u></h2>
+            <button class="button"><a href="Next.html"><span>Back to Overview</span></a></button><br>
+            Here is the URL to TryHackMe: <a href="https://tryhackme.com/">https://tryhackme.com/</a>
+            <hr>
+
+            <div>
+              <!-- Code based off the following:https://www.tipsandtricks-hq.com/simple-table-of-contents-toc-using-pure-html-and-css-code-9217-->
+              <p><b><u>Table of contents</u></b></p>
+              <ul style="  border: 1px solid black;
+              padding-right: 0px;
+              padding-left: 28px;
+              width: 240px;
+              border-radius: 5px;">
+              <li><a href="#what">1. What is it?</a></li>
+              <li><a href="#issue">2. Issues with THM</a></li>
+              <li><a href="#overall">3. Overall</a></li>
+              </ul>
+            </div>
+
+            <hr>
+            <h3 style="padding-left: 10px;"id="what"><u>What is THM?</u></h3>
+            <p>
+                TryHackMe is a learning platform based around teaching users' cybersecurity-based content (meaning it doesn’t 
+                solely teach penetration testing content), using things called ‘rooms’ (which are basically modules) for 
+                teaching. <br><br>The platform has a mix of learning-based content (which is more textbook learning with some user 
+                interaction) to CTF based rooms which expect users to solve on their own (write-ups are available online 
+                however if the user requires help). <br>Compared to HTB, it's a much more beginner friendly platform, offering 
+                easier tasks and being more teaching oriented.
+            </p>
+
+            <p>Here is an example of what the TryHackMe dashboard looks like:</p>
+            <p><img src="images/thmdashboard.png" alt = "THM bashboard" height="750"> </p>
+
+
+            <p>
+                In each room the content is broken down into sections (creating a sort of checkpoint system), separating the 
+                content and making it easier to digest (and allows users to work on a single room across multiple sessions). 
+                <br><br>At the end of each checkpoint, a Q and A system will appear. This tests users on the content they have gone 
+                over, sometimes asking users textbook based questions (if X is done, what must be done next?), and other times 
+                ask the users to practice commands, either telling users to enter the command in its correct syntax (and allow 
+                the user to pass if they enter the command correctly), or ask the user to run the command and enter the correct 
+                response from the command. <br>In addition to the Q and A, users can click on hints to receive advice if they are 
+                struggling. 
+            </p>
+
+            <p>
+                Below are two examples of the Q&A system, the one on the left comes from a learning-based room ‘What is networking?’ 
+                and the right on from the practical room ‘Vulnversity’.
+              </p>
+  
+              <p><img src="images/thmnetwork.png" alt = "THM network questions"height="600" >
+              <img src="images/thmnmap.png" alt = "THM ‘Vulnversity’" height="500"> </p>
+
+
+            <p>
+                In order to motivate users into completing tasks on a daily basis TryHackMe has a ‘streak’ system. Every day 
+                you do a task, you get a point, but miss a day and the streak resets to 0. The streak also offers some nice 
+                benefits, nothing major but better than nothing.<br>
+                <img src="images/thmstreak.png" alt = "THM streak">
+            </p>
+
+            <p>
+                In addition, some rooms require you to run a VM to provide the services for the room. Fortunately, 
+                the VM is setup by TryHackMe, so no user intervention is required (other than clicking the button saying 
+                ‘Start Machine’.<br>
+                <img src="images/thmstart.png" alt = "THM start">
+            </p>
+
+            <p>
+                Some rooms require the user to use a penetration testing VM to complete the tasks. Previously, you would need 
+                to connect to the TryHackMe network using OpenVPN on your penetration VM. <br><br>Now, TryHackMe gives you the option 
+                of using their own ‘AttackBox’ which can be accessed from the website instead of using your own VM. This is 
+                very useful if you are not able to use your own VM for the tasks (doing the task away from your main PC setup etc.).<br>
+                <img src="images/thmattackbox.png" alt = "THM start">
+            </p>
+
+            <p>
+                Finally, TryHackMe also has learning paths and modules that can be found by clicking the ‘learn’ button in the 
+                toolbar. The modules are a group of relevant rooms that are connected to each other, and have been grouped up 
+                (for example the Burp Suite module has all the Burp Suite rooms), and the learning path combines modules into 
+                a larger module. Here is an example of some learning paths and its contents.<br>
+                <img src="images/thmjrpentest.png" alt = "THM JR pentesting path" align="right">
+                <img src="images/thmjrpentestcontent.png" alt = "THM JR pentesting content" height="700">
+
+            </p>
+
+            <hr>
+
+            <h3 style="padding-left: 10px;"id="issue"><u>Issues with TryHackMe</u></h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+                One issue with TryHackMe is many of the rooms are locked behind a paywall membership. This means some of 
+                the rooms (for example, the first couple of rooms in a learning path) will be free for you to do. However, 
+                later on you will start to notice some rooms will require a premium membership to access (midway or later 
+                in the learning path) – this can interrupt your experience if you plan to do a learning path/room but then 
+                find out you must stop because it’s a paid feature. <br><br>
+                The membership also effects your time limit on the 
+                Attack Box – if you’re a free user, you can only use it 1hr a day, which can be slightly annoying if you 
+                wish to binge TryHackMe tasks (but in my opinion 1hr is more than enough for a single TryHackMe session).
+            </p>
+
+            <p>
+                Another issue is I have noticed some free rooms have actually turned into membership only rooms – Eternal 
+                ‘blue’ room used to be free (and this room went over the EternalBlue exploit, and even provided a vulnerable 
+                VM to try the exploit against) but this is no longer available to free users.<br>
+
+                <img src="images/thmmembership.png" alt = "THM membership" height="500">
+
+            </p>
+
+            <hr>
+            <h3 style="padding-left: 10px;"id="overall"><u>Overall</u></h3>
+            <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+            <p>
+                TryHackMe is very good for learning content. It’s also pretty good for CTF based content, however 
+                I believe HTB is still the best for CTF. Despite having some rooms locked behind a paywall, the 
+                learning content is still very decent and worth learning from. On the plus side, TryHackMe is 
+                (slightly) cheaper than HTB per month, as well as being an easier starting point.    
+            </p>
+            
+
+            <h4 style="padding-left: 10px;"><a href="Next.html"><b>Back to future paths</b></a></h4>
+        </main>
+
+        <div class="footer">
+          <p>Pen Testing is hard at first, walk before you fly!</p>
+        </div>
+    </body>
+</html>
+

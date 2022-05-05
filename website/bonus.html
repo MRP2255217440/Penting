@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, inital-scale=1">
+        <meta name="description" content="A place to learn basic pen testing info!">
+        <meta name="author" content="Mujeeb">
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
+        <title>Penting - Bonus Tasks</title>
+
+    </head>
+    <body>
+        <header>
+            <h1>Penting Bonus Tasks</h1>
+            <!-- Navigation bar based off https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp-->
+            <nav>
+                <div class="navbar">
+                    <a href="index.html">Home</a>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">List of Tools 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                        <a href="Tools.html">Tools page Overview</a>
+                        <a href="Nmap.html">Nmap</a>
+                        <a href= "Nikto.html">Nikto</a>
+                        <a href="BurpSuite.html">BurpSuite</a>
+                        <a href="Othertools.html">Other Tools</a>
+                      </div>
+                    </div>
+
+                    <div class="dropdown">
+                      <button class="dropbtn">List of Services 
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-content">
+                        <a href="Services.html">Services page Overview</a>
+                        <a href="DVWA.html">DVWA</a>
+                        <a href="BadStore.html">BadStore</a>
+                        <a href="bonus.html">Additional Tasks</a>
+                      </div>
+                  </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Misc. Resources
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Misc.html">Misc Resources page</a>
+                          <a href="EDB.html">ExploitDB</a>
+                          <a href="Kali.html">Kali</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Legal + Ethics 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="LandE.html">Legal and Ethics Overview</a>
+                          <a href="Legal.html">Useful Legal info</a>
+                          <a href="Ethics.html">Ethics info</a>
+                          <a href="Disclaimer.html">Disclaimer page</a>
+                        </div>
+                      </div>
+
+                      <div class="dropdown">
+                        <button class="dropbtn">Further Reading 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Next.html">What to do next?</a>
+                          <a href="HTB.html">HTB</a>
+                          <a href="TryHackMe.html">TryHackMe</a>
+                          <a href="Programming.html">Programming</a>
+                        </div>
+                      </div>
+                  </div>
+                  
+            </nav>
+    
+
+        </header>
+
+        <main>
+        
+          <h2 style="padding-left: 10px;" id="Start"><u>Other Tasks</u></h2>
+          <button class="button"><a href="Services.html"><span>Back to Overview</span></a></button>
+          <hr>
+ <!-- Code based off the following:https://www.tipsandtricks-hq.com/simple-table-of-contents-toc-using-pure-html-and-css-code-9217-->
+          <p><b><u>Table of contents</u></b></p>
+          <ul style="  border: 1px solid black;
+          padding-right: 0px;
+          padding-left: 28px;
+          width: 240px;
+          border-radius: 5px;">
+          <li><a href="#Q">1. Questions</a></li>
+          <li><a href="#A">2. Answers</a></li>
+          </ul>
+          </div>
+
+          <hr>
+          <h3 style="padding-left: 10px;"><u>General Info</u></h3>
+          
+          <p>
+            This page contains a list of penetration based miscellaneous tasks you can do.<br> 
+            These are more like general tips rather than a list of objectives you need to complete.
+
+        </p>  
+        <hr>
+
+
+        <!-- This is the start of the Questions-->
+
+        <h3 style="padding-left: 10px;" id ="Q"><u>Questions</u></h3>
+        <hr>
+        <h4 style="text-align: center;" >
+            1.	Sometimes when developers make a webpage they leave behind comments to outline key features, stating what this block of code does etc. <br>
+            Sometimes comments containing important information are left behind.<br> 
+            A link has been hidden in this page, can you find it? <!-- The top secret link is here! localhost:1001/avdsecvfret22fold13er/-->
+        </h4>
+        <hr>
+
+        <!-- Button used to show and hide hints. This appears frequently-->
+        <button onclick="showqQ1H1()">Click Me to show/hide hints</button>
+
+        <div id="q1hint1" style="display: none;">
+            <p>Hint 1: Look at the page source. Often its ‘right click -> view page source’. </p>
+        </div>
+
+        <hr>
+        <h4 style="text-align: center;" >
+          2. Following up from the previous task, access the link. It should take you to a directory. <br>
+          What file can be found in this directory?
+        </h4>
+        <hr>
+
+        <h5 style="text-align: center;">
+            2.1	Using nmap and/or nikto, could you find this directory?
+          </h5>
+  
+
+        
+        <hr>
+        <h4 style="text-align: center;" >
+            3. Enter the page found. It contains some hashed values, what type of hash is it?
+        </h4>
+        <hr>
+        <button onclick="showqQ3H1()">Click Me to show/hide hints</button>
+        <div id="q3hint1" style="display: none;">
+            <p>Hint 1: you can find a hash identifying website on google</p>
+        </div>
+
+        <hr>
+        <h4 style="text-align: center;" >
+            4. Revert the hashed values back to plaintext
+        </h4>
+        <hr>
+
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          5.On this virtual machine, a port has been opened up. Accessing the port through the browser reveals a root terminal. <br>
+          Using nmap, can you find this port?
+        </h4>
+        <hr>
+        <p>
+            NB: When scanning with nmap, look for TTYD. Also, dont forget your arguments!
+        </p>
+
+        <hr>
+        <h4 style="text-align: center;" >
+          6.Once you have found the port, look at the source code of the nmap (or nikto) page in this guide website. <br>
+          Does the embedded terminal frame match what you found?
+        </h4>
+        <hr> 
+
+        <hr>
+        <h4 style="text-align: center;" >
+          7. And to verify your findings, try to access the port you found through the browser 
+        </h4>
+        <hr>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          8. Using the internet, can you identify the default credentials for the Arris DG860A wireless router?
+        </h4>
+        <hr>
+
+        <hr>
+        <h4 style="text-align: center;" >
+        9. What’s the difference between a black box and white box test?
+        </h4>
+        <hr>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+         10. If I wanted to look at a deleted page, what website would I use?
+        </h4>
+        <hr>
+        <p>
+          NB: This website is commonly used outside of just penetration testing!
+        </p>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+          11. Name a popular vulnerability database
+        </h4>
+        <hr>
+
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+        12.	In this scenario, you are part of an organisation hired to do a penetration test. <br>
+        When investigating a client’s server, you detect a vulnerability, however it is out of scope. What do you do?
+        </h4>
+        <hr>
+
+        <hr>
+        <h4 style="text-align: center;" >
+        13.	Following on from task 12, as you are investigating a client’s server you’ve notice the client has been undergoing illegal activity 
+        (for example, found evidence of illegal images on the servers). What do you do?
+        </h4>
+        <hr>
+        <p>
+        NB: although this task is off track, it is possible you may find yourself in a situation in the future so it’s a nice to know.
+        </p>
+
+        
+        <hr>
+        <h4 style="text-align: center;" >
+         14. Using the answer to task 10, what was the last Tweet @realDonalTrump sent before getting suspended?
+        </h4>
+        <hr>
+        <p>
+          NB: Admittedly, he was very active in sending tweets so getting around one of his last Tweets is also fine. <br>
+          Also, consider the date he got suspended when looking
+        </p>
+
+        <!-- This is the end of the Questions-->
+
+
+
+
+
+
+
+
+
+
+
+        <!-- This is the start of the Answers-->
+
+
+        <hr>
+        <h3 style="padding-left: 10px;" id ="A"><u>Answers</u></h3>
+        <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+        <hr>
+        <br>
+        <button onclick="showansw()">Click Me to show/hide the answers </button> <p></p><hr>
+        <div id ="answ" style="display: none;">
+
+      <h4 style="text-align: center;" >
+        1.	A link has been hidden in this page, can you find it?
+      </h4>
+      <hr>
+      <p>
+        The answer may vary depending on what browser is being used, commonly the page source can be viewed by right clicking and selecting 
+        ‘view page source’, or the shortcut ‘Crtl+U’. <br>
+        <img src="images/other1viewpagesource.png" alt = "View page source">
+      </p>
+
+      <p>
+        After looking through you can find the link. The directory is called 'avdsecvfret22fold13er'.<br>
+        <img src="images/other1viewpagesource2.png" alt = "view page source in detail">
+      </p>
+      <p>
+        Alternatively, you can press F12 to open the inspector console, and you can read the source code through that.<br>
+         I do not recommend reading the source code like this though, it’s not very spacious.
+         <br>
+        <img src="images/other1inspectelement.png" alt = "inspect element">
+      </p>
+
+      <hr>
+      <h4 style="text-align: center;" >
+        2. Following up from the previous task, access the link. It should take you to a directory. <br>
+        What file can be found in this directory?
+      </h4>
+      <hr>
+      <p>
+        A file called ‘testingpage.html’ can be found.<br>
+        <img src="images/other2findingpage.png" alt = "Finding the testing page">
+      </p>
+
+      <hr>
+      <h5 style="text-align: center;" >
+        2.1. Using Nikto, could you find this directory by scanning the website?
+      </h5>
+
+      <p>
+        No you wouldn’t due to the random name of the folder. 
+        You could also use a directory scanning tool, like dirb, to increase the possibility of finding the directory.
+      </p>
+
+      <hr>
+      <h4 style="text-align: center;" >
+      3. Enter the page found. It contains some hashed values, what type of hash is it?
+      </h4>
+      <hr>
+      <p>
+        The contents of the page is the following:<br>
+        <img src="images/other3page.png" alt = "testingpage contents ">
+      </p>
+      <p>
+        The hash is SHA1<br>
+        <img src="images/other3hash.png" alt = "SHA1 hash ">
+      </p>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+            4.	Revert the hashed values back to plaintext
+        </h4>
+        <hr>
+
+        <p>Note – some websites only identify the hash, they don’t revert it. As such I have used another website to demonstrate this.</p>
+
+          <p>The value is p@$$w0rd<br>
+            <img src="images/other4hash.png" alt = "SHA1 hash "></p>
+
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+            5. On this virtual machine, a port has been opened up. 
+            Accessing the port through the browser reveals a root terminal. <br>Using nmap, can you find this port?
+        </h4>
+        <hr>
+        <p>       
+            With the following command 
+        </p>
+        <div><pre><code> nmap -p- -A localhost</code></pre></div><br>
+        <p>The following can be found<br>
+            <img src="images/other5nmapcommand.png" alt = "Nmap command "><br>
+            <img src="images/other5nmapcommand2.png" alt = "Nmap command ">
+        </p>
+
+
+                
+        <hr>
+        <h4 style="text-align: center;" >
+            6. Once you have found the port, look at the source code of the nmap (or nikto) page in this guide website. 
+            Does the embedded frame match what you found?
+        </h4>
+        <hr>
+        <p>
+            From looking at the source code of the Nmap page, this can be found for the terminal:<br>
+          <img src="images/other6terminal.png" alt = "Terminal HTML code">
+
+        </p>
+
+        <hr>
+        <h4 style="text-align: center;" >
+        7. And to verify your findings, try to access the port you found through the browser
+        </h4>
+        <hr>
+        <p>
+          Upon accessing the port, the terminal can be found.
+          <img src="images/other7terminal.png" alt = "Accessing the terminal">
+        </p>
+ 
+
+        <hr>
+        <h4 style="text-align: center;" >
+        8. Using the internet, can you identify the default credentials for the Arris DG860A wireless router?
+        </h4>
+        <hr>
+        <p>
+            The username is admin, the password is password<br>
+            The URL to the page is here: <a href="https://www.cleancss.com/router-default/Arris/DG860A">https://www.cleancss.com/router-default/Arris/DG860A</a><br>
+          <img src="images/other8cred.png" alt = "Router credentials">
+        </p>
+
+        
+        <hr>
+        <h4 style="text-align: center;" >
+          9. What’s the difference between a black box and white box test?
+        </h4>
+        <hr>
+        <p>
+            The main difference between black box and white box test is the availability of information provided to the penetration tester 
+            before the test has begun.<br> <br>
+            For example, in a white box test the tester may get told detailed information about the client’s servers, 
+            such as what services they are running, all the IP addresses being used etc. <br><br>
+            Black box on the other hand is where the penetration tester is kept in the dark and not told any information at all.<br><br>
+            They may not even be given an IP address, they may only be told to just investigate company xyz. 
+            Because of this perspective, the penetration tester is like a real attacker in a black box.
+             <br> Information like out-of-scope targets will still be provided to the tester for legal reasons. <br>
+          <img src="images/other9box.png" alt = "black box description" style="height: 300px;">
+        
+        </p>
+
+        <hr>
+        <h4 style="text-align: center;" >
+           10. If I wanted to look at a deleted page, what website would I use?
+        </h4>
+        <hr>
+        <p>
+            You would use a website (like) the waybackmachine. Using the waybackmachine you can find deleted pages.<br>
+             Under certain circumstances, you may even find sensitive deleted files/pages (that someone accidentally uploaded then proceeded to delete).<br>
+          <img src="images/other10wayback.png" alt = "Wayback machine screenshot" style="height: 600px;">
+        </p>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+         11.	Name a popular vulnerability database
+        </h4>
+        <hr>
+        <p>
+            The two most popular vulnerability databases are ExploitDB and NVD. For more on ExploitDB check out the ExploitDB page.
+        </p>
+        <p>
+            NVD (national vulnerability database) is owned by the US government and is basically a big library full of CVEs and its CVSS scoring (severity scoring).
+<br>
+          <img src="images/other11nvd.png" alt = "NVD screenshot" style="height: 600px;">
+        </p>
+
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+            12.	In this scenario, you are part of an organisation hired to do a penetration test.
+            When investigating a client’s server, you detect a vulnerability, however it is out of scope. What do you do?
+        </h4>
+        <hr>
+        <p>
+            You should contact the client and bring it up with them. They will either say leave it (and possibly have it investigated in a future test) 
+            or exploit it. <br>
+            If they say exploit it, the scoping contract (made before the penetration testing starts) will need to be amended to take this 
+            activity into consideration (or at the very least be put on the record so the client is well aware they told you to investigate it).
+        </p>
+
+
+        <hr>
+        <h4 style="text-align: center;" >
+            13.	Following on from task 12, as you are investigating a client’s server you’ve notice the client has been undergoing illegal activity 
+            (for example, found evidence of illegal images on the servers). What do you do?
+        </h4>
+        <hr>
+        <p>
+            As the client is not above the law, the authorities will need to be contacted. If you do not act upon it and it was later found 
+            you kept silent about it you may also suffer legal consequences, and as such it would be best to get into 
+            contact with someone regarding your findings.
+        </p>
+
+        <hr>
+        <h4 style="text-align: center;" >
+         14. Using the answer to task 10, what was the last Tweet @realDonalTrump sent before getting suspended?
+        </h4>
+        <hr>
+        <p>
+          The last Tweet he sent out was on the 9th of Jan. On the WayBackMachine, the last Tweet can be seen below:<br>
+          <img src="images/other14trump.png" alt = "Trump Twitter" style="height: 700px;">
+        </p>
+
+
+
+      <a href="#Start" style="padding-left: 10px;font-size: 14px;">To Contents Table</a>
+      </div> <!-- This is the end of Answers -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- These are the scripts used to show and hide the hints. Check the questions section for the button it is connected to-->
+
+      <script>
+        function showqQ1H1() {
+          var i = document.getElementById("q1hint1");
+          if (i.style.display === "none") {
+            i.style.display = "block";
+          } else {
+            i.style.display = "none";
+          }
+        }
+
+      function showqQ2H1() {
+      var i = document.getElementById("q2hint1");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+
+        function showqQ3H1() {
+        var i = document.getElementById("q3hint1");
+        if (i.style.display === "none") {
+            i.style.display = "block";
+        } else {
+            i.style.display = "none";
+        }
+        }
+ 
+      function showansw() {
+      var i = document.getElementById("answ");
+      if (i.style.display === "none") {
+          i.style.display = "block";
+      } else {
+          i.style.display = "none";
+      }
+      }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        </main>
+
+        <div class="footer">
+          <p>Pen Testing is hard at first, but could be worse</p>
+        </div>
+    </body>
+</html>
+

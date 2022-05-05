@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, inital-scale=1">
+        <meta name="description" content="A place to learn basic pen testing info!">
+        <meta name="author" content="Mujeeb">
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
+        <title>Penting - Services</title>
+
+    </head>
+    <body>
+        <header>
+            <h1>Penting Services Overview</h1>
+            <!-- Navigation bar based off https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp-->
+            <nav>
+                <div class="navbar">
+                    <a href="index.html">Home</a>
+
+                    <div class="dropdown">
+                      <button class="dropbtn">List of Tools 
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-content">
+                      <a href="Tools.html">Tools page Overview</a>
+                      <a href="Nmap.html">Nmap</a>
+                      <a href= "Nikto.html">Nikto</a>
+                      <a href="BurpSuite.html">BurpSuite</a>
+                      <a href="Othertools.html">Other Tools</a>
+                    </div>
+                  </div>
+
+                    <div class="dropdown">
+                      <button class="dropbtn">List of Services 
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-content">
+                        <a href="Services.html">Services page Overview</a>
+                        <a href="DVWA.html">DVWA</a>
+                        <a href="BadStore.html">BadStore</a>
+                        <a href="bonus.html">Additional Tasks</a>
+                      </div>
+                  </div>
+
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Misc. Resources
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Misc.html">Misc Resources page</a>
+                          <a href="EDB.html">ExploitDB</a>
+                          <a href="Kali.html">Kali</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">Legal + Ethics 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="LandE.html">Legal and Ethics Overview</a>
+                          <a href="Legal.html">Useful Legal info</a>
+                          <a href="Ethics.html">Ethics info</a>
+                          <a href="Disclaimer.html">Disclaimer page</a>
+                        </div>
+                      </div>
+
+                      <div class="dropdown">
+                        <button class="dropbtn">Further Reading 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a href="Next.html">What to do next?</a>
+                          <a href="HTB.html">HTB</a>
+                          <a href="TryHackMe.html">TryHackMe</a>
+                          <a href="Programming.html">Programming</a>
+                        </div>
+                      </div>
+                  </div>
+                  
+            </nav>
+    
+
+        </header>
+
+        <main>
+            <h2 style="padding-left: 10px;"><u>List of Vulnerable services</u></h2>
+            <hr>
+            <h3 style="padding-left: 10px;"><a href="DVWA.html"><b><u>DVWA</u></b></a></h3>
+            <!-- DVWA overview-->
+            <p>DVWA (Damn Vulnerable Web Application) is a vulnerable web service that I have downloaded online and set up on 
+                this VM. <br><br>
+
+                The service itself can be found on a port on this VM, you will need to find it using Nmap.
+                <br><br>
+                The service has already been configured by me. However you may need to create a new database the 
+                first time you go onto the website (its a simply procedure, just click the create database button).
+            </p>
+
+            <p>
+                DVWA is a learning tool designed to have many vulnerabilities. It contains a wide range of vulnerabilities 
+                and has been designed to help teach users how to exploit them. <br>I have included a couple of my own 
+                vulnerabilities/additions to help enhance the learning experience. DVWA is considered to be one of 
+                the more popular vulnerable services and as such many other guides can be found surrounding it.<br> As 
+                DVWA has a vast amount of vulnerabilities and exploits, I recommend looking at other guides for more 
+                advanced exploits as this guide is for starters.
+
+                <br><br>
+
+                DVWA also shows users how to patch out the vulnerabilities that can be found by having a range of ‘difficulty’ 
+                levels, in which the page with the vulnerability has be rewritten to have more secure code. <br><br>This would mean a 
+                ‘low level’ exploit would not work against medium difficulty page for example. You can also compare the code 
+                of different difficulty.
+            </p>
+
+            <hr>
+            <!-- Bad Store overview-->
+            <h3 style="padding-left: 10px;"><a href="BadStore.html"><b><u>BadStore</u></b></a></h3>
+            <p>
+                Bad Store is another vulnerable web service I have set up.
+                <br><br>
+                Unlike DVWA, I have setup Bad Store on its own separate VM. This means you will have to look for an IP address 
+                as well as a port. <br>If you don’t know how to do this, look at the Nmap page. Refer to the Bad Store page for more specific information.
+            </p>
+
+            <p>
+                Bad Store is another learning tool filled with vulnerabilities. Unlike DVWA, however, Bad Store is more 
+                reflective of a badly made website.<br><br> Although DVWA offered a more handholding experienced, Bad Store shows 
+                a more practical ‘real life’ example of a vulnerable website. The closest Bad Store has to a giving help is a 
+                manual that can be found, stating what exploits and vulnerabilities Bad Store has.
+
+                <br><br>
+
+                Bad Store demonstrates a range of vulnerabilities, however most of the vulnerabilities contained are more ‘bad 
+                practice/policy in use’ rather than technical based (you will see what I mean when you play with it!). This 
+                web service is an example of why you must follow good standards and good coding practices.
+            </p>
+
+            <hr>
+            <!-- Mutillidae overview-->
+            <h3 style="padding-left: 10px;"><b><u>Mutillidae</u></b></h3>
+            <p>
+              Mutillidae is another vulnerable web application added to Penting. Mutillidae runs off a Docker in order to host the 
+              website and its vulnerable service. <br><br>
+              Unlike DVWA and Bad Store, this vulnerable service was not covered in-depth in 
+              this guide, and instead was included for the purpose of allowing users to have a go at exploiting a vulnerable 
+              service blind. <br><br>Mutillidae contains inbuilt hints and tips, as well as a pathway and goes over how to exploit 
+              some of its vulnerabilities, if you require the assistance.
+            </p>
+
+            <p>
+              Due to how Mutillidae has been setup, running DVWA and Mutillidae simultaneously is not possible and as such 
+              DVWA needs to be turned off to allow Mutillidae to run.<br><br> Steps to configure Mutillidae has been included 
+              in the text document found on the Penting desktop. <br>I recommend making a backup of the VM beforehand (this also 
+              means if you wish to go back to DVWA you would not need to reconfigure DVWA if you make an error). 
+              When configured, it can be found on port 80.
+            </p>
+
+            <hr>
+            <!-- Other tasks overview-->
+            <h3 style="padding-left: 10px;"><a href="bonus.html"><b><u>Bonus/Other tasks</u></b></a></h3>
+            <p>
+              In addition to vulnerable services like Bad Store and DVWA, I have also added a list of additional questions relating to penetration testing. 
+            </p>
+            <p>
+              Some of these questions are the practical sorts, taking a look at vulnerabilities I have added to Penting.<br>
+              Others are more text book based response questions, asking what you would do if situation xyz happened.
+              Regardless, they are designed to be quick and easy to complete.
+
+            </p>
+
+
+        </main>
+
+        <div class="footer">
+          <p>Pen Testing is hard at first, be careful not to do difficult challenges early</p>
+        </div>
+    </body>
+</html>
+
