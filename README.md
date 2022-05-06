@@ -19,4 +19,4 @@ Both link leads to the same compressed files. Both contain two folders, each con
 
 OneDrive:
 
-Google Drive:
+Google Drive: https://drive.google.com/file/d/1jzwBuslkwsPQX6mU2CdMd4ZUm7BoyhDE/view?usp=sharing
