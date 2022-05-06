@@ -17,7 +17,7 @@ Instead Penting (and Bad Store) has been uploaded onto OneDrive and Google Drive
 
 Both link leads to the same compressed files. Both contain two folders, each containing one OVF for each folder (one OVF for Bad Store, another for Penting).
 
-Download the file and decompress it.
+Download the file and decompress it. Once decompressed, a folder called 'Submitting VMs' will be found, inside containing Penting and Bad Store. Use the .OVF files to import the VMs.
 
 OneDrive:
 
