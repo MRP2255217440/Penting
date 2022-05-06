@@ -17,6 +17,8 @@ Instead Penting (and Bad Store) has been uploaded onto OneDrive and Google Drive
 
 Both link leads to the same compressed files. Both contain two folders, each containing one OVF for each folder (one OVF for Bad Store, another for Penting).
 
+Download the file and decompress it.
+
 OneDrive:
 
 Google Drive: https://drive.google.com/file/d/1jzwBuslkwsPQX6mU2CdMd4ZUm7BoyhDE/view?usp=sharing
