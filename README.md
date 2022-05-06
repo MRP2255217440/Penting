@@ -21,4 +21,4 @@ Download the file and decompress it. Once decompressed, a folder called 'Submitt
 
 OneDrive (Only works if part of DMU): https://demontfortuniversity-my.sharepoint.com/:u:/g/personal/p2521740_my365_dmu_ac_uk/Eehp1aU7J9ZFvimLjZicY8sBH9IQScQAfEHFqW9Pu8g61Q?e=sNgw5c
 
-Google Drive: https://drive.google.com/file/d/1jzwBuslkwsPQX6mU2CdMd4ZUm7BoyhDE/view?usp=sharing
+Google Drive (works if not part of DMU): https://drive.google.com/file/d/1jzwBuslkwsPQX6mU2CdMd4ZUm7BoyhDE/view?usp=sharing
