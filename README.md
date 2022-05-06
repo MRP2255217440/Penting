@@ -19,6 +19,6 @@ Both link leads to the same compressed files. Both contain two folders, each con
 
 Download the file and decompress it. Once decompressed, a folder called 'Submitting VMs' will be found, inside containing Penting and Bad Store. Use the .OVF files to import the VMs.
 
-OneDrive:
+OneDrive (Only works if part of DMU): https://demontfortuniversity-my.sharepoint.com/:u:/g/personal/p2521740_my365_dmu_ac_uk/Eehp1aU7J9ZFvimLjZicY8sBH9IQScQAfEHFqW9Pu8g61Q?e=sNgw5c
 
 Google Drive: https://drive.google.com/file/d/1jzwBuslkwsPQX6mU2CdMd4ZUm7BoyhDE/view?usp=sharing
